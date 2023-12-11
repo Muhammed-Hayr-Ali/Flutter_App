@@ -64,7 +64,7 @@ class Pages {
     ),
     GetPage(
       name: Routes.editProfile,
-      page: () => const EditProfile(),
+      page: () =>  EditProfile(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,

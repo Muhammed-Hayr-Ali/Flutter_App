@@ -1,9 +1,11 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({super.key});
+class ProfileScreens extends StatelessWidget {
+  ProfileScreens({super.key});
   final LocalStorage localStorage = LocalStorage();
+
+
 
   void editProfile() {
     Get.toNamed(Routes.editProfile);

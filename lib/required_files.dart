@@ -2,16 +2,17 @@ export 'bindings.dart';
 
 export 'app/views/home/home.dart';
 export 'app/views/notification/notifications.dart';
-export 'app/views/profile.dart/profile.dart';
+export 'app/views/profile0.dart/profile.dart';
 export 'app/views/search/search.dart';
-export 'package:application/app/views/profile.dart/widgets/profile_widget.dart';
-export 'package:application/app/views/profile.dart/widgets/select_mode.dart';
-export 'package:application/app/views/profile.dart/widgets/select_lang.dart';
+export 'package:application/app/views/profile0.dart/widgets/profile_widget.dart';
+export 'package:application/app/views/profile0.dart/widgets/select_mode.dart';
+export 'package:application/app/views/profile0.dart/widgets/select_lang.dart';
 export 'package:application/components/custom_list_item.dart';
 export 'package:application/app/model/user.dart';
 export 'package:application/app/controller/auth/auth.dart';
 export 'package:application/app/controller/account/account.dart';
-export 'package:application/app/controller/profile/profile.dart';
+export 'package:application/app/views/profile/controller/profile.dart';
+export 'package:application/app/views/profile/view/profile_screen.dart';
 
 export 'app/views/product_details/product_details.dart';
 export 'package:application/components/custom_list_tile.dart';
@@ -51,7 +52,7 @@ export 'services/permission_handler/permission_handler.dart';
 export 'services/theme_service/theme_service.dart';
 export 'services/validator/validator.dart';
 export 'package:application/app/controller/splashscreen_controller.dart';
-export 'package:application/app/views/profile.dart/edit_profile.dart';
+export 'package:application/app/views/profile0.dart/edit_profile.dart';
 
 export 'components/animation/fade_animation_dx.dart';
 export 'components/animation/fade_animation_dy.dart';

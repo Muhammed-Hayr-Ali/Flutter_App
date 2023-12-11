@@ -14,3 +14,4 @@ export 'package:image_picker/image_picker.dart';
 export 'package:permission_handler/permission_handler.dart';
 export 'package:flutter/services.dart';
 export 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+export 'package:shimmer/shimmer.dart';
