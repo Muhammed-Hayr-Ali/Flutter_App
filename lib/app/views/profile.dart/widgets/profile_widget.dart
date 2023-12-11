@@ -25,7 +25,7 @@ class ProfileWidget extends StatelessWidget {
                       children: [
                         CustomAvatar(
                             size: Get.width * 0.22,
-                            imageUrl: _.currentUser!.profile!),
+                            imageUrl: _.currentUser!.profile ?? ''),
                         Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(

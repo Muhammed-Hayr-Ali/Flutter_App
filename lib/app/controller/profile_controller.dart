@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
-class ProfileController extends GetxController {
+class ProfileControllers extends GetxController {
   //
   //
 
