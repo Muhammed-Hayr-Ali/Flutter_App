@@ -20,7 +20,6 @@ export 'package:application/components/custom_list_tile.dart';
 export 'app/controller/auth_controller.dart';
 export 'package:shimmer/shimmer.dart';
 
-export 'app/controller/profile_controller.dart';
 
 export 'app/views/auth/authentication.dart';
 export 'app/views/auth/creat_new_account.dart';

@@ -32,9 +32,9 @@ class ProfileController extends GetxController {
     currentUser = User.fromJson(user);
     if (currentUser == null) return;
     update();
-    userName.text = currentUser!.name!;
-    phoneNumber.text = currentUser!.phoneNumber!;
-    status.text = currentUser!.status!;
+    userName.text = currentUser!.name??'';
+    phoneNumber.text = currentUser!.phoneNumber??'';
+    status.text = currentUser!.status??'';
   }
 
   void updateProfile() {}
