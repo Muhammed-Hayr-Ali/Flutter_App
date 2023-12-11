@@ -14,20 +14,8 @@ class ProfileUser extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CustomAvatar(size: Get.width * 0.25, imageUrl: user.profile ?? ''),
-          // Container(
-          //   padding: const EdgeInsets.all(4),
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(8),
-          //     border: Border.all(color: AppColors.athensGray),
-          //   ),
-          //   child: const Icon(
-          //     PhosphorIcons.bell,
-          //     size: 18.0,
-          //   ),
-          // ),
           const SizedBox(height: 14),
           Text(
             user.name ?? '',

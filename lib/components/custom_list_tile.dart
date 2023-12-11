@@ -2,7 +2,7 @@ import 'package:application/packages.dart';
 
 class CustomListTile extends StatefulWidget {
   final double radius;
-  final Widget? leading;
+  final IconData? icon;
   final void Function()? onTap;
   final String? title;
   final double? elevation;
@@ -11,7 +11,7 @@ class CustomListTile extends StatefulWidget {
   const CustomListTile(
       {super.key,
       this.radius = 14,
-      this.leading,
+      this.icon,
       this.onTap,
       this.title,
       this.elevation = 0.0,
@@ -47,7 +47,10 @@ class _CustomListTileState extends State<CustomListTile> {
           borderRadius: BorderRadius.circular(widget.radius),
         ),
         onTap: widget.onTap,
-        leading: widget.leading,
+        leading: Icon(
+                PhosphorIcons.globe_hemisphere_west_bold,
+                size: 22,
+              ),
         title: widget.title != null
             ? Text(
                 '${widget.title}'.tr,

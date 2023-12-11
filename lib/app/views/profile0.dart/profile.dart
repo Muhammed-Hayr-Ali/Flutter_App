@@ -5,8 +5,6 @@ class ProfileScreens extends StatelessWidget {
   ProfileScreens({super.key});
   final LocalStorage localStorage = LocalStorage();
 
-
-
   void editProfile() {
     Get.toNamed(Routes.editProfile);
   }
@@ -64,35 +62,18 @@ class ProfileScreens extends StatelessWidget {
             const SizedBox(height: 10),
             CustomListTile(
               title: 'Edit Profile',
-              leading: const Icon(
-                PhosphorIcons.note_pencil_bold,
-                size: 22,
-              ),
               onTap: editProfile,
             ),
             CustomListTile(
               title: 'Language',
-              leading: const Icon(
-                PhosphorIcons.globe_hemisphere_west_bold,
-                size: 22,
-              ),
               onTap: appLang,
             ),
             CustomListTile(
               title: 'Theme',
-              leading: const Icon(
-                PhosphorIcons.moon_bold,
-                size: 22,
-              ),
               onTap: appMode,
             ),
             CustomListTile(
               title: 'Sign Out',
-              leading: const Icon(
-                PhosphorIcons.power_bold,
-                color: Colors.red,
-                size: 22,
-              ),
               onTap: () => signOut(context),
             ),
           ],
