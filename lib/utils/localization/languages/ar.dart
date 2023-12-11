@@ -137,7 +137,7 @@ const Map<String, String> arabic = {
   'You must agree to the privacy policy': 'يجب أن توافق على سياسة الخصوصية',
   'Please enter valid phone number': 'الرجاء إدخال رقم هاتف صحيح',
   'An unknown error occurred': 'حدث خطأ غير معروف',
-
+  'Enter your verification Code': 'أدخل رمز التحقق الخاص بك',
   //profile
   'Profile': 'صفحتي',
   'Edit Profile': 'تعديل الملف الشخصي ',

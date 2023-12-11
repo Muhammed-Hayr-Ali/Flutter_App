@@ -1,4 +1,4 @@
-import 'package:application/app/controller/api/auth.dart';
+import 'package:application/app/controller/auth/auth.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 

@@ -9,7 +9,8 @@ export 'package:application/app/views/profile.dart/widgets/select_mode.dart';
 export 'package:application/app/views/profile.dart/widgets/select_lang.dart';
 export 'package:application/components/custom_list_item.dart';
 export 'package:application/app/model/user.dart';
-export 'package:application/app/controller/api/auth.dart';
+export 'package:application/app/controller/auth/auth.dart';
+export 'package:application/app/controller/account/account.dart';
 
 export 'app/views/product_details/product_details.dart';
 export 'package:application/components/custom_list_tile.dart';

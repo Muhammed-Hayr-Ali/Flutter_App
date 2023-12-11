@@ -7,29 +7,28 @@ class SetPassword extends StatelessWidget {
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.find<AuthController>();
+  final _ = Get.find<Account>();
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _email = TextEditingController();
+  final TextEditingController _verificationCode = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
-  final TextEditingController _verificationCode = TextEditingController();
 
   void _reset() async {
     if (_.isLoading.value) return;
 
     if (_formKey.currentState!.validate()) {
-      final response = await _.reset(
-          _email.text, _verificationCode.text, _confirmPassword.text);
-      response ? Get.offAllNamed(Routes.home) : null;
+      _.resetPassword(
+        password: _password.text,
+        verificationCode: _verificationCode.text,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      ),
+      appBar: AppBar(),
       body: Form(
         key: _formKey,
         child: Padding(
@@ -58,16 +57,6 @@ class SetPassword extends StatelessWidget {
                             fontWeight: FontWeight.w200),
                       ),
                     ],
-                  ),
-                ),
-                SizedBox(height: space),
-                FadeAnimationDx(
-                  delay: 2,
-                  child: CustomTextField(
-                    labelText: 'E-mail',
-                    textEditingController: _email,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) => Validator.email(value!),
                   ),
                 ),
                 SizedBox(height: space),
@@ -124,8 +113,10 @@ class SetPassword extends StatelessWidget {
                         ? const CustomProgress(
                             color: Colors.white,
                           )
-                        : Text('Reset'.tr,
-                            style: const TextStyle(color: Colors.white),)),
+                        : Text(
+                            'Reset'.tr,
+                            style: const TextStyle(color: Colors.white),
+                          )),
                   ),
                 ),
               ],

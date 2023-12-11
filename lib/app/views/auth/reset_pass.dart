@@ -7,26 +7,21 @@ class RessetPass extends StatelessWidget {
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.find<AuthController>();
+  final _ = Get.put(Account());
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _email = TextEditingController();
 
   void _recovery() async {
-    if (_.isLoading.value) return;
-
     if (_formKey.currentState!.validate()) {
-      final response = await _.resetPassword(_email.text);
-      response ? Get.toNamed(Routes.setPassword) : null; //;
+      _.forgotPassword(_email.text);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-      ),
+      appBar: AppBar(),
       body: Form(
         key: _formKey,
         child: Padding(
@@ -77,8 +72,10 @@ class RessetPass extends StatelessWidget {
                         ? const CustomProgress(
                             color: Colors.white,
                           )
-                        : Text('Recovery'.tr,
-                            style: const TextStyle(color: Colors.white),)),
+                        : Text(
+                            'Recovery'.tr,
+                            style: const TextStyle(color: Colors.white),
+                          )),
                   ),
                 ),
               ],

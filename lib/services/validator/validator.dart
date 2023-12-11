@@ -61,7 +61,7 @@ static  email(String value) {
 
  static verificationCode(String value) {
     if (value.isEmpty) {
-      return 'Enter your verificationCode'.tr;
+      return 'Enter your verification Code'.tr;
     }
     return;
   }
