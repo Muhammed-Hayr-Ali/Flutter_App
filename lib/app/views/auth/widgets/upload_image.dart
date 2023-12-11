@@ -35,32 +35,12 @@ class _UploadImageState extends State<UploadImage> {
   Widget build(BuildContext context) {
     return Center(
       child: GestureDetector(
-        onTap: uploadingImage,
-        onLongPress: removeImage,
-        child: Container(
-          height: widget.size,
-          width: widget.size,
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(245, 245, 245, 1),
-            borderRadius: BorderRadius.circular(
-              widget.size,
-            ),
-          ),
-          child: ClipOval(
-            child: path != null
-                ? Image.file(
-                    fit: BoxFit.cover,
-                    File(path!),
-                  )
-                : Padding(
-                    padding: EdgeInsets.all(widget.size / 10),
-                    child: SvgPicture.asset(
-                      'assets/images/avatar.svg',
-                    ),
-                  ),
-          ),
-        ),
-      ),
+          onTap: uploadingImage,
+          onLongPress: removeImage,
+          child: CustomAvatar(
+            imageUrl: path ?? '',
+            sourceImage: SourceImage.localImage,
+          )),
     );
   }
 }

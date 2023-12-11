@@ -12,48 +12,48 @@ class ProfileUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomAvatar(
-                  size: Get.width * 0.22, imageUrl: user.profile ?? ''),
-              Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: AppColors.athensGray),
-                ),
-                child: const Icon(
-                  PhosphorIcons.bell,
-                  size: 18.0,
-                ),
-              )
-            ],
-          ),
+          CustomAvatar(size: Get.width * 0.25, imageUrl: user.profile ?? ''),
+          // Container(
+          //   padding: const EdgeInsets.all(4),
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(8),
+          //     border: Border.all(color: AppColors.athensGray),
+          //   ),
+          //   child: const Icon(
+          //     PhosphorIcons.bell,
+          //     size: 18.0,
+          //   ),
+          // ),
           const SizedBox(height: 14),
           Text(
             user.name ?? '',
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 2),
+          const SizedBox(height: 4),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey.shade200),
+            child: Text(
+              '@${mail(user.email ?? '')}',
+              textDirection: TextDirection.ltr,
+              style: TextStyle(
+                color: AppColors.primaryColor,
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
           Text(
             user.status ?? '',
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            '@${mail(user.email ?? '')}',
-            textDirection: TextDirection.ltr,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-            ),
           ),
         ],
       ),
