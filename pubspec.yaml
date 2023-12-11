@@ -1,0 +1,106 @@
+name: application
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+
+
+
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.1 <4.0.0'
+
+
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  google_sign_in: ^6.1.6
+  image_picker: ^1.0.4
+  permission_handler: ^11.1.0
+  lottie: ^2.7.0
+  cached_network_image: ^3.3.0
+  flutter_svg: ^2.0.9
+  font_awesome_flutter: ^10.6.0
+  flutter_phosphor_icons: ^0.0.1+6
+  url_launcher: ^6.2.1
+  date_time_format: ^2.0.1
+  flashy_tab_bar2: ^0.0.6
+  dio: ^5.4.0
+  fluttertoast: ^8.2.4
+  shimmer: ^3.0.0
+  
+  
+  
+  # fluttertoast: ^8.2.4      Preparing "Install Android SDK Platform 31 (revision: 1)".
+  # easy_image_viewer: ^1.2.1
+  # open_settings: ^2.0.2
+  # shimmer: ^3.0.0
+  # custom_refresh_indicator: ^2.2.1
+  # rive: ^0.11.17
+  # youtube_player_flutter: ^8.1.2
+  # assets_audio_player: ^3.1.1
+
+
+  # internet_connection_checker
+  # flutter_rating_bar: ^4.0.1
+  # percent_indicator: ^4.2.3
+  # getwidget: ^4.0.0
+  # like_button: ^2.0.5
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  
+  
+  flutter_lints: ^2.0.0
+
+
+flutter:
+
+
+  uses-material-design: true
+
+
+
+
+
+
+
+
+  assets:
+    - assets/rive/
+    - assets/lottie/
+    - assets/images/
+    - assets/audio/
+    - assets/icons/
+    - assets/icons/bottom_navbar/
+    - assets/icons/profile/
+  fonts:
+    - family: ReadexPro
+      fonts:
+        - asset: assets/font/ReadexPro-ExtraLight.ttf
+          weight: 200
+        - asset: assets/font/ReadexPro-Light.ttf
+          weight: 300
+        - asset: assets/font/ReadexPro-Regular.ttf
+          weight: 400
+        - asset: assets/font/ReadexPro-Medium.ttf
+          weight: 500
+        - asset: assets/font/ReadexPro-SemiBold.ttf
+          weight: 600
+        - asset: assets/font/ReadexPro-Bold.ttf
+          weight: 700
+
