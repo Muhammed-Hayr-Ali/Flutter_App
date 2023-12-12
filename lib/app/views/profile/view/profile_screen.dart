@@ -41,8 +41,8 @@ class ProfileScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              SizedBox(
-                  child: _.currentUser != null
+              GetBuilder<ProfileController>(
+                builder: (_)=> _.currentUser != null
                       ? ProfileUser(
                           user: _.currentUser!,
                         )

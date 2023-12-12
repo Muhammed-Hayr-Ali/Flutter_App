@@ -19,42 +19,46 @@ class EditProfile extends StatelessWidget {
               onPressed: () => _.updateProfile(), child: Text('Save'.tr)),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Obx(
-                  () => _.isLoading.value
-                      ? const LinearProgressIndicator()
-                      : const SizedBox(height: 4),
+      body: Column(
+        children: [
+          Obx(
+            () => _.isLoading.value
+                ? const LinearProgressIndicator()
+                : const SizedBox(height: 4),
+          ),
+          SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 8),
+                    CustomTextField(
+                      labelText: 'User Name',
+                      textEditingController: _.userName,
+                      keyboardType: TextInputType.name,
+                      validator: (value) => Validator.userName(value!),
+                    ),
+                    SizedBox(height: space),
+                    CustomTextField(
+                      labelText: 'Status',
+                      textEditingController: _.status,
+                      keyboardType: TextInputType.text,
+                    ),
+                    SizedBox(height: space),
+                    CustomTextField(
+                      labelText: 'Phone Number',
+                      textEditingController: _.phoneNumber,
+                      keyboardType: TextInputType.phone,
+                      validator: (value) => Validator.mobile(value!),
+                    )
+                  ],
                 ),
-                const SizedBox(height: 8),
-                CustomTextField(
-                  labelText: 'User Name',
-                  textEditingController: _.userName,
-                  keyboardType: TextInputType.name,
-                  validator: (value) => Validator.userName(value!),
-                ),
-                SizedBox(height: space),
-                CustomTextField(
-                  labelText: 'Status',
-                  textEditingController: _.status,
-                  keyboardType: TextInputType.text,
-                ),
-                SizedBox(height: space),
-                CustomTextField(
-                  labelText: 'Phone Number',
-                  textEditingController: _.phoneNumber,
-                  keyboardType: TextInputType.phone,
-                  validator: (value) => Validator.mobile(value!),
-                )
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

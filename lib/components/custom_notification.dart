@@ -23,7 +23,6 @@ class CustomNotification {
       ),
       borderRadius: 4.0,
       snackPosition: SnackPosition.TOP,
-      duration: const Duration(seconds: 8),
       padding: const EdgeInsets.fromLTRB(8, 8, 8, 16),
     );
   }

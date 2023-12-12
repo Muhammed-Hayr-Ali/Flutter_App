@@ -39,6 +39,8 @@ class ProfileController extends GetxController {
 
   void updateProfile() async {
     isLoading(true);
+    final token = await _localStorage.readData(keys: Keys.token);
+    final header = {'Authorization': 'Bearer $token'};
 
     FormData data = FormData.fromMap({
       'name': userName.text,
@@ -52,14 +54,17 @@ class ProfileController extends GetxController {
     }
 
     try {
-      final response = await _dio.post(Api.updateProfile, data: data);
+      final response = await _dio.post(Api.updateProfile,
+          options: Options(headers: header), data: data);
       if (!response.data['status']) return;
 
       final profile = response.data['data']['profile'];
       _localStorage.saveData(keys: Keys.profile, data: profile);
-
       final message = response.data['message'];
       CustomNotification.showSnackbar(message: message);
+      final newProfile = response.data['data']['profile'];
+      currentUser = User.fromJson(newProfile);
+      update();
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
