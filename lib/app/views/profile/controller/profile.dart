@@ -60,11 +60,12 @@ class ProfileController extends GetxController {
 
       final profile = response.data['data']['profile'];
       _localStorage.saveData(keys: Keys.profile, data: profile);
-      final message = response.data['message'];
-      CustomNotification.showSnackbar(message: message);
+      // final message = response.data['message'];
+      // CustomNotification.showSnackbar(message: message);
       final newProfile = response.data['data']['profile'];
       currentUser = User.fromJson(newProfile);
       update();
+      Get.back();
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;

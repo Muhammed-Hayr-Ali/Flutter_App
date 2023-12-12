@@ -30,42 +30,40 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.primaryColor,
         title: Text(
-          'Profile'.tr,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          'Account'.tr,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
+        centerTitle: false,
       ),
-      body: SingleChildScrollView(
-        physics: const ScrollPhysics(),
-        child: Center(
-          child: Column(
+      body: Stack(
+        children: [
+          Container(
+            width: double.infinity,
+            color: AppColors.primaryColor,
+            child: const Column(
+              children: [
+                ProfileUser(),
+                SizedBox(height: 20),
+                SizedBox(height: 20),
+              ],
+            ),
+          ),
+          Column(
             children: [
-              GetBuilder<ProfileController>(
-                  init: ProfileController(),
-                  builder: (_) => _.currentUser != null
-                      ? ProfileUser(
-                          user: _.currentUser!,
-                        )
-                      : const LadingProfile()),
+              const SizedBox(height: 256),
               Container(
-                height: 30,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade200),
-              ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: menu.length,
-                itemBuilder: (context, index) {
-                  return menu[index];
-                },
+                height: double.infinity,
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(9.0),
+                    ),
+                    color: Colors.white), // child: Column(
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }

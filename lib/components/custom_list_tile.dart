@@ -37,33 +37,25 @@ class _CustomListTileState extends State<CustomListTile> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: widget.margin ?? const EdgeInsets.fromLTRB(8, 8, 8, 0),
-      color: widget.background,
-      elevation: widget.elevation,
+    return ListTile(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(widget.radius),
       ),
-      child: ListTile(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(widget.radius),
-        ),
-        onTap: widget.onTap,
-        leading: Icon(
-          widget.icon,
-          size: 22,
-          color: widget.color,
-        ),
-        title: widget.title != null
-            ? Text(
-                '${widget.title}'.tr,
-                style: const TextStyle(fontSize: 14),
-              )
-            : const SizedBox(),
-        trailing: isRtl
-            ? const Icon(Icons.chevron_left)
-            : const Icon(Icons.chevron_right),
+      onTap: widget.onTap,
+      leading: Icon(
+        widget.icon,
+        size: 22,
+        color: widget.color,
       ),
+      title: widget.title != null
+          ? Text(
+              '${widget.title}'.tr,
+              style: const TextStyle(fontSize: 14),
+            )
+          : const SizedBox(),
+      trailing: isRtl
+          ? const Icon(Icons.chevron_left)
+          : const Icon(Icons.chevron_right),
     );
   }
 }

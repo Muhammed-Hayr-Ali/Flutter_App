@@ -2,7 +2,6 @@ import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
-
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
 
@@ -15,7 +14,7 @@ class _NavBarState extends State<NavBar> {
     const Home(),
     const Search(),
     const Notifications(),
-     ProfileScreen(),
+    ProfileScreen(),
   ];
 
   int currentScreen = 0;
