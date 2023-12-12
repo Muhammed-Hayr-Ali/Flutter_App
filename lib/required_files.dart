@@ -2,11 +2,7 @@ export 'bindings.dart';
 
 export 'app/views/home/home.dart';
 export 'app/views/notification/notifications.dart';
-export 'app/views/profile0.dart/profile.dart';
 export 'app/views/search/search.dart';
-export 'package:application/app/views/profile0.dart/widgets/profile_widget.dart';
-export 'package:application/app/views/profile0.dart/widgets/select_mode.dart';
-export 'package:application/app/views/profile0.dart/widgets/select_lang.dart';
 export 'package:application/components/custom_list_item.dart';
 export 'package:application/app/model/user.dart';
 export 'package:application/app/controller/auth/auth.dart';
