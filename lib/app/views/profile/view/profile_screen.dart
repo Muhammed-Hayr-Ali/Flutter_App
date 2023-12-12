@@ -1,18 +1,17 @@
-import 'package:application/components/custom_list_tile.dart';
 import 'package:application/packages.dart';
+import 'package:application/required_files.dart';
 
-import '../../../model/user_profile.dart';
 import '../component/loading_profile.dart';
 import '../component/user_profile.dart';
-import '../controller/profile.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
   final _ = Get.put(ProfileController());
   final List<Widget> menu = [
-    const CustomListTile(
+    CustomListTile(
       title: 'Edit Profile',
       icon: PhosphorIcons.note_pencil_bold,
+      onTap: () => Get.toNamed(Routes.editProfile),
     ),
     const CustomListTile(
       title: 'Language',
@@ -25,6 +24,7 @@ class ProfileScreen extends StatelessWidget {
     const CustomListTile(
       title: 'Sign Out',
       icon: PhosphorIcons.power_bold,
+      color: Colors.red,
     ),
   ];
   @override

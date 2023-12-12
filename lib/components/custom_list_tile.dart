@@ -3,6 +3,7 @@ import 'package:application/packages.dart';
 class CustomListTile extends StatefulWidget {
   final double radius;
   final IconData? icon;
+  final Color? color;
   final void Function()? onTap;
   final String? title;
   final double? elevation;
@@ -16,7 +17,8 @@ class CustomListTile extends StatefulWidget {
       this.title,
       this.elevation = 0.0,
       this.background,
-      this.margin});
+      this.margin,
+      this.color});
 
   @override
   State<CustomListTile> createState() => _CustomListTileState();
@@ -48,9 +50,10 @@ class _CustomListTileState extends State<CustomListTile> {
         ),
         onTap: widget.onTap,
         leading: Icon(
-                PhosphorIcons.globe_hemisphere_west_bold,
-                size: 22,
-              ),
+          widget.icon,
+          size: 22,
+          color: widget.color,
+        ),
         title: widget.title != null
             ? Text(
                 '${widget.title}'.tr,

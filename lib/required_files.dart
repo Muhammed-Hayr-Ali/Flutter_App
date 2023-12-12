@@ -51,7 +51,7 @@ export 'services/permission_handler/permission_handler.dart';
 export 'services/theme_service/theme_service.dart';
 export 'services/validator/validator.dart';
 export 'package:application/app/controller/splashscreen_controller.dart';
-export 'package:application/app/views/profile0.dart/edit_profile.dart';
+export 'package:application/app/views/profile/view/edit_profile.dart';
 
 export 'components/animation/fade_animation_dx.dart';
 export 'components/animation/fade_animation_dy.dart';

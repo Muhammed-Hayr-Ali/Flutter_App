@@ -15,23 +15,23 @@ class EditProfile extends StatelessWidget {
       appBar: AppBar(
         title: Text('Edite Profile'.tr),
         actions: [
-          Obx(
-            () => _.loadingSave.value
-                ? const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Center(child: CustomProgress()),
-                  )
-                : TextButton(onPressed: () {}, child: Text('Save'.tr)),
-          )
+          TextButton(
+              onPressed: () => _.updateProfile(), child: Text('Save'.tr)),
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
+                Obx(
+                  () => _.isLoading.value
+                      ? const LinearProgressIndicator()
+                      : const SizedBox(height: 4),
+                ),
+                const SizedBox(height: 8),
                 CustomTextField(
                   labelText: 'User Name',
                   textEditingController: _.userName,
