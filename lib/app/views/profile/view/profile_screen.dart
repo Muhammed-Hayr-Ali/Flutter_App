@@ -6,7 +6,6 @@ import '../component/user_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
-  final _ = Get.put(ProfileController());
   final List<Widget> menu = [
     CustomListTile(
       title: 'Edit Profile',
@@ -42,7 +41,8 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             children: [
               GetBuilder<ProfileController>(
-                builder: (_)=> _.currentUser != null
+                  init: ProfileController(),
+                  builder: (_) => _.currentUser != null
                       ? ProfileUser(
                           user: _.currentUser!,
                         )
