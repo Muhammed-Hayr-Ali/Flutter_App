@@ -11,6 +11,6 @@ abstract class Routes {
   static const home = '/home';
   static const forgotPassword = '/ForgotPassword';
   static const verifyVerificationCode = '/verifyVerificationCode';
-  static const setPassword = '/setPassword';
+  static const createNewPassword = '/createNewPassword';
   static const editProfile = '/editProfile';
 }

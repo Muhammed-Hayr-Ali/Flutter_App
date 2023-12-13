@@ -40,11 +40,12 @@ class CreatNewAccount extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 FadeAnimationDx(
                   delay: 1,
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         'join'.tr,
@@ -87,12 +88,17 @@ class CreatNewAccount extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: space / 2),
-                FadeAnimationDx(
-                  delay: 5,
-                  child: Text(
-                    'You cannot edit the email at a later time'.tr,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
+                Row(
+                  children: [
+                    FadeAnimationDx(
+                      delay: 5,
+                      child: Text(
+                        'You cannot edit the email at a later time'.tr,
+                        style:
+                            const TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: space / 2),
                 FadeAnimationDx(

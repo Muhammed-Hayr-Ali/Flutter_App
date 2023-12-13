@@ -1,6 +1,6 @@
 class Api {
   Api._();
-  static const String baseUrl = 'http://192.168.55.252:8000';
+  static const String baseUrl = 'http://192.168.0.105:8000';
   //
   static const Duration connectTimeout = Duration(seconds: 5);
   static const Map<String, dynamic> defaultHeaders = {
@@ -18,7 +18,7 @@ class Api {
   static const String forgotPassword = '/api/account/forgotPassword';
   static const String verifyVerificationCode =
       '/api/account/verifyVerificationCode';
-  static const String resetPassword = '/api/account/resetPassword';
+  static const String createNewPassword = '/api/account/createNewPassword';
 
   //Profile
   static const String currentUser = '/api/profile/getCurrentUser';

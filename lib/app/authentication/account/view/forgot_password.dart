@@ -1,7 +1,7 @@
 import 'package:application/packages.dart';
 
 import '../controller/account.dart';
- import 'package:application/required_files.dart';
+import 'package:application/required_files.dart';
 
 class ForgotPassword extends StatelessWidget {
   ForgotPassword({super.key});
@@ -16,7 +16,7 @@ class ForgotPassword extends StatelessWidget {
 
   void _recovery() async {
     if (_formKey.currentState!.validate()) {
-      _.forgotPassword(_email.text);
+      _.forgotPassword(mail: _email.text);
     }
   }
 
@@ -39,7 +39,7 @@ class ForgotPassword extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'Recovery'.tr,
+                        'Forgot'.tr,
                         style: TextStyle(
                             fontSize: 30,
                             color: AppColors.primaryColor,
@@ -47,7 +47,7 @@ class ForgotPassword extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'account'.tr,
+                        'Password'.tr,
                         style: const TextStyle(
                             fontSize: 30, fontWeight: FontWeight.w200),
                       ),

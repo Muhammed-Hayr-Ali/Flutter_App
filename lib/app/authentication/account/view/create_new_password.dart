@@ -1,33 +1,29 @@
 import 'package:application/packages.dart';
-import 'package:application/required_files.dart';
 
 import '../controller/account.dart';
+import 'package:application/required_files.dart';
 
-class SetPassword extends StatelessWidget {
-  SetPassword({super.key});
+class CreateNewPassword extends StatelessWidget {
+  CreateNewPassword({super.key});
 
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.find<Account>();
+  final _ = Get.put(Account());
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _verificationCode = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
 
-  void _reset() async {
-    if (_.isLoading.value) return;
-
+  void _recovery() async {
     if (_formKey.currentState!.validate()) {
-      _.resetPassword(
-        password: _password.text,
-      );
+      _.createNewPassword(password: _password.text);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    double size = Get.width * 0.5;
     return Scaffold(
       appBar: AppBar(),
       body: Form(
@@ -36,14 +32,15 @@ class SetPassword extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 FadeAnimationDx(
                   delay: 1,
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'Reset'.tr,
+                        'Forgot'.tr,
                         style: TextStyle(
                             fontSize: 30,
                             color: AppColors.primaryColor,
@@ -52,34 +49,35 @@ class SetPassword extends StatelessWidget {
                       const SizedBox(width: 8),
                       Text(
                         'Password'.tr,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: AppColors.blueVogue,
-                            fontWeight: FontWeight.w200),
+                        style: const TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w200),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(height: space),
-                FadeAnimationDx(
-                  delay: 3,
-                  child: CustomTextField(
-                    labelText: 'verification code',
-                    textEditingController: _verificationCode,
-                    keyboardType: TextInputType.phone,
-                    validator: (value) => Validator.verificationCode(value!),
+                Container(
+                  height: size,
+                  width: size,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(size),
+                    color: AppColors.primaryColor.withOpacity(0.1),
+                  ),
+                  child: Icon(
+                    Icons.lock,
+                    size: size * .5,
+                    color: AppColors.primaryColor,
                   ),
                 ),
-                SizedBox(height: space / 2),
-                FadeAnimationDx(
-                  delay: 5,
-                  child: Text(
-                    'You can find the verification code in the inbox'.tr,
-                    style: const TextStyle(fontSize: 10, color: Colors.grey),
-                  ),
+                SizedBox(height: space),
+                Text(
+                  'Please Enter your email Address To Recieve a Verification Code'
+                      .tr,
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
-                SizedBox(height: space / 2),
-                FadeAnimationDx(
+                const SizedBox(height: 10),
+   
+                   FadeAnimationDx(
                   delay: 4,
                   child: CustomTextField(
                     labelText: 'Password',
@@ -102,22 +100,27 @@ class SetPassword extends StatelessWidget {
                         Validator.password(value!, _password.text),
                   ),
                 ),
-                SizedBox(height: space * 2.2),
+
+   
+   
+                  SizedBox(height: space * 2.2),
                 FadeAnimationDx(
-                  delay: 6,
+                  delay: 3,
                   child: CustomElevatedButton(
                     height: 54,
                     width: double.infinity,
                     borderRadius: BorderRadius.circular(28),
-                    onPressed: _reset,
-                    child: Obx(() => _.isLoading.value
-                        ? const CustomProgress(
-                            color: Colors.white,
-                          )
-                        : Text(
-                            'Reset'.tr,
-                            style: const TextStyle(color: Colors.white),
-                          )),
+                    onPressed: _recovery,
+                    child: Obx(
+                      () => _.isLoading.value
+                          ? const CustomProgress(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              'Send'.tr,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                    ),
                   ),
                 ),
               ],
@@ -128,5 +131,3 @@ class SetPassword extends StatelessWidget {
     );
   }
 }
-
-// 

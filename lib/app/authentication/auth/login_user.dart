@@ -40,11 +40,12 @@ class Login extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 FadeAnimationDx(
                   delay: 1,
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         'Welcome'.tr,
@@ -89,7 +90,6 @@ class Login extends StatelessWidget {
                   child: TextButton(
                     onPressed: _recovery,
                     child: Row(
-                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           'Forgot your password? '.tr,

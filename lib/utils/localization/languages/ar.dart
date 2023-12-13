@@ -39,7 +39,9 @@ const Map<String, String> arabic = {
   'verification code': 'رمز التحقق',
   'Enter your verification code that we sent you through your email ':
       'أدخل رمز التحقق الخاص بك الذي أرسلناه إليك عبر بريدك الإلكتروني',
-      'You have entered an incorrect verification code' : 'لقد قمت بإدخال رمز التحقق غير صحيح',
+
+  'Email verification code is invalid. You can request a new code if the code expires, knowing that the code is valid for 15 minutes':
+      'رمز التحقق من البريد الإلكتروني غير صحيح. بإمكانك طلب رمز جديد في حال انتهاء صلاحية الرمز، مع العلم أن الرمز صالح لمدة 15 دقيقة',
   'You can find the verification code in the inbox':
       'يمكنك العثور على رمز التحقق في البريد الوارد',
   'Send': 'إرسال',

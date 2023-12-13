@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 class Account extends GetxController {
   RxBool isLoading = false.obs;
-  RxBool codeHasError = false.obs;
+  RxBool invalidCodeError = false.obs;
 
   final Dio _dio = Dio(
     BaseOptions(
@@ -15,7 +15,7 @@ class Account extends GetxController {
   String? email;
   String? verificationCode;
 
-  void forgotPassword(String mail) async {
+  void forgotPassword({required String mail}) async {
     isLoading(true);
     FormData data = FormData.fromMap({
       'email': mail,
@@ -24,8 +24,6 @@ class Account extends GetxController {
     try {
       final response = await _dio.post(Api.forgotPassword, data: data);
       if (!response.data['status']) return;
-      final message = response.data['message'];
-      CustomNotification.showSnackbar(message: message);
 
       Get.toNamed(Routes.verifyVerificationCode);
 
@@ -37,9 +35,8 @@ class Account extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-    } 
-      isLoading(false);
-    
+    }
+    isLoading(false);
   }
 
   void verifyVerificationCode({required String code}) async {
@@ -52,8 +49,8 @@ class Account extends GetxController {
     try {
       final response = await _dio.post(Api.verifyVerificationCode, data: data);
       if (!response.data['status']) return;
-      final message = response.data['message'];
-      CustomNotification.showSnackbar(message: message);
+      // final message = response.data['message'];
+      // CustomNotification.showSnackbar(message: message);
 
       Get.toNamed(Routes.setPassword);
 
@@ -63,17 +60,16 @@ class Account extends GetxController {
       if (exception.response != null) {
         final responseData = exception.response?.data;
         if (responseData['message'] == 'Verification code error') {
-          codeHasError(true);
+          invalidCodeError(true);
         }
       } else {
         CustomDioException.exception(exception.type);
       }
     }
-      isLoading(false);
-    
+    isLoading(false);
   }
 
-  void resetPassword({required String password}) async {
+  void createNewPassword({required String password}) async {
     isLoading(true);
     FormData data = FormData.fromMap({
       'email': email,
@@ -82,7 +78,7 @@ class Account extends GetxController {
     });
 
     try {
-      final response = await _dio.post(Api.resetPassword, data: data);
+      final response = await _dio.post(Api.createNewPassword, data: data);
       if (!response.data['status']) return;
 
       final message = response.data['message'];
@@ -96,9 +92,8 @@ class Account extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-    } 
-    
-      isLoading(false);
-    
+    }
+
+    isLoading(false);
   }
 }

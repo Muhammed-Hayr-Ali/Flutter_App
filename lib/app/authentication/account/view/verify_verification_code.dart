@@ -5,7 +5,6 @@ import 'package:otp_text_field/style.dart';
 
 import '../controller/account.dart';
 
-
 class VerifyVerificationCode extends StatelessWidget {
   VerifyVerificationCode({super.key});
 
@@ -100,8 +99,19 @@ class VerifyVerificationCode extends StatelessWidget {
                       textFieldAlignment: MainAxisAlignment.spaceAround,
                       fieldStyle: FieldStyle.underline,
                       outlineBorderRadius: 2,
-                      onChanged: (v) => _.codeHasError(false),
+                      onChanged: (v) => _.invalidCodeError(false),
                       onCompleted: (code) => _code.text = code),
+                ),
+                SizedBox(height: space),
+                Obx(
+                  () => _.invalidCodeError.value
+                      ? Text(
+                          'Email verification code is invalid. You can request a new code if the code expires, noting that the code is valid for 15 minutes'
+                              .tr,
+                          style:
+                              const TextStyle(fontSize: 12, color: Colors.red),
+                        )
+                      : const SizedBox(),
                 ),
                 SizedBox(height: space * 2.2),
                 FadeAnimationDx(
