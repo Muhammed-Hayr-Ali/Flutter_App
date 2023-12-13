@@ -14,7 +14,7 @@ class Login extends StatelessWidget {
   final TextEditingController _password = TextEditingController();
 
   void _recovery() {
-    Get.toNamed(Routes.ressetPass);
+    Get.toNamed(Routes.forgotPassword);
   }
 
   void _signIn() async {

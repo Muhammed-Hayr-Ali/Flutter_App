@@ -1,7 +1,5 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
-
-import '../component/loading_profile.dart';
 import '../component/user_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -29,8 +27,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
         title: Text(
           'Account'.tr,
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -41,6 +39,7 @@ class ProfileScreen extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
+            height: 256,
             color: AppColors.primaryColor,
             child: const Column(
               children: [

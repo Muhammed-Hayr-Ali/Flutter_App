@@ -12,15 +12,15 @@ export 'package:application/app/views/profile/view/profile_screen.dart';
 
 export 'app/views/product_details/product_details.dart';
 export 'package:application/components/custom_list_tile.dart';
+export 'package:application/app/views/auth/verify_verification_code.dart';
 
 export 'app/controller/auth_controller.dart';
 export 'package:shimmer/shimmer.dart';
 
-
 export 'app/views/auth/authentication.dart';
 export 'app/views/auth/creat_new_account.dart';
 export 'app/views/auth/login_user.dart';
-export 'app/views/auth/reset_pass.dart';
+export 'app/views/auth/forgot_password.dart';
 export 'app/views/auth/set_password.dart';
 
 export 'app/views/navbar.dart';

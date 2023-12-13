@@ -12,9 +12,14 @@ class FadeAnimationDx extends StatelessWidget {
     }
   }
 
+  bool getLocal() {
+    return Get.locale.toString() == 'ar' ? true : false;
+  }
+
   @override
   Widget build(BuildContext context) {
     _buildList();
+    getLocal();
     return TweenAnimationBuilder<double>(
       tween: Tween<double>(begin: 0.0, end: 1.0),
       duration: Duration(milliseconds: delayList[delay]),
@@ -23,7 +28,7 @@ class FadeAnimationDx extends StatelessWidget {
         return Opacity(
           opacity: value,
           child: Transform.translate(
-            offset: Offset(-30 * (1 - value), 0),
+            offset: getLocal() == true ?Offset(-30 * (1 - value), 0): Offset( 30 * (1 - value), 0),
             child: child,
           ),
         );

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 class Account extends GetxController {
   RxBool isLoading = false.obs;
+  RxBool codeHasError = false.obs;
 
   final Dio _dio = Dio(
     BaseOptions(
@@ -11,12 +12,13 @@ class Account extends GetxController {
         connectTimeout: Api.connectTimeout,
         headers: Api.defaultHeaders),
   );
-  String? _email;
+  String? email;
+  String? verificationCode;
 
-  void forgotPassword(String email) async {
+  void forgotPassword(String mail) async {
     isLoading(true);
     FormData data = FormData.fromMap({
-      'email': email,
+      'email': mail,
     });
 
     try {
@@ -25,8 +27,9 @@ class Account extends GetxController {
       final message = response.data['message'];
       CustomNotification.showSnackbar(message: message);
 
-      Get.toNamed(Routes.setPassword);
-      _email = email;
+      Get.toNamed(Routes.verifyVerificationCode);
+
+      email = mail;
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -34,15 +37,46 @@ class Account extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-    } finally {
+    } 
       isLoading(false);
-    }
+    
   }
 
-  void resetPassword({required String password, required String verificationCode}) async {
+  void verifyVerificationCode({required String code}) async {
     isLoading(true);
     FormData data = FormData.fromMap({
-      'email': _email,
+      'email': email,
+      'code': code,
+    });
+
+    try {
+      final response = await _dio.post(Api.verifyVerificationCode, data: data);
+      if (!response.data['status']) return;
+      final message = response.data['message'];
+      CustomNotification.showSnackbar(message: message);
+
+      Get.toNamed(Routes.setPassword);
+
+      verificationCode = code;
+    } on DioException catch (exception) {
+      // codeHasError(true);
+      if (exception.response != null) {
+        final responseData = exception.response?.data;
+        if (responseData['message'] == 'Verification code error') {
+          codeHasError(true);
+        }
+      } else {
+        CustomDioException.exception(exception.type);
+      }
+    }
+      isLoading(false);
+    
+  }
+
+  void resetPassword({required String password}) async {
+    isLoading(true);
+    FormData data = FormData.fromMap({
+      'email': email,
       'password': password,
       'code': verificationCode,
     });
@@ -51,9 +85,10 @@ class Account extends GetxController {
       final response = await _dio.post(Api.resetPassword, data: data);
       if (!response.data['status']) return;
 
-      Get.toNamed(Routes.loginUser);
       final message = response.data['message'];
       CustomNotification.showSnackbar(message: message);
+
+      Get.toNamed(Routes.loginUser);
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -61,8 +96,9 @@ class Account extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-    } finally {
+    } 
+    
       isLoading(false);
-    }
+    
   }
 }

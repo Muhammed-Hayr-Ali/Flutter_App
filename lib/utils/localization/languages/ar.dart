@@ -34,10 +34,15 @@ const Map<String, String> arabic = {
 
   'account': 'الحساب',
   'Reset': 'إعادة تعيين',
+  'Enter your email to send the recovery code':
+      'أدخل بريدك الإلكتروني لإرسال رمز الاسترداد',
   'verification code': 'رمز التحقق',
+  'Enter your verification code that we sent you through your email ':
+      'أدخل رمز التحقق الخاص بك الذي أرسلناه إليك عبر بريدك الإلكتروني',
+      'You have entered an incorrect verification code' : 'لقد قمت بإدخال رمز التحقق غير صحيح',
   'You can find the verification code in the inbox':
       'يمكنك العثور على رمز التحقق في البريد الوارد',
-
+  'Send': 'إرسال',
 //API Messages
   'Please enter your email address.':
       'الرجاء إدخال عنوان البريد الإلكتروني الخاص بك.',

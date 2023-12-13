@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 class ProfileController extends GetxController {
   @override
   void onInit() {
-    // TODO: implement onInit
+
     super.onInit();
     getCurrentUser();
   }

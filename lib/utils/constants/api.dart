@@ -16,6 +16,8 @@ class Api {
 
   //Account
   static const String forgotPassword = '/api/account/forgotPassword';
+  static const String verifyVerificationCode =
+      '/api/account/verifyVerificationCode';
   static const String resetPassword = '/api/account/resetPassword';
 
   //Profile

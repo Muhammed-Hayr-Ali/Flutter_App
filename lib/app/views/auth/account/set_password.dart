@@ -20,7 +20,6 @@ class SetPassword extends StatelessWidget {
     if (_formKey.currentState!.validate()) {
       _.resetPassword(
         password: _password.text,
-        verificationCode: _verificationCode.text,
       );
     }
   }

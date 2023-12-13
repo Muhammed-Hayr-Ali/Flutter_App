@@ -41,8 +41,16 @@ class Pages {
       curve: curve,
     ),
     GetPage(
-      name: Routes.ressetPass,
-      page: () => RessetPass(),
+      name: Routes.forgotPassword,
+      page: () => ForgotPassword(),
+      transitionDuration: duration,
+      transition: transition,
+      curve: curve,
+      //binding: HomeBinding(),
+    ),
+    GetPage(
+      name: Routes.verifyVerificationCode,
+      page: () => VerifyVerificationCode(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,
@@ -64,7 +72,7 @@ class Pages {
     ),
     GetPage(
       name: Routes.editProfile,
-      page: () =>  EditProfile(),
+      page: () => EditProfile(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,

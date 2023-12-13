@@ -106,7 +106,6 @@ class Auth extends GetxController {
       final response = await _dio.post(Api.continueWithGoogle, data: data);
 
       if (!response.data['status']) return;
-      print(response.data);
       final profile = response.data['data']['profile'];
       final token = response.data['data']['profile']['token'];
       final isNewUser = response.data['message'];

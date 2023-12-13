@@ -24,7 +24,7 @@ class SplashScreenController extends GetxController {
       final response =
           await _dio.post(Api.currentUser, options: Options(headers: header));
       if (!response.data['status']) Get.offAndToNamed(Routes.authentication);
-            _localStorage.saveData(
+      _localStorage.saveData(
           keys: Keys.profile, data: response.data['data']['profile']);
 
       Get.offAndToNamed(Routes.home);
