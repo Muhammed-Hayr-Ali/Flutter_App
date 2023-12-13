@@ -51,14 +51,11 @@ class AccountController extends GetxController {
     try {
       final response = await _dio.post(Api.verifyVerificationCode, data: data);
       if (!response.data['status']) return;
-      // final message = response.data['message'];
-      // CustomNotification.showSnackbar(message: message);
 
       Get.toNamed(Routes.createNewPassword);
 
       verificationCode = code;
     } on DioException catch (exception) {
-      // codeHasError(true);
       if (exception.response != null) {
         final responseData = exception.response?.data;
         verifyVerificationCodeError(responseData['message']);
