@@ -1,6 +1,6 @@
 import 'package:application/packages.dart';
 
-import '../controller/account.dart';
+import '../controller/account_controller.dart';
 import 'package:application/required_files.dart';
 
 class CreateNewPassword extends StatelessWidget {
@@ -9,7 +9,7 @@ class CreateNewPassword extends StatelessWidget {
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.put(Account());
+  final _ = Get.put(AccountController());
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _password = TextEditingController();
@@ -40,7 +40,7 @@ class CreateNewPassword extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'Forgot'.tr,
+                        'CreateNew'.tr,
                         style: TextStyle(
                             fontSize: 30,
                             color: AppColors.primaryColor,
@@ -64,20 +64,19 @@ class CreateNewPassword extends StatelessWidget {
                     color: AppColors.primaryColor.withOpacity(0.1),
                   ),
                   child: Icon(
-                    Icons.lock,
+                    Icons.password_rounded,
                     size: size * .5,
                     color: AppColors.primaryColor,
                   ),
                 ),
                 SizedBox(height: space),
                 Text(
-                  'Please Enter your email Address To Recieve a Verification Code'
+                  'Your New Password Must Be Different from Previous Password'
                       .tr,
                   style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
                 const SizedBox(height: 10),
-   
-                   FadeAnimationDx(
+                FadeAnimationDx(
                   delay: 4,
                   child: CustomTextField(
                     labelText: 'Password',
@@ -86,6 +85,7 @@ class CreateNewPassword extends StatelessWidget {
                     keyboardType: TextInputType.multiline,
                     validator: (value) =>
                         Validator.password(value!, _confirmPassword.text),
+                    onChanged: (value) => _.createNewPasswordError.value = '',
                   ),
                 ),
                 SizedBox(height: space),
@@ -98,12 +98,17 @@ class CreateNewPassword extends StatelessWidget {
                     keyboardType: TextInputType.multiline,
                     validator: (value) =>
                         Validator.password(value!, _password.text),
+                    onChanged: (value) => _.createNewPasswordError.value = '',
                   ),
                 ),
-
-   
-   
-                  SizedBox(height: space * 2.2),
+                SizedBox(height: space),
+                Obx(
+                  () => Text(
+                    _.createNewPasswordError.value.tr,
+                    style: const TextStyle(fontSize: 12, color: Colors.red),
+                  ),
+                ),
+                SizedBox(height: space * 2.2),
                 FadeAnimationDx(
                   delay: 3,
                   child: CustomElevatedButton(
@@ -117,7 +122,7 @@ class CreateNewPassword extends StatelessWidget {
                               color: Colors.white,
                             )
                           : Text(
-                              'Send'.tr,
+                              'save'.tr,
                               style: const TextStyle(color: Colors.white),
                             ),
                     ),

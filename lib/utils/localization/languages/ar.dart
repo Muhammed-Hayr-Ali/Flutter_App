@@ -40,11 +40,13 @@ const Map<String, String> arabic = {
   'Enter your verification code that we sent you through your email ':
       'أدخل رمز التحقق الخاص بك الذي أرسلناه إليك عبر بريدك الإلكتروني',
 
-  'Email verification code is invalid. You can request a new code if the code expires, knowing that the code is valid for 15 minutes':
+  'Email verification code is invalid':
       'رمز التحقق من البريد الإلكتروني غير صحيح. بإمكانك طلب رمز جديد في حال انتهاء صلاحية الرمز، مع العلم أن الرمز صالح لمدة 15 دقيقة',
   'You can find the verification code in the inbox':
       'يمكنك العثور على رمز التحقق في البريد الوارد',
   'Send': 'إرسال',
+  'Your New Password Must Be Different from Previous Password':
+      'يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور السابقة',
 //API Messages
   'Please enter your email address.':
       'الرجاء إدخال عنوان البريد الإلكتروني الخاص بك.',

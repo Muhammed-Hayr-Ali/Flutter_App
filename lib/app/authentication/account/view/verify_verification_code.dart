@@ -3,7 +3,7 @@ import 'package:application/required_files.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
-import '../controller/account.dart';
+import '../controller/account_controller.dart';
 
 class VerifyVerificationCode extends StatelessWidget {
   VerifyVerificationCode({super.key});
@@ -11,7 +11,7 @@ class VerifyVerificationCode extends StatelessWidget {
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.put(Account());
+  final _ = Get.put(AccountController());
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _code = TextEditingController();
@@ -63,7 +63,7 @@ class VerifyVerificationCode extends StatelessWidget {
                     color: AppColors.primaryColor.withOpacity(0.1),
                   ),
                   child: Icon(
-                    Icons.mail,
+                    Icons.mark_email_read_sharp,
                     size: size * .5,
                     color: AppColors.primaryColor,
                   ),
@@ -90,28 +90,25 @@ class VerifyVerificationCode extends StatelessWidget {
                 FadeAnimationDx(
                   delay: 2,
                   child: OTPTextField(
-                      length: 6,
-                      width: Get.width * 0.6,
-                      fieldWidth: 30,
-                      spaceBetween: 4,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                      textFieldAlignment: MainAxisAlignment.spaceAround,
-                      fieldStyle: FieldStyle.underline,
-                      outlineBorderRadius: 2,
-                      onChanged: (v) => _.invalidCodeError(false),
-                      onCompleted: (code) => _code.text = code),
+                    length: 6,
+                    width: Get.width * 0.6,
+                    fieldWidth: 30,
+                    spaceBetween: 4,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                    textFieldAlignment: MainAxisAlignment.spaceAround,
+                    fieldStyle: FieldStyle.underline,
+                    outlineBorderRadius: 2,
+                    onCompleted: (code) => _code.text = code,
+                    onChanged: (value) => _.verifyVerificationCodeError.value = '',
+                  ),
                 ),
                 SizedBox(height: space),
                 Obx(
-                  () => _.invalidCodeError.value
-                      ? Text(
-                          'Email verification code is invalid. You can request a new code if the code expires, noting that the code is valid for 15 minutes'
-                              .tr,
-                          style:
-                              const TextStyle(fontSize: 12, color: Colors.red),
-                        )
-                      : const SizedBox(),
+                  () => Text(
+                    _.verifyVerificationCodeError.value.tr,
+                    style: const TextStyle(fontSize: 12, color: Colors.red),
+                  ),
                 ),
                 SizedBox(height: space * 2.2),
                 FadeAnimationDx(

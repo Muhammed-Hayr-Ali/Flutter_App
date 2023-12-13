@@ -1,6 +1,6 @@
 import 'package:application/packages.dart';
 
-import '../controller/account.dart';
+import '../controller/account_controller.dart';
 import 'package:application/required_files.dart';
 
 class ForgotPassword extends StatelessWidget {
@@ -9,7 +9,7 @@ class ForgotPassword extends StatelessWidget {
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.put(Account());
+  final _ = Get.put(AccountController());
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _email = TextEditingController();
@@ -63,7 +63,7 @@ class ForgotPassword extends StatelessWidget {
                     color: AppColors.primaryColor.withOpacity(0.1),
                   ),
                   child: Icon(
-                    Icons.lock,
+                    Icons.lock_person,
                     size: size * .5,
                     color: AppColors.primaryColor,
                   ),
@@ -82,6 +82,14 @@ class ForgotPassword extends StatelessWidget {
                     textEditingController: _email,
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) => Validator.email(value!),
+                    onChanged: (value) => _.forgotPasswordError.value = '',
+                  ),
+                ),
+                SizedBox(height: space),
+                Obx(
+                  () => Text(
+                    _.forgotPasswordError.value.tr,
+                    style: const TextStyle(fontSize: 12, color: Colors.red),
                   ),
                 ),
                 SizedBox(height: space * 2.2),

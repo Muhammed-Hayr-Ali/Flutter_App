@@ -2,9 +2,11 @@ import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'package:dio/dio.dart';
 
-class Account extends GetxController {
+class AccountController extends GetxController {
   RxBool isLoading = false.obs;
-  RxBool invalidCodeError = false.obs;
+  RxString forgotPasswordError = ''.obs;
+  RxString verifyVerificationCodeError = ''.obs;
+  RxString createNewPasswordError = ''.obs;
 
   final Dio _dio = Dio(
     BaseOptions(
@@ -31,7 +33,7 @@ class Account extends GetxController {
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
-        CustomNotification.showSnackbar(message: responseData['message']);
+        forgotPasswordError.value = responseData['message'];
       } else {
         CustomDioException.exception(exception.type);
       }
@@ -52,16 +54,14 @@ class Account extends GetxController {
       // final message = response.data['message'];
       // CustomNotification.showSnackbar(message: message);
 
-      Get.toNamed(Routes.setPassword);
+      Get.toNamed(Routes.createNewPassword);
 
       verificationCode = code;
     } on DioException catch (exception) {
       // codeHasError(true);
       if (exception.response != null) {
         final responseData = exception.response?.data;
-        if (responseData['message'] == 'Verification code error') {
-          invalidCodeError(true);
-        }
+        verifyVerificationCodeError(responseData['message']);
       } else {
         CustomDioException.exception(exception.type);
       }
@@ -88,7 +88,7 @@ class Account extends GetxController {
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
-        CustomNotification.showSnackbar(message: responseData['message']);
+        createNewPasswordError.value = responseData['message'];
       } else {
         CustomDioException.exception(exception.type);
       }
