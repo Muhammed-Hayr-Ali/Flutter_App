@@ -1,6 +1,18 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
+import '../app/authentication/account/view/forgot_password.dart';
+import '../app/authentication/account/view/set_password.dart';
+import '../app/authentication/account/view/verify_verification_code.dart';
+import '../app/authentication/auth/creat_new_account.dart';
+import '../app/authentication/auth/login_user.dart';
+import '../app/authentication/authentication.dart';
+import '../app/bottomNavigationBar/view/bottom_navigation_bar.dart';
+
+import '../app/profile/view/edit_profile.dart';
+import '../app/splash_screen/controller/splashscreen_controller.dart';
+
+
 /// Pages
 class Pages {
   static const initial = Routes.splashScreen;

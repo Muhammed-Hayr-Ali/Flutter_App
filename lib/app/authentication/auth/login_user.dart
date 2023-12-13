@@ -1,31 +1,31 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
-import 'widgets/upload_image.dart';
+import 'controller/auth.dart';
 
-class CreatNewAccount extends StatelessWidget {
-  CreatNewAccount({super.key});
+class Login extends StatelessWidget {
+  Login({super.key});
 
   final double space = 32;
+  final double fontSize = 10;
 
   final _ = Get.find<Auth>();
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _userName = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
-  final TextEditingController _confirmPassword = TextEditingController();
-  final TextEditingController _imagePath = TextEditingController();
 
-  void _createNewAccount() async {
+  void _recovery() {
+    Get.toNamed(Routes.forgotPassword);
+  }
+
+  void _signIn() async {
     if (_.isLoading.value) return;
 
     if (_formKey.currentState!.validate()) {
-      _.register({
-        'name': _userName.text,
+      _.login({
         'email': _email.text,
         'password': _password.text,
-        'path': _imagePath.text
       });
     }
   }
@@ -47,7 +47,7 @@ class CreatNewAccount extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        'join'.tr,
+                        'Welcome'.tr,
                         style: TextStyle(
                             fontSize: 30,
                             color: AppColors.primaryColor,
@@ -55,7 +55,7 @@ class CreatNewAccount extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'us'.tr,
+                        'Back'.tr,
                         style: const TextStyle(
                             fontSize: 30, fontWeight: FontWeight.w200),
                       ),
@@ -63,73 +63,62 @@ class CreatNewAccount extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: space),
-                UploadImage(
-                  pathImage: _imagePath,
-                ),
-                SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 2,
                   child: CustomTextField(
-                    labelText: 'User Name',
-                    textEditingController: _userName,
-                    keyboardType: TextInputType.name,
+                    labelText: 'E-mail',
+                    textEditingController: _email,
+                    keyboardType: TextInputType.emailAddress,
                     validator: (value) => Validator.userName(value!),
                   ),
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 4,
-                  child: CustomTextField(
-                    labelText: 'E-mail',
-                    textEditingController: _email,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) => Validator.email(value!),
-                  ),
-                ),
-                SizedBox(height: space / 2),
-                FadeAnimationDx(
-                  delay: 5,
-                  child: Text(
-                    'You cannot edit the email at a later time'.tr,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ),
-                SizedBox(height: space / 2),
-                FadeAnimationDx(
-                  delay: 6,
+                  delay: 3,
                   child: CustomTextField(
                     labelText: 'Password',
                     isPassword: true,
                     textEditingController: _password,
                     keyboardType: TextInputType.multiline,
-                    validator: (value) =>
-                        Validator.password(value!, _confirmPassword.text),
+                    validator: (value) => Validator.pass(value!),
                   ),
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 7,
-                  child: CustomTextField(
-                    labelText: 'Confirm password',
-                    isPassword: true,
-                    textEditingController: _confirmPassword,
-                    keyboardType: TextInputType.multiline,
-                    validator: (value) =>
-                        Validator.password(value!, _password.text),
+                  delay: 4,
+                  child: TextButton(
+                    onPressed: _recovery,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Forgot your password? '.tr,
+                          style:
+                              const TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                        Text(
+                          'Recovery'.tr,
+                          style: const TextStyle(
+                              fontSize: 12, color: Colors.green),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: space * 2.2),
                 FadeAnimationDx(
-                  delay: 9,
+                  delay: 5,
                   child: CustomElevatedButton(
                     height: 54,
                     width: double.infinity,
                     borderRadius: BorderRadius.circular(28),
-                    onPressed: _createNewAccount,
+                    onPressed: _signIn,
                     child: Obx(() => _.isLoading.value
-                        ? const CustomProgress(color: Colors.white)
+                        ? const CustomProgress(
+                            color: Colors.white,
+                          )
                         : Text(
-                            'Create New Account'.tr,
+                            'Sign in'.tr,
                             style: const TextStyle(color: Colors.white),
                           )),
                   ),

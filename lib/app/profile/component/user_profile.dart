@@ -1,6 +1,9 @@
-import 'package:application/packages.dart';
 
-import '../../../../required_files.dart';
+
+import 'package:application/packages.dart';
+import 'package:application/required_files.dart';
+
+import '../controller/profile.dart';
 
 class ProfileUser extends StatelessWidget {
   const ProfileUser({

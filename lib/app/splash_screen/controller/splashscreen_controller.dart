@@ -1,5 +1,5 @@
-import '../../packages.dart';
-import '../../required_files.dart';
+import '../../../../packages.dart';
+import '../../../../required_files.dart';
 
 class SplashScreenController extends GetxController {
   @override

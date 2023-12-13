@@ -1,6 +1,8 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
+import 'auth/controller/auth.dart';
+
 class Authentication extends StatelessWidget {
   Authentication({super.key});
 

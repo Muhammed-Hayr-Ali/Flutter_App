@@ -1,26 +1,32 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
+import 'components/upload_image.dart';
+import 'controller/auth.dart';
 
-class SetPassword extends StatelessWidget {
-  SetPassword({super.key});
+class CreatNewAccount extends StatelessWidget {
+  CreatNewAccount({super.key});
 
   final double space = 32;
-  final double fontSize = 10;
 
-  final _ = Get.find<Account>();
+  final _ = Get.find<Auth>();
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _verificationCode = TextEditingController();
+  final TextEditingController _userName = TextEditingController();
+  final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
+  final TextEditingController _imagePath = TextEditingController();
 
-  void _reset() async {
+  void _createNewAccount() async {
     if (_.isLoading.value) return;
 
     if (_formKey.currentState!.validate()) {
-      _.resetPassword(
-        password: _password.text,
-      );
+      _.register({
+        'name': _userName.text,
+        'email': _email.text,
+        'password': _password.text,
+        'path': _imagePath.text
+      });
     }
   }
 
@@ -41,7 +47,7 @@ class SetPassword extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        'Reset'.tr,
+                        'join'.tr,
                         style: TextStyle(
                             fontSize: 30,
                             color: AppColors.primaryColor,
@@ -49,36 +55,48 @@ class SetPassword extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'Password'.tr,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: AppColors.blueVogue,
-                            fontWeight: FontWeight.w200),
+                        'us'.tr,
+                        style: const TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w200),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(height: space),
+                UploadImage(
+                  pathImage: _imagePath,
+                ),
+                SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 3,
+                  delay: 2,
                   child: CustomTextField(
-                    labelText: 'verification code',
-                    textEditingController: _verificationCode,
-                    keyboardType: TextInputType.phone,
-                    validator: (value) => Validator.verificationCode(value!),
+                    labelText: 'User Name',
+                    textEditingController: _userName,
+                    keyboardType: TextInputType.name,
+                    validator: (value) => Validator.userName(value!),
+                  ),
+                ),
+                SizedBox(height: space),
+                FadeAnimationDx(
+                  delay: 4,
+                  child: CustomTextField(
+                    labelText: 'E-mail',
+                    textEditingController: _email,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) => Validator.email(value!),
                   ),
                 ),
                 SizedBox(height: space / 2),
                 FadeAnimationDx(
                   delay: 5,
                   child: Text(
-                    'You can find the verification code in the inbox'.tr,
-                    style: const TextStyle(fontSize: 10, color: Colors.grey),
+                    'You cannot edit the email at a later time'.tr,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                 ),
                 SizedBox(height: space / 2),
                 FadeAnimationDx(
-                  delay: 4,
+                  delay: 6,
                   child: CustomTextField(
                     labelText: 'Password',
                     isPassword: true,
@@ -90,7 +108,7 @@ class SetPassword extends StatelessWidget {
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 5,
+                  delay: 7,
                   child: CustomTextField(
                     labelText: 'Confirm password',
                     isPassword: true,
@@ -102,18 +120,16 @@ class SetPassword extends StatelessWidget {
                 ),
                 SizedBox(height: space * 2.2),
                 FadeAnimationDx(
-                  delay: 6,
+                  delay: 9,
                   child: CustomElevatedButton(
                     height: 54,
                     width: double.infinity,
                     borderRadius: BorderRadius.circular(28),
-                    onPressed: _reset,
+                    onPressed: _createNewAccount,
                     child: Obx(() => _.isLoading.value
-                        ? const CustomProgress(
-                            color: Colors.white,
-                          )
+                        ? const CustomProgress(color: Colors.white)
                         : Text(
-                            'Reset'.tr,
+                            'Create New Account'.tr,
                             style: const TextStyle(color: Colors.white),
                           )),
                   ),
@@ -126,5 +142,3 @@ class SetPassword extends StatelessWidget {
     );
   }
 }
-
-// 
