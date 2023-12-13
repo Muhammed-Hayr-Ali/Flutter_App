@@ -6,7 +6,7 @@ export 'app/views/search/search.dart';
 export 'package:application/components/custom_list_item.dart';
 export 'package:application/app/model/user.dart';
 export 'package:application/app/controller/auth/auth.dart';
-export 'package:application/app/controller/account/account.dart';
+export 'package:application/app/views/auth/account/controller/account.dart';
 export 'package:application/app/views/profile/controller/profile.dart';
 export 'package:application/app/views/profile/view/profile_screen.dart';
 export 'package:application/app/views/auth/account/forgot_password.dart';
