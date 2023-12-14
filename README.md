@@ -11,3 +11,9 @@ Marketna is a mobile application project that aims to provide a unique shopping 
 4. **Settings**: This page allows users to customize the application settings and manage their personal accounts. They can change their personal account information, manage notification preferences, privacy settings, and other options.
 
 The Marketna app provides a seamless and convenient shopping experience, enabling users to browse and purchase various products, discover new brands, and customize their personal settings to meet their needs and preferences.
+
+
+**Screenshot**
+<img src="https://www12.0zz0.com/2023/12/14/06/642842878.jpg" alt="Screenshot">
+
+
