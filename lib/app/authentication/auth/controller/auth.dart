@@ -21,6 +21,8 @@ class Auth extends GetxController {
       "name": user['name'],
       "email": user['email'],
       "password": user['password'],
+      "country_code": user['country_code'],
+      "phone_number": user['phone_number'],
     });
 
     if (user['path'] != '') {

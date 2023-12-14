@@ -3,6 +3,7 @@ class User {
   String? name;
   String? email;
   dynamic emailVerifiedAt;
+  String? countryCode;
   String? phoneNumber;
   String? status;
   String? profile;
@@ -15,6 +16,7 @@ class User {
       this.name,
       this.email,
       this.emailVerifiedAt,
+      this.countryCode,
       this.phoneNumber,
       this.status,
       this.profile,
@@ -27,6 +29,7 @@ class User {
     name = json['name'];
     email = json['email'];
     emailVerifiedAt = json['email_verified_at'];
+    countryCode = json['country_code'];
     phoneNumber = json['phone_number'];
     status = json['status'];
     profile = json['profile'];
@@ -41,6 +44,7 @@ class User {
     data['name'] = name;
     data['email'] = email;
     data['email_verified_at'] = emailVerifiedAt;
+    data['country_code'] = countryCode;
     data['phone_number'] = phoneNumber;
     data['status'] = status;
     data['profile'] = profile;

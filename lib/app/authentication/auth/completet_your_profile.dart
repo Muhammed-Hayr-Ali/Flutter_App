@@ -47,8 +47,8 @@ class CompletetYourProfile extends StatelessWidget {
         'password': data['password'],
         'path': _imagePath.text,
         'name': _userName.text,
-        'country_code' : _countryCode.text,
-        'phone_number' : _phoneNumber.text,
+        'country_code': _countryCode.text,
+        'phone_number': _phoneNumber.text,
       });
     }
   }
@@ -102,7 +102,7 @@ class CompletetYourProfile extends StatelessWidget {
                   child: CustomTextField(
                     labelText: 'Phone Number',
                     hintText: 'Enter Phone Number',
-                    textEditingController: _userName,
+                    textEditingController: _phoneNumber,
                     keyboardType: TextInputType.phone,
                     validator: (value) => Validator.userName(value!),
                     prefix: Obx(
@@ -142,7 +142,7 @@ class CompletetYourProfile extends StatelessWidget {
                     child: Obx(() => _.isLoading.value
                         ? const CustomProgress(color: Colors.white)
                         : Text(
-                            'Create New Account'.tr,
+                            'Complete Profile'.tr,
                             style: const TextStyle(
                                 fontSize: 16, color: Colors.white),
                           )),
