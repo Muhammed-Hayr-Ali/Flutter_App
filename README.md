@@ -1,4 +1,4 @@
-<p align="center"><a href="https://flutter.dev/" target="_blank"><img src="https://www.svgrepo.com/show/353751/flutter.svg" width="400" height = "50"alt="Flutter Logo"></a></p>
+<p align="center"><a href="https://flutter.dev/" target="_blank"><img src="https://www.svgrepo.com/show/353751/flutter.svg" height = "200"alt="Flutter Logo"></a></p>
 
 
 
