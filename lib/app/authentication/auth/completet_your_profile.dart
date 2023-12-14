@@ -32,7 +32,7 @@ class CompletetYourProfile extends StatelessWidget {
   );
   final TextEditingController _imagePath = TextEditingController();
   final TextEditingController _userName = TextEditingController();
-  final TextEditingController _countryCode = TextEditingController();
+  final TextEditingController _countryCode = TextEditingController(text: '+963');
   final TextEditingController _phoneNumber = TextEditingController();
   final String title = 'Complete Your Profile';
   final String subTitle =
