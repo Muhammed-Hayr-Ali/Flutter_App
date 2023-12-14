@@ -1,9 +1,11 @@
+import 'package:application/required_files.dart';
+
 import '../packages.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
     super.key,
-    required this.labelText,
+    this.labelText,
     this.underline,
     this.isPassword = false,
     required this.textEditingController,
@@ -12,10 +14,10 @@ class CustomTextField extends StatefulWidget {
     this.onChanged,
     this.suffix = true,
     this.hintText,
-    this.autofocus = false,
+    this.autofocus = false, this.prefix,
   });
 
-  final String labelText;
+  final String? labelText;
   final Color? underline;
   final bool isPassword;
   final bool suffix;
@@ -25,6 +27,7 @@ class CustomTextField extends StatefulWidget {
   final Function(String)? onChanged;
   final String? hintText;
   final bool autofocus;
+  final Widget? prefix;
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
@@ -34,37 +37,56 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      autofocus: widget.autofocus,
-      controller: widget.textEditingController,
-      keyboardType: widget.keyboardType,
-      obscureText: widget.isPassword ? obscureText : false,
-      validator: widget.validator,
-      onChanged: widget.onChanged,
-      cursorHeight: 26,
-      decoration: InputDecoration(
-        hintText: widget.hintText,
-        labelText: widget.labelText.tr,
-        suffix: widget.suffix
-            ? GestureDetector(
-                onTap: widget.isPassword ? updatevisiblity : clear,
-                child: widget.isPassword
-                    ? Icon(
-                        obscureText ? Icons.visibility : Icons.visibility_off,
-                        size: 16,
-                        color: Colors.grey.shade300,
-                      )
-                    : Icon(
-                        Icons.cancel,
-                        size: 16,
-                        color: Colors.grey.shade300,
-                      ),
-              )
-            : null,
-        // errorBorder: const UnderlineInputBorder(
-        //   borderSide: BorderSide(color: Colors.red),
-        // ),
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('${widget.labelText}'.tr),
+        const SizedBox(height: 2),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
+              color: Colors.grey.withOpacity(0.08)),
+          child: TextFormField(
+            
+            autofocus: widget.autofocus,
+            controller: widget.textEditingController,
+            keyboardType: widget.keyboardType,
+            obscureText: widget.isPassword ? obscureText : false,
+            validator: widget.validator,
+            onChanged: widget.onChanged,
+            cursorHeight: 26,
+            
+            decoration: InputDecoration(
+              prefix: widget.prefix,
+              hintText: widget.hintText,
+              //  labelText: '${widget.labelText}'.tr,
+              suffix: widget.suffix
+                  ? GestureDetector(
+                      onTap: widget.isPassword ? updatevisiblity : clear,
+                      child: widget.isPassword
+                          ? Icon(
+                              obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              size: 16,
+                              color: Colors.grey.shade300,
+                            )
+                          : Icon(
+                              Icons.cancel,
+                              size: 16,
+                              color: Colors.grey.shade300,
+                            ),
+                    )
+                  : null,
+              // errorBorder: const UnderlineInputBorder(
+              //   borderSide: BorderSide(color: Colors.red),
+              // ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -78,9 +100,3 @@ class _CustomTextFieldState extends State<CustomTextField> {
     widget.textEditingController.clear();
   }
 }
-
-
-
-
-
-

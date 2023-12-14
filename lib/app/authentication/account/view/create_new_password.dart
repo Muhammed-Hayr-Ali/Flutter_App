@@ -1,5 +1,6 @@
 import 'package:application/packages.dart';
 
+import '../../auth/components/title_page.dart';
 import '../controller/account_controller.dart';
 import 'package:application/required_files.dart';
 
@@ -14,6 +15,9 @@ class CreateNewPassword extends StatelessWidget {
 
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
+  final String title = 'Create New Password';
+  final String subTitle =
+      'Your New Password Must Be Different from Previous Password';
 
   void _recovery() async {
     if (_formKey.currentState!.validate()) {
@@ -34,26 +38,9 @@ class CreateNewPassword extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                FadeAnimationDx(
-                  delay: 1,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'CreateNew'.tr,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Password'.tr,
-                        style: const TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.w200),
-                      ),
-                    ],
-                  ),
+                PageTitle(
+                  title: title,
+                  subTitle: subTitle,
                 ),
                 SizedBox(height: space),
                 Container(
@@ -70,16 +57,11 @@ class CreateNewPassword extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: space),
-                Text(
-                  'Your New Password Must Be Different from Previous Password'
-                      .tr,
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-                const SizedBox(height: 10),
                 FadeAnimationDx(
                   delay: 4,
                   child: CustomTextField(
                     labelText: 'Password',
+                    hintText: '************',
                     isPassword: true,
                     textEditingController: _password,
                     keyboardType: TextInputType.multiline,
@@ -93,6 +75,7 @@ class CreateNewPassword extends StatelessWidget {
                   delay: 5,
                   child: CustomTextField(
                     labelText: 'Confirm password',
+                    hintText: '************',
                     isPassword: true,
                     textEditingController: _confirmPassword,
                     keyboardType: TextInputType.multiline,
@@ -108,7 +91,7 @@ class CreateNewPassword extends StatelessWidget {
                     style: const TextStyle(fontSize: 12, color: Colors.red),
                   ),
                 ),
-                SizedBox(height: space * 2.2),
+                SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 3,
                   child: CustomElevatedButton(
@@ -123,11 +106,13 @@ class CreateNewPassword extends StatelessWidget {
                             )
                           : Text(
                               'save'.tr,
-                              style: const TextStyle(color: Colors.white),
+                              style: const TextStyle(
+                                  fontSize: 16, color: Colors.white),
                             ),
                     ),
                   ),
                 ),
+                SizedBox(height: space * 2.2),
               ],
             ),
           ),

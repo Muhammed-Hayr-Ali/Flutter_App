@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 class Auth extends GetxController {
   RxBool isLoading = false.obs;
+  RxString countryCode = '+963'.obs;
 
   final LocalStorage _localStorage = LocalStorage();
   final Dio _dio = Dio(

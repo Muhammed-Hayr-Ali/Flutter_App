@@ -1,5 +1,6 @@
 import 'package:application/packages.dart';
 
+import '../../auth/components/title_page.dart';
 import '../controller/account_controller.dart';
 import 'package:application/required_files.dart';
 
@@ -13,6 +14,8 @@ class ForgotPassword extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _email = TextEditingController();
+  final String title = 'Forgot Password';
+  final String subTitle = 'Please Enter your email Address To Recieve a Verification Code';
 
   void _recovery() async {
     if (_formKey.currentState!.validate()) {
@@ -33,26 +36,10 @@ class ForgotPassword extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                FadeAnimationDx(
-                  delay: 1,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Forgot'.tr,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Password'.tr,
-                        style: const TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.w200),
-                      ),
-                    ],
-                  ),
+        
+                 PageTitle(
+                  title: title,
+                  subTitle: subTitle,
                 ),
                 SizedBox(height: space),
                 Container(
@@ -69,12 +56,8 @@ class ForgotPassword extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: space),
-                Text(
-                  'Please Enter your email Address To Recieve a Verification Code'
-                      .tr,
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-                const SizedBox(height: 10),
+
+
                 FadeAnimationDx(
                   delay: 2,
                   child: CustomTextField(
@@ -92,7 +75,7 @@ class ForgotPassword extends StatelessWidget {
                     style: const TextStyle(fontSize: 12, color: Colors.red),
                   ),
                 ),
-                SizedBox(height: space * 2.2),
+                SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 3,
                   child: CustomElevatedButton(
@@ -107,12 +90,14 @@ class ForgotPassword extends StatelessWidget {
                             )
                           : Text(
                               'Send'.tr,
-                              style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.white),
                             ),
                     ),
                   ),
                 ),
-              ],
+                         SizedBox(height: space * 2.2),
+     ],
             ),
           ),
         ),

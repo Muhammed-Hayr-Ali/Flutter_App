@@ -3,6 +3,7 @@ import 'package:application/required_files.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
+import '../../auth/components/title_page.dart';
 import '../controller/account_controller.dart';
 
 class VerifyVerificationCode extends StatelessWidget {
@@ -15,6 +16,8 @@ class VerifyVerificationCode extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _code = TextEditingController();
+  final String title = 'Verify Your Email';
+  final String subTitle = 'Please Enter your verification code that we sent you through your email ';
 
   void _verifyVerificationCode() async {
     _.verifyVerificationCode(code: _code.text);
@@ -33,26 +36,10 @@ class VerifyVerificationCode extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                FadeAnimationDx(
-                  delay: 1,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Verify Your'.tr,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Email'.tr,
-                        style: const TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.w200),
-                      ),
-                    ],
-                  ),
+            
+                 PageTitle(
+                  title: title,
+                  subTitle: subTitle,
                 ),
                 SizedBox(height: space),
                 Container(
@@ -69,24 +56,8 @@ class VerifyVerificationCode extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: space),
-                Text.rich(
-                  TextSpan(
-                    text:
-                        'Please Enter your verification code that we sent you through your email '
-                            .tr,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
-                    children: <InlineSpan>[
-                      TextSpan(
-                        text: _.email ?? '',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.primaryColor),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 10),
+
+
                 FadeAnimationDx(
                   delay: 2,
                   child: OTPTextField(
@@ -110,7 +81,7 @@ class VerifyVerificationCode extends StatelessWidget {
                     style: const TextStyle(fontSize: 12, color: Colors.red),
                   ),
                 ),
-                SizedBox(height: space * 2.2),
+                SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 3,
                   child: CustomElevatedButton(
@@ -125,12 +96,14 @@ class VerifyVerificationCode extends StatelessWidget {
                             )
                           : Text(
                               'Verify'.tr,
-                              style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.white),
                             ),
                     ),
                   ),
                 ),
-              ],
+                           SizedBox(height: space * 2.2),
+   ],
             ),
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
+import 'components/title_page.dart';
 import 'controller/auth.dart';
 
 class Login extends StatelessWidget {
@@ -14,6 +15,8 @@ class Login extends StatelessWidget {
 
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+  final String title = 'Sign In';
+  final String subTitle = 'Hi! Welcome Back, you\'ve been missed';
 
   void _recovery() {
     Get.toNamed(Routes.forgotPassword);
@@ -42,32 +45,16 @@ class Login extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                FadeAnimationDx(
-                  delay: 1,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Welcome'.tr,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Back'.tr,
-                        style: const TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.w200),
-                      ),
-                    ],
-                  ),
+                 PageTitle(
+                  title: title,
+                  subTitle: subTitle,
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 2,
                   child: CustomTextField(
                     labelText: 'E-mail',
+                    hintText: 'example@gmail.com',
                     textEditingController: _email,
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) => Validator.userName(value!),
@@ -78,28 +65,25 @@ class Login extends StatelessWidget {
                   delay: 3,
                   child: CustomTextField(
                     labelText: 'Password',
+                    hintText: '************',
                     isPassword: true,
                     textEditingController: _password,
                     keyboardType: TextInputType.multiline,
                     validator: (value) => Validator.pass(value!),
                   ),
                 ),
-                SizedBox(height: space),
+                SizedBox(height: space / 2),
                 FadeAnimationDx(
                   delay: 4,
                   child: TextButton(
                     onPressed: _recovery,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          'Forgot your password? '.tr,
-                          style:
-                              const TextStyle(fontSize: 12, color: Colors.grey),
-                        ),
-                        Text(
-                          'Recovery'.tr,
-                          style: const TextStyle(
-                              fontSize: 12, color: Colors.green),
+                          'Forgot your password?'.tr,
+                          style: TextStyle(
+                              fontSize: 12, color: AppColors.primaryColor),
                         ),
                       ],
                     ),
@@ -119,10 +103,12 @@ class Login extends StatelessWidget {
                           )
                         : Text(
                             'Sign in'.tr,
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.white),
                           )),
                   ),
                 ),
+                SizedBox(height: space * 2.2),
               ],
             ),
           ),

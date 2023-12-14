@@ -1,3 +1,4 @@
+import 'package:application/app/authentication/auth/completet_your_profile.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
@@ -40,6 +41,13 @@ class Pages {
     GetPage(
       name: Routes.creatNewAccount,
       page: () => CreatNewAccount(),
+      transitionDuration: duration,
+      transition: transition,
+      curve: curve,
+    ),
+    GetPage(
+      name: Routes.completetYourProfile,
+      page: () => CompletetYourProfile(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,

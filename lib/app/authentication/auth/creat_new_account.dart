@@ -1,5 +1,6 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
+import 'components/title_page.dart';
 import 'components/upload_image.dart';
 import 'controller/auth.dart';
 
@@ -11,22 +12,22 @@ class CreatNewAccount extends StatelessWidget {
   final _ = Get.find<Auth>();
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _userName = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
-  final TextEditingController _imagePath = TextEditingController();
+  final String title = 'Create Account';
+  final String subTitle =
+      'Fill in your information below, and proceed to the home page';
 
   void _createNewAccount() async {
     if (_.isLoading.value) return;
 
     if (_formKey.currentState!.validate()) {
-      _.register({
-        'name': _userName.text,
+      Map data = {
         'email': _email.text,
         'password': _password.text,
-        'path': _imagePath.text
-      });
+      };
+      Get.toNamed(Routes.completetYourProfile, arguments: data);
     }
   }
 
@@ -42,52 +43,22 @@ class CreatNewAccount extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                FadeAnimationDx(
-                  delay: 1,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'join'.tr,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'us'.tr,
-                        style: const TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.w200),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: space),
-                UploadImage(
-                  pathImage: _imagePath,
-                ),
-                SizedBox(height: space),
-                FadeAnimationDx(
-                  delay: 2,
-                  child: CustomTextField(
-                    labelText: 'User Name',
-                    textEditingController: _userName,
-                    keyboardType: TextInputType.name,
-                    validator: (value) => Validator.userName(value!),
-                  ),
+                PageTitle(
+                  title: title,
+                  subTitle: subTitle,
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 4,
                   child: CustomTextField(
-                    labelText: 'E-mail',
+                    labelText: 'Email',
+                    hintText: 'example@gmail.com',
                     textEditingController: _email,
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) => Validator.email(value!),
                   ),
                 ),
-                SizedBox(height: space / 2),
+                SizedBox(height: space/2),
                 Row(
                   children: [
                     FadeAnimationDx(
@@ -95,16 +66,17 @@ class CreatNewAccount extends StatelessWidget {
                       child: Text(
                         'You cannot edit the email at a later time'.tr,
                         style:
-                            const TextStyle(fontSize: 12, color: Colors.grey),
+                            TextStyle(fontSize: 12, color: AppColors.grayColor),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: space / 2),
+                SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 6,
                   child: CustomTextField(
                     labelText: 'Password',
+                    hintText: '************',
                     isPassword: true,
                     textEditingController: _password,
                     keyboardType: TextInputType.multiline,
@@ -117,6 +89,7 @@ class CreatNewAccount extends StatelessWidget {
                   delay: 7,
                   child: CustomTextField(
                     labelText: 'Confirm password',
+                    hintText: '************',
                     isPassword: true,
                     textEditingController: _confirmPassword,
                     keyboardType: TextInputType.multiline,
@@ -136,10 +109,12 @@ class CreatNewAccount extends StatelessWidget {
                         ? const CustomProgress(color: Colors.white)
                         : Text(
                             'Create New Account'.tr,
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.white),
                           )),
                   ),
                 ),
+                SizedBox(height: space * 2.2),
               ],
             ),
           ),
