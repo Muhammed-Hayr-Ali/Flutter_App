@@ -1,3 +1,10 @@
+<p align="center"><a href="https://flutter.dev/" target="_blank"><img src="https://www.svgrepo.com/show/353751/flutter.svg" width="400" alt="Flutter Logo"></a></p>
+
+
+
+
+
+
 # Marketna App
 
 Marketna is a mobile application project that aims to provide a unique shopping experience for users. The app includes features such as login and account creation, password recovery, and login via Google account. It also consists of several internal pages, as described below:
