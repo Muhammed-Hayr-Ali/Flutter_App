@@ -1,12 +1,10 @@
-
-
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
 import '../controller/profile.dart';
 
-class ProfileUser extends StatelessWidget {
-  const ProfileUser({
+class UserProfile extends StatelessWidget {
+  const UserProfile({
     super.key,
   });
 
@@ -16,47 +14,53 @@ class ProfileUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    return Container(
+        decoration: BoxDecoration(
+            color: AppColors.primaryColor,
+            borderRadius:
+                const BorderRadius.vertical(bottom: Radius.circular(18.0))),
+        padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 16.0),
         child: GetBuilder<ProfileController>(
           init: ProfileController(),
           builder: (_) => _.currentUser == null
               ? Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
-                  child: Column(
+                  baseColor: Colors.white,
+                  highlightColor: Colors.grey.shade300,
+                  child: Row(
                     children: [
                       Container(
-                        height: Get.width * 0.25,
-                        width: Get.width * 0.25,
+                        height: Get.width * 0.14,
+                        width: Get.width * 0.14,
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(Get.width * 0.25)),
+                            borderRadius: BorderRadius.circular(
+                              Get.width * 0.14,
+                            )),
                       ),
-                      const SizedBox(height: 14),
-                      Container(
-                        height: 26,
-                        width: 100,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(4.0)),
-                      ),
-                      const SizedBox(height: 4),
-                      Container(
-                        height: 15,
-                        width: 222,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(4.0)),
-                      ),
-                      const SizedBox(height: 6),
-                      Container(
-                        height: 15,
-                        width: 190,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(4.0)),
+                      const SizedBox(width: 10),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedBox(),
+                            Container(
+                              height: 26,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(4.0)),
+                            ),
+                            const SizedBox(height: 4),
+                            Container(
+                              height: 15,
+                              width: 222,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(4.0)),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -65,7 +69,7 @@ class ProfileUser extends StatelessWidget {
                   children: [
                     CustomAvatar(
                         size: Get.width * 0.14,
-                        imageUrl: _.currentUser!.profile ?? ''),
+                        imageUrl: _.currentUser!.profile!),
                     const SizedBox(width: 10),
                     Flexible(
                       child: Column(

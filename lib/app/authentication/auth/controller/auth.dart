@@ -37,7 +37,7 @@ class Auth extends GetxController {
       _localStorage.saveData(keys: Keys.profile, data: profile);
       _localStorage.saveData(keys: Keys.token, data: token);
 
-      Get.offAndToNamed(Routes.home);
+      Get.offAllNamed(Routes.home);
       CustomNotification.showSnackbar(
           message: '${'Welcome to the world of '.tr} ${AppConstants.appName}');
     } on DioException catch (exception) {
@@ -69,7 +69,7 @@ class Auth extends GetxController {
 
       _localStorage.saveData(keys: Keys.profile, data: profile);
       _localStorage.saveData(keys: Keys.token, data: token);
-      Get.offAndToNamed(Routes.home);
+      Get.offAllNamed(Routes.home);
       CustomNotification.showSnackbar(
           message:
               '${'Welcome Back,'.tr} ${response.data['data']['profile']['name']}');
@@ -117,7 +117,7 @@ class Auth extends GetxController {
               ? '${'Welcome to the world of '.tr} ${AppConstants.appName}'
               : '${'Welcome Back,'.tr} ${response.data['data']['profile']['name']}');
 
-      Get.offAndToNamed(Routes.home);
+      Get.offAllNamed(Routes.home);
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;

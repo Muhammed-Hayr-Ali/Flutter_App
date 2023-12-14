@@ -27,43 +27,17 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
-      appBar: AppBar(
-        title: Text(
-          'Account'.tr,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        appBar: AppBar(
+          backgroundColor: AppColors.primaryColor,
+          title: Text(
+            'Account'.tr,
+            style: const TextStyle(color: Colors.white),
+          ),
+          centerTitle: false,
+          
         ),
-        centerTitle: false,
-      ),
-      body: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: 256,
-            color: AppColors.primaryColor,
-            child: const Column(
-              children: [
-                ProfileUser(),
-                SizedBox(height: 20),
-                SizedBox(height: 20),
-              ],
-            ),
-          ),
-          Column(
-            children: [
-              const SizedBox(height: 256),
-              Container(
-                height: double.infinity,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(9.0),
-                    ),
-                    color: Colors.white), // child: Column(
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+        body: const Column(
+          children: [UserProfile()],
+        ));
   }
 }
