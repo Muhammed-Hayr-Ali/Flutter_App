@@ -15,7 +15,6 @@ class CompletetYourProfile extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   /// Default.
-  final countryPicker = const FlCountryCodePicker();
 
   /// With custom params.
   final countryPickerWithParams = const FlCountryCodePicker(
@@ -23,7 +22,7 @@ class CompletetYourProfile extends StatelessWidget {
     showDialCode: true,
     showSearchBar: true,
     // favoritesIcon: _yourIcon,
-    // favorites: _yourFavorites,
+     favorites: ['SYR', 'IRQ', 'AU'],
     // title: Text('data'),
     // filteredCountries: _yourFilters,
     // countryTextStyle: _yourCountryTextStyle,

@@ -1,7 +1,6 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'components/title_page.dart';
-import 'components/upload_image.dart';
 import 'controller/auth.dart';
 
 class CreatNewAccount extends StatelessWidget {
