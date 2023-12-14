@@ -1,6 +1,6 @@
-# Filters App
+# Marketna App
 
-Filters is a mobile application project that aims to provide a unique shopping experience for users. The app includes features such as login and account creation, password recovery, and login via Google account. It also consists of several internal pages, as described below:
+Marketna is a mobile application project that aims to provide a unique shopping experience for users. The app includes features such as login and account creation, password recovery, and login via Google account. It also consists of several internal pages, as described below:
 
 1. **Home**: This is the main page that displays various products available for purchase. The products are showcased attractively with information such as images, prices, and descriptions.
 
@@ -10,4 +10,4 @@ Filters is a mobile application project that aims to provide a unique shopping e
 
 4. **Settings**: This page allows users to customize the application settings and manage their personal accounts. They can change their personal account information, manage notification preferences, privacy settings, and other options.
 
-The Filters app provides a seamless and convenient shopping experience, enabling users to browse and purchase various products, discover new brands, and customize their personal settings to meet their needs and preferences.
+The Marketna app provides a seamless and convenient shopping experience, enabling users to browse and purchase various products, discover new brands, and customize their personal settings to meet their needs and preferences.
