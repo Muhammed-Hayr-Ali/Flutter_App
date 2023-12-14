@@ -1,7 +1,7 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
-import '../controller/profile.dart';
+import '../controller/profile_controller.dart';
 
 class EditProfile extends StatelessWidget {
   EditProfile({super.key});

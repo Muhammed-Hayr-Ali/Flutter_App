@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 class ProfileController extends GetxController {
   @override
   void onInit() {
-
     super.onInit();
     getCurrentUser();
   }
@@ -19,6 +18,7 @@ class ProfileController extends GetxController {
         connectTimeout: Api.connectTimeout,
         headers: Api.defaultHeaders),
   );
+  // Rx<User?> currentUser =User().obs;
 
   User? currentUser;
 
@@ -31,6 +31,7 @@ class ProfileController extends GetxController {
     final user = await _localStorage.readData(keys: Keys.profile);
     currentUser = User.fromJson(user);
     if (currentUser == null) return;
+    debugPrint(currentUser!.profile ?? '');
     update();
     userName.text = currentUser!.name ?? '';
     status.text = currentUser!.status ?? '';

@@ -1,7 +1,7 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
-import '../controller/profile.dart';
+import '../controller/profile_controller.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({
@@ -15,10 +15,7 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            color: AppColors.primaryColor,
-            borderRadius:
-                const BorderRadius.vertical(bottom: Radius.circular(18.0))),
+        color: AppColors.primaryColor,
         padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 16.0),
         child: GetBuilder<ProfileController>(
           init: ProfileController(),
@@ -69,7 +66,7 @@ class UserProfile extends StatelessWidget {
                   children: [
                     CustomAvatar(
                         size: Get.width * 0.14,
-                        imageUrl: _.currentUser!.profile!),
+                        imageUrl: '${_.currentUser!.profile}'),
                     const SizedBox(width: 10),
                     Flexible(
                       child: Column(

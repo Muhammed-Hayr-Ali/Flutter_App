@@ -34,7 +34,6 @@ class ProfileScreen extends StatelessWidget {
             style: const TextStyle(color: Colors.white),
           ),
           centerTitle: false,
-          
         ),
         body: const Column(
           children: [UserProfile()],
