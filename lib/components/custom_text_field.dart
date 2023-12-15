@@ -14,9 +14,12 @@ class CustomTextField extends StatefulWidget {
     this.onChanged,
     this.suffix = true,
     this.hintText,
-    this.autofocus = false, this.prefix,
+    this.autofocus = false,
+    this.prefix,
+    this.enabled,
   });
 
+  final bool? enabled;
   final String? labelText;
   final Color? underline;
   final bool isPassword;
@@ -41,15 +44,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('${widget.labelText}'.tr),
-        const SizedBox(height: 2),
+        SizedBox(
+          child: widget.labelText != null
+              ? Column(
+                  children: [
+                    Text('${widget.labelText}'.tr),
+                    const SizedBox(height: 2),
+                  ],
+                )
+              : null,
+        ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.0),
               color: Colors.grey.withOpacity(0.08)),
           child: TextFormField(
-            
+            enabled: widget.enabled,
             autofocus: widget.autofocus,
             controller: widget.textEditingController,
             keyboardType: widget.keyboardType,
@@ -57,7 +68,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             validator: widget.validator,
             onChanged: widget.onChanged,
             cursorHeight: 26,
-            
+            style: const TextStyle(fontWeight: FontWeight.w500),
             decoration: InputDecoration(
               prefix: widget.prefix,
               hintText: widget.hintText,
@@ -71,12 +82,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
                                   ? Icons.visibility
                                   : Icons.visibility_off,
                               size: 16,
-                              color: Colors.grey.shade300,
+                              color: AppColors.grayColor,
                             )
                           : Icon(
                               Icons.cancel,
                               size: 16,
-                              color: Colors.grey.shade300,
+                              color: AppColors.grayColor,
                             ),
                     )
                   : null,

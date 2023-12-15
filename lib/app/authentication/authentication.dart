@@ -1,13 +1,13 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
-import 'auth/controller/auth.dart';
+import 'auth/controller/auth_controller.dart';
 
 class Authentication extends StatelessWidget {
   Authentication({super.key});
 
   final double fontSize = 9;
-  final _ = Get.put(Auth());
+  final _ = Get.put(AuthControlleer());
 
   void _continueWithGoogle() async {
     if (_.isLoading.value) return;

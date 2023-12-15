@@ -1,46 +1,75 @@
+import 'package:application/components/custom_date_picker.dart';
+import 'package:application/components/custom_dropdown_utton.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'components/title_page.dart';
 import 'components/upload_image.dart';
-import 'controller/auth.dart';
+import 'controller/auth_controller.dart';
 
 class CompletetYourProfile extends StatelessWidget {
   CompletetYourProfile({super.key});
 
   final double space = 32;
 
-  final _ = Get.find<Auth>();
+  final _ = Get.find<AuthControlleer>();
   final data = Get.arguments as Map;
   final _formKey = GlobalKey<FormState>();
-
-  /// Default.
 
   /// With custom params.
   final countryPickerWithParams = const FlCountryCodePicker(
     localize: true,
     showDialCode: true,
     showSearchBar: true,
-    // favoritesIcon: _yourIcon,
-     favorites: ['SYR', 'IRQ', 'AU'],
-    // title: Text('data'),
-    // filteredCountries: _yourFilters,
-    // countryTextStyle: _yourCountryTextStyle,
-    // dialCodeTextStyle: _yourdialCodeTextStyle,
-    // searchBarDecoration: _yourInputDecoration,
+    favorites: [
+      "SY",
+      "BH",
+      "DZ",
+      "SD",
+      "IQ",
+      "KW",
+      "MA",
+      "JO",
+      "AE",
+      "SA",
+      "SO",
+      "SS",
+      "IQ",
+      "KW",
+      "BH",
+      "JO",
+      "DZ",
+      "AE",
+      "MA",
+      "MR",
+      "TN",
+      "DJ",
+      "SO",
+      "PS",
+      "LB",
+      "LY",
+      "EG",
+      "YE",
+      "OM",
+      "QA"
+    ],
   );
   final TextEditingController _imagePath = TextEditingController();
   final TextEditingController _userName = TextEditingController();
-  final TextEditingController _countryCode = TextEditingController(text: '+963');
+  final TextEditingController _countryCode =
+      TextEditingController(text: '+963');
   final TextEditingController _phoneNumber = TextEditingController();
+  final TextEditingController _gender = TextEditingController();
+  final TextEditingController _date_birth = TextEditingController();
   final String title = 'Complete Your Profile';
   final String subTitle =
       'Don\'t worry only you can see your personal data No one else will be able to see it';
-
+  List<String> genderList = ['Unspecified', 'Male', 'Female'];
   void _createNewAccount() async {
     if (_.isLoading.value) return;
 
     if (_formKey.currentState!.validate()) {
+      _.registerError.value = '';
       _.register({
         'email': data['email'],
         'password': data['password'],
@@ -48,6 +77,8 @@ class CompletetYourProfile extends StatelessWidget {
         'name': _userName.text,
         'country_code': _countryCode.text,
         'phone_number': _phoneNumber.text,
+        'gender': _gender.text,
+        'date_birth': _date_birth.text,
       });
     }
   }
@@ -96,6 +127,7 @@ class CompletetYourProfile extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 3,
                   child: CustomTextField(
@@ -117,6 +149,7 @@ class CompletetYourProfile extends StatelessWidget {
                                       initialSelectedLocale: 'syr');
                               // Null check
                               if (picked != null) {
+                                debugPrint(picked.code);
                                 _.countryCode.value = picked.dialCode;
                                 _countryCode.text = picked.dialCode;
                               }
@@ -128,6 +161,24 @@ class CompletetYourProfile extends StatelessWidget {
                         ],
                       ),
                     ),
+                  ),
+                ),
+                SizedBox(height: space),
+                FadeAnimationDx(
+                  delay: 4,
+                  child: CustomDropdownButton(
+                      title: 'Gender', listItem: genderList, value: _gender),
+                ),
+                SizedBox(height: space),
+                CustomDatePicker(
+                  textEditingController: _date_birth,
+                  labelText: 'Date Birth',
+                ),
+                SizedBox(height: space),
+                Obx(
+                  () => Text(
+                    _.registerError.value.tr,
+                    style: const TextStyle(fontSize: 12, color: Colors.red),
                   ),
                 ),
                 SizedBox(height: space),

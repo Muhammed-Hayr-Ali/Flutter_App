@@ -2,7 +2,7 @@ import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
 import 'components/title_page.dart';
-import 'controller/auth.dart';
+import 'controller/auth_controller.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -10,7 +10,7 @@ class Login extends StatelessWidget {
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.find<Auth>();
+  final _ = Get.find<AuthControlleer>();
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _email = TextEditingController();

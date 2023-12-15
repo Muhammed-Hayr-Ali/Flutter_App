@@ -2,9 +2,12 @@ import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'package:dio/dio.dart';
 
-class Auth extends GetxController {
+class AuthControlleer extends GetxController {
   RxBool isLoading = false.obs;
   RxString countryCode = '+963'.obs;
+  RxString checkMailAvailabilityError = ''.obs;
+  RxString registerError = ''.obs;
+  RxString genderValue = 'Unspecified'.obs;
 
   final LocalStorage _localStorage = LocalStorage();
   final Dio _dio = Dio(
@@ -14,15 +17,41 @@ class Auth extends GetxController {
         headers: Api.defaultHeaders),
   );
 
+  void checkMailAvailability({required Map user}) async {
+    isLoading(true);
+
+    FormData data = FormData.fromMap({
+      'email': user['email'],
+    });
+
+    try {
+      final response = await _dio.post(Api.checkMailAvailability, data: data);
+      if (!response.data['status']) return;
+
+      Get.toNamed(Routes.completetYourProfile, arguments: user);
+    } on DioException catch (exception) {
+      if (exception.response != null) {
+        final responseData = exception.response?.data;
+        checkMailAvailabilityError.value = responseData['message'];
+      } else {
+        CustomDioException.exception(exception.type);
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
+
   void register(Map<dynamic, dynamic> user) async {
     isLoading(true);
 
     FormData data = FormData.fromMap({
-      "name": user['name'],
-      "email": user['email'],
-      "password": user['password'],
-      "country_code": user['country_code'],
-      "phone_number": user['phone_number'],
+      'name': user['name'],
+      'email': user['email'],
+      'password': user['password'],
+      'country_code': user['country_code'],
+      'phone_number': user['phone_number'],
+      'gender': user['gender'],
+      'date_birth': user['date_birth'],
     });
 
     if (user['path'] != '') {
@@ -59,8 +88,8 @@ class Auth extends GetxController {
     isLoading(true);
 
     FormData data = FormData.fromMap({
-      "email": user['email'],
-      "password": user['password'],
+      'email': user['email'],
+      'password': user['password'],
     });
 
     try {

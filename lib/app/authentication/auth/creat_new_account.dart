@@ -1,14 +1,14 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'components/title_page.dart';
-import 'controller/auth.dart';
+import 'controller/auth_controller.dart';
 
 class CreatNewAccount extends StatelessWidget {
   CreatNewAccount({super.key});
 
   final double space = 32;
 
-  final _ = Get.find<Auth>();
+  final _ = Get.find<AuthControlleer>();
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _email = TextEditingController();
@@ -22,11 +22,14 @@ class CreatNewAccount extends StatelessWidget {
     if (_.isLoading.value) return;
 
     if (_formKey.currentState!.validate()) {
+      _.checkMailAvailabilityError.value = '';
+
       Map data = {
         'email': _email.text,
         'password': _password.text,
       };
-      Get.toNamed(Routes.completetYourProfile, arguments: data);
+      _.checkMailAvailability(user: data);
+      ();
     }
   }
 
@@ -52,12 +55,14 @@ class CreatNewAccount extends StatelessWidget {
                   child: CustomTextField(
                     labelText: 'Email',
                     hintText: 'example@gmail.com',
+                    onChanged: (value) =>
+                        _.checkMailAvailabilityError.value = '',
                     textEditingController: _email,
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) => Validator.email(value!),
                   ),
                 ),
-                SizedBox(height: space/2),
+                SizedBox(height: space / 2),
                 Row(
                   children: [
                     FadeAnimationDx(
@@ -96,7 +101,14 @@ class CreatNewAccount extends StatelessWidget {
                         Validator.password(value!, _password.text),
                   ),
                 ),
-                SizedBox(height: space * 2.2),
+                SizedBox(height: space),
+                Obx(
+                  () => Text(
+                    _.checkMailAvailabilityError.value.tr,
+                    style: const TextStyle(fontSize: 12, color: Colors.red),
+                  ),
+                ),
+                SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 9,
                   child: CustomElevatedButton(

@@ -13,7 +13,7 @@ class CustomAvatar extends StatelessWidget {
     super.key,
     required this.imageUrl,
     this.size = 128.0,
-    this.backgroundColor = const Color.fromRGBO(245, 245, 245, 1),
+    this.backgroundColor = const Color(0xFFF6F6F6),
     this.padding = 0,
     this.margin = 0,
     this.sourceImage = SourceImage.networkImage,
@@ -27,37 +27,21 @@ class CustomAvatar extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(size),
         child: sourceImage == SourceImage.localImage
-            ?
-            
- imageUrl != '' ?
-
-             Image.file(
-                fit: BoxFit.cover,
-                File(imageUrl),
-              )
-              :
-
-
-
-DecoratedBox(
-                  decoration: BoxDecoration(color: backgroundColor),
-                  child: Padding(
-                    padding: EdgeInsets.all(size * 0.1),
-                    child: SvgPicture.asset(
-                      'assets/images/avatar.svg',
+            ? imageUrl != ''
+                ? Image.file(
+                    fit: BoxFit.cover,
+                    File(imageUrl),
+                  )
+                : DecoratedBox(
+                    decoration: BoxDecoration(color: backgroundColor),
+                    child: Padding(
+                      padding: EdgeInsets.all(size * 0.2),
+                      child: SvgPicture.asset(
+                        'assets/images/avatar.svg',
+                      ),
                     ),
-                  ),
-                )
-
-
-
-            :
-            
-            
-            
-            
-            
-             CachedNetworkImage(
+                  )
+            : CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl: imageUrl,
                 placeholder: (context, url) => Shimmer.fromColors(
@@ -71,7 +55,7 @@ DecoratedBox(
                 errorWidget: (context, url, error) => DecoratedBox(
                   decoration: BoxDecoration(color: backgroundColor),
                   child: Padding(
-                    padding: EdgeInsets.all(size * 0.1),
+                    padding: EdgeInsets.all(size * 0.2),
                     child: SvgPicture.asset(
                       'assets/images/avatar.svg',
                     ),
