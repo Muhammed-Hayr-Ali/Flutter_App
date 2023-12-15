@@ -60,11 +60,11 @@ class CompletetYourProfile extends StatelessWidget {
       TextEditingController(text: '+963');
   final TextEditingController _phoneNumber = TextEditingController();
   final TextEditingController _gender = TextEditingController();
-  final TextEditingController _date_birth = TextEditingController();
+  final TextEditingController _dateBirth = TextEditingController();
   final String title = 'Complete Your Profile';
   final String subTitle =
       'Don\'t worry only you can see your personal data No one else will be able to see it';
-  List<String> genderList = ['Unspecified', 'Male', 'Female'];
+  final List<String> genderList = ['Unspecified', 'Male', 'Female'];
   void _createNewAccount() async {
     if (_.isLoading.value) return;
 
@@ -78,7 +78,7 @@ class CompletetYourProfile extends StatelessWidget {
         'country_code': _countryCode.text,
         'phone_number': _phoneNumber.text,
         'gender': _gender.text,
-        'date_birth': _date_birth.text,
+        'date_birth': _dateBirth.text,
       });
     }
   }
@@ -171,7 +171,7 @@ class CompletetYourProfile extends StatelessWidget {
                 ),
                 SizedBox(height: space),
                 CustomDatePicker(
-                  textEditingController: _date_birth,
+                  textEditingController: _dateBirth,
                   labelText: 'Date Birth',
                 ),
                 SizedBox(height: space),
