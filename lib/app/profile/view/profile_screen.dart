@@ -1,6 +1,7 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import '../component/user_profile.dart';
+import '../controller/profile_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -25,23 +26,44 @@ class ProfileScreen extends StatelessWidget {
       color: Colors.red,
     ),
   ];
+
+  String _shortMail(String value) {
+    return value.substring(0, value.indexOf("@"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
-        title: Text(
-          'Account'.tr,
-          style:
-              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        title: GetBuilder<ProfileController>(
+          builder: (_) => SizedBox(
+            child: _.currentUser != null
+                ? Row(
+                    children: [
+                      SvgPicture.asset(AppAssets.mentionCircle),
+                      SizedBox(width: 2),
+                      Text(
+                        _shortMail(
+                          _.currentUser!.email ?? '',
+                        ),
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w200),
+                      ),
+                    ],
+                  )
+                : null,
+          ),
         ),
-        centerTitle: false,
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const UserProfile(),
+            UserProfile(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text('Account Settings'.tr,

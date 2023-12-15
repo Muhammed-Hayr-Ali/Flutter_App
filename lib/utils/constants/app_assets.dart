@@ -19,7 +19,11 @@ class AppAssets {
   static const String shop = 'assets/icons/bottom_navigation_bar/shop.svg';
   static const String shopActive =
       'assets/icons/bottom_navigation_bar/shop_active.svg';
-  static const String userCircle = 'assets/icons/user-circle/shop.svg';
+  static const String userCircle =
+      'assets/icons/bottom_navigation_bar/user-circle.svg';
   static const String userCircleActive =
       'assets/icons/bottom_navigation_bar/user-circle_active.svg';
+
+  static const String editProfile = 'assets/icons/edit_profile.svg';
+  static const String mentionCircle = 'assets/icons/mention-circle.svg';
 }

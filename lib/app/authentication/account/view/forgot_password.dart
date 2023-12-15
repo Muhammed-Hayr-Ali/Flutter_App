@@ -10,7 +10,7 @@ class ForgotPassword extends StatelessWidget {
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.put(AccountController());
+  final _ = Get.find<AccountController>();
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _email = TextEditingController();

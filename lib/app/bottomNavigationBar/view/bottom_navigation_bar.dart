@@ -1,5 +1,4 @@
 import 'package:application/required_files.dart';
-import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:application/packages.dart';
 
 import '../../home/home.dart';
@@ -26,10 +25,9 @@ class _NavBarState extends State<NavBar> {
 
   List<BottomNavigationBarItem> items = [
     BottomNavigationBarItem(
-      icon: SvgPicture.asset(AppAssets.home),
-      activeIcon: SvgPicture.asset(AppAssets.homeActive),
-      label: 'Home',
-    ),
+        icon: SvgPicture.asset(AppAssets.home),
+        activeIcon: SvgPicture.asset(AppAssets.homeActive),
+        label: 'Home'),
     BottomNavigationBarItem(
         icon: SvgPicture.asset(AppAssets.shop),
         activeIcon: SvgPicture.asset(AppAssets.shopActive),
@@ -39,7 +37,9 @@ class _NavBarState extends State<NavBar> {
         activeIcon: SvgPicture.asset(AppAssets.cartActive),
         label: 'Cart'),
     BottomNavigationBarItem(
-        icon: SvgPicture.asset(AppAssets.userCircle),    activeIcon: SvgPicture.asset(AppAssets.userCircleActive), label: 'Profile'),
+        icon: SvgPicture.asset(AppAssets.userCircle),
+        activeIcon: SvgPicture.asset(AppAssets.userCircleActive),
+        label: 'Profile'),
   ];
 
   void _onTap(int index) {
@@ -51,14 +51,22 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: view[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (value) => _onTap(value),
-        items: items,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        type: BottomNavigationBarType.fixed,
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20.0)),
+        child: Material(
+          child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: (value) => _onTap(value),
+            items: items,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            type: BottomNavigationBarType.fixed,
+          ),
+        ),
       ),
     );
   }

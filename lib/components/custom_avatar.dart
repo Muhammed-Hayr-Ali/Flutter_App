@@ -8,23 +8,24 @@ class CustomAvatar extends StatelessWidget {
   final String imageUrl;
   final double size;
   final Color backgroundColor;
-  final double padding;
-  final double margin;
+  final double borderWidth;
   const CustomAvatar({
     super.key,
     required this.imageUrl,
     this.size = 128.0,
     this.backgroundColor = const Color(0xFFF6F6F6),
-    this.padding = 0,
-    this.margin = 0,
+    this.borderWidth = 0,
     this.sourceImage = SourceImage.networkImage,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(size), color: backgroundColor),
       height: size,
       width: size,
+      padding: EdgeInsets.all(borderWidth),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(size),
         child: sourceImage == SourceImage.localImage
@@ -38,7 +39,7 @@ class CustomAvatar extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.all(size * 0.2),
                       child: SvgPicture.asset(
-                       AppAssets.user,
+                        AppAssets.user,
                       ),
                     ),
                   )
@@ -58,7 +59,7 @@ class CustomAvatar extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(size * 0.2),
                     child: SvgPicture.asset(
-                       AppAssets.user,
+                      AppAssets.user,
                     ),
                   ),
                 ),

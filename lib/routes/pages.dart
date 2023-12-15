@@ -1,10 +1,13 @@
+import 'package:application/app/authentication/account/controller/account_controller.dart';
 import 'package:application/app/authentication/auth/completet_your_profile.dart';
+import 'package:application/app/profile/controller/profile_controller.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
 import '../app/authentication/account/view/create_new_password.dart';
 import '../app/authentication/account/view/forgot_password.dart';
 import '../app/authentication/account/view/verify_verification_code.dart';
+import '../app/authentication/auth/controller/auth_controller.dart';
 import '../app/authentication/auth/creat_new_account.dart';
 import '../app/authentication/auth/login_user.dart';
 import '../app/authentication/authentication.dart';
@@ -23,21 +26,21 @@ class Pages {
 
   static final routes = [
     GetPage(
-        name: Routes.splashScreen,
-        page: () => const SplashScreen(),
-        // transitionDuration: duration,
-        // transition: transition,
-        // curve: curve,
-        binding: BindingsBuilder(() {
-          Get.put<SplashScreenController>(SplashScreenController());
-        })),
-    GetPage(
-      name: Routes.authentication,
-      page: () => Authentication(),
+      name: Routes.splashScreen,
+      page: () => const SplashScreen(),
       // transitionDuration: duration,
       // transition: transition,
       // curve: curve,
     ),
+    GetPage(
+        name: Routes.authentication,
+        page: () => Authentication(),
+        // transitionDuration: duration,
+        // transition: transition,
+        // curve: curve,
+        binding: BindingsBuilder(() {
+          Get.put(AuthControlleer());
+        })),
     GetPage(
       name: Routes.creatNewAccount,
       page: () => CreatNewAccount(),
@@ -65,8 +68,9 @@ class Pages {
       transitionDuration: duration,
       transition: transition,
       curve: curve,
-      //binding: HomeBinding(),
-    ),
+           binding: BindingsBuilder(() {
+          Get.put(AccountController());
+        }) ),
     GetPage(
       name: Routes.verifyVerificationCode,
       page: () => VerifyVerificationCode(),
@@ -83,12 +87,14 @@ class Pages {
       curve: curve,
     ),
     GetPage(
-      name: Routes.home,
-      page: () => const NavBar(),
-      // transitionDuration: duration,
-      // transition: transition,
-      // curve: curve,
-    ),
+        name: Routes.home,
+        page: () => const NavBar(),
+        // transitionDuration: duration,
+        // transition: transition,
+        // curve: curve,
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => ProfileController());
+        })),
     GetPage(
       name: Routes.editProfile,
       page: () => EditProfile(),
