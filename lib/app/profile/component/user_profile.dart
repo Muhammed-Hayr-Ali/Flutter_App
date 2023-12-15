@@ -18,7 +18,7 @@ class UserProfile extends StatelessWidget {
       children: [
         Container(
             color: AppColors.primaryColor,
-            padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: GetBuilder<ProfileController>(
               init: ProfileController(),
               builder: (_) => _.currentUser == null

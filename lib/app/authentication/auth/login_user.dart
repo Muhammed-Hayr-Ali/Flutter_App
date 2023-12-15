@@ -45,7 +45,7 @@ class Login extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                 PageTitle(
+                PageTitle(
                   title: title,
                   subTitle: subTitle,
                 ),
@@ -57,7 +57,7 @@ class Login extends StatelessWidget {
                     hintText: 'example@gmail.com',
                     textEditingController: _email,
                     keyboardType: TextInputType.emailAddress,
-                    validator: (value) => Validator.userName(value!),
+                    validator: (value) => Validator.email(value!),
                   ),
                 ),
                 SizedBox(height: space),

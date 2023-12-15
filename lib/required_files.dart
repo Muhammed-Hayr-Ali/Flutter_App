@@ -33,7 +33,7 @@ export 'components/animation/fade_animation_dy.dart';
 
 export 'utils/constants/api.dart';
 export 'utils/constants/app_constants.dart';
-export 'utils/constants/assets_path.dart';
+export 'utils/constants/app_assets.dart';
 export 'utils/constants/colors_constants.dart';
 
 export 'utils/localization/languages/ar.dart';

@@ -5,7 +5,6 @@ import '../component/user_profile.dart';
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
 
-
   final List<Widget> menu = [
     CustomListTile(
       title: 'Edit Profile',
@@ -29,15 +28,15 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: AppColors.primaryColor,
-      //   title: Text(
-      //     'Account'.tr,
-      //     style:
-      //         const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      //   ),
-      //   centerTitle: false,
-      // ),
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryColor,
+        title: Text(
+          'Account'.tr,
+          style:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: false,
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

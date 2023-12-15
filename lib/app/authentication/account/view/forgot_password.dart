@@ -15,7 +15,8 @@ class ForgotPassword extends StatelessWidget {
 
   final TextEditingController _email = TextEditingController();
   final String title = 'Forgot Password';
-  final String subTitle = 'Please Enter your email Address To Recieve a Verification Code';
+  final String subTitle =
+      'Please Enter your email Address To Recieve a Verification Code';
 
   void _recovery() async {
     if (_formKey.currentState!.validate()) {
@@ -36,8 +37,7 @@ class ForgotPassword extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-        
-                 PageTitle(
+                PageTitle(
                   title: title,
                   subTitle: subTitle,
                 ),
@@ -45,19 +45,16 @@ class ForgotPassword extends StatelessWidget {
                 Container(
                   height: size,
                   width: size,
+                  padding: EdgeInsets.all(size * 0.2),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(size),
                     color: AppColors.primaryColor.withOpacity(0.1),
                   ),
-                  child: Icon(
-                    Icons.lock_person,
-                    size: size * .5,
-                    color: AppColors.primaryColor,
+                  child: SvgPicture.asset(
+                    AppAssets.keySquare,
                   ),
                 ),
                 SizedBox(height: space),
-
-
                 FadeAnimationDx(
                   delay: 2,
                   child: CustomTextField(
@@ -90,14 +87,14 @@ class ForgotPassword extends StatelessWidget {
                             )
                           : Text(
                               'Send'.tr,
-                            style: const TextStyle(
-                                fontSize: 16, color: Colors.white),
+                              style: const TextStyle(
+                                  fontSize: 16, color: Colors.white),
                             ),
                     ),
                   ),
                 ),
-                         SizedBox(height: space * 2.2),
-     ],
+                SizedBox(height: space * 2.2),
+              ],
             ),
           ),
         ),

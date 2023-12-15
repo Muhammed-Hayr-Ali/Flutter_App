@@ -21,7 +21,10 @@ class CreateNewPassword extends StatelessWidget {
   final data = Get.arguments as Map;
   void _recovery() async {
     if (_formKey.currentState!.validate()) {
-      _.createNewPassword(email: data['email'], verificationCode: data['verificationCode'], password: _password.text);
+      _.createNewPassword(
+          email: data['email'],
+          verificationCode: data['verificationCode'],
+          password: _password.text);
     }
   }
 
@@ -46,14 +49,13 @@ class CreateNewPassword extends StatelessWidget {
                 Container(
                   height: size,
                   width: size,
+                  padding: EdgeInsets.all(size * 0.2),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(size),
                     color: AppColors.primaryColor.withOpacity(0.1),
                   ),
-                  child: Icon(
-                    Icons.password_rounded,
-                    size: size * .5,
-                    color: AppColors.primaryColor,
+                  child: SvgPicture.asset(
+                    AppAssets.password,
                   ),
                 ),
                 SizedBox(height: space),

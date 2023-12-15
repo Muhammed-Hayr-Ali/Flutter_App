@@ -17,11 +17,13 @@ class VerifyVerificationCode extends StatelessWidget {
 
   final TextEditingController _verificationCode = TextEditingController();
   final String title = 'Verify Your Email';
-  final String subTitle = 'Please Enter your verification code that we sent you through your email ';
-  
+  final String subTitle =
+      'Please Enter your verification code that we sent you through your email ';
+
   final data = Get.arguments as Map;
   void _verifyVerificationCode() async {
-    _.verifyVerificationCode(email: data['email'], verificationCode: _verificationCode.text);
+    _.verifyVerificationCode(
+        email: data['email'], verificationCode: _verificationCode.text);
   }
 
   @override
@@ -37,8 +39,7 @@ class VerifyVerificationCode extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-            
-                 PageTitle(
+                PageTitle(
                   title: title,
                   subTitle: subTitle,
                 ),
@@ -46,19 +47,16 @@ class VerifyVerificationCode extends StatelessWidget {
                 Container(
                   height: size,
                   width: size,
+                  padding: EdgeInsets.all(size * 0.2),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(size),
                     color: AppColors.primaryColor.withOpacity(0.1),
                   ),
-                  child: Icon(
-                    Icons.mark_email_read_sharp,
-                    size: size * .5,
-                    color: AppColors.primaryColor,
+                  child: SvgPicture.asset(
+                    AppAssets.mention,
                   ),
                 ),
                 SizedBox(height: space),
-
-
                 FadeAnimationDx(
                   delay: 2,
                   child: OTPTextField(
@@ -72,7 +70,8 @@ class VerifyVerificationCode extends StatelessWidget {
                     fieldStyle: FieldStyle.underline,
                     outlineBorderRadius: 2,
                     onCompleted: (code) => _verificationCode.text = code,
-                    onChanged: (value) => _.verifyVerificationCodeError.value = '',
+                    onChanged: (value) =>
+                        _.verifyVerificationCodeError.value = '',
                   ),
                 ),
                 SizedBox(height: space),
@@ -97,14 +96,14 @@ class VerifyVerificationCode extends StatelessWidget {
                             )
                           : Text(
                               'Verify'.tr,
-                            style: const TextStyle(
-                                fontSize: 16, color: Colors.white),
+                              style: const TextStyle(
+                                  fontSize: 16, color: Colors.white),
                             ),
                     ),
                   ),
                 ),
-                           SizedBox(height: space * 2.2),
-   ],
+                SizedBox(height: space * 2.2),
+              ],
             ),
           ),
         ),
