@@ -84,6 +84,7 @@ flutter:
     - assets/images/
     - assets/audio/
     - assets/icons/
+    - assets/icons/bottom_navigation_bar/
   fonts:
     - family: ReadexPro
       fonts:
