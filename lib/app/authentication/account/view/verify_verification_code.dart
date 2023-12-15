@@ -15,12 +15,13 @@ class VerifyVerificationCode extends StatelessWidget {
   final _ = Get.put(AccountController());
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _code = TextEditingController();
+  final TextEditingController _verificationCode = TextEditingController();
   final String title = 'Verify Your Email';
   final String subTitle = 'Please Enter your verification code that we sent you through your email ';
-
+  
+  final data = Get.arguments as Map;
   void _verifyVerificationCode() async {
-    _.verifyVerificationCode(code: _code.text);
+    _.verifyVerificationCode(email: data['email'], verificationCode: _verificationCode.text);
   }
 
   @override
@@ -70,7 +71,7 @@ class VerifyVerificationCode extends StatelessWidget {
                     textFieldAlignment: MainAxisAlignment.spaceAround,
                     fieldStyle: FieldStyle.underline,
                     outlineBorderRadius: 2,
-                    onCompleted: (code) => _code.text = code,
+                    onCompleted: (code) => _verificationCode.text = code,
                     onChanged: (value) => _.verifyVerificationCodeError.value = '',
                   ),
                 ),

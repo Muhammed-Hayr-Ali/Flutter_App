@@ -14,8 +14,7 @@ class AccountController extends GetxController {
         connectTimeout: Api.connectTimeout,
         headers: Api.defaultHeaders),
   );
-  String? email;
-  String? verificationCode;
+
 
   void forgotPassword({required String mail}) async {
     isLoading(true);
@@ -27,9 +26,7 @@ class AccountController extends GetxController {
       final response = await _dio.post(Api.forgotPassword, data: data);
       if (!response.data['status']) return;
 
-      Get.toNamed(Routes.verifyVerificationCode);
-
-      email = mail;
+      Get.toNamed(Routes.verifyVerificationCode, arguments: {'email' : mail});
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -41,20 +38,19 @@ class AccountController extends GetxController {
     isLoading(false);
   }
 
-  void verifyVerificationCode({required String code}) async {
+  void verifyVerificationCode({required String email, required String verificationCode}) async {
     isLoading(true);
     FormData data = FormData.fromMap({
       'email': email,
-      'code': code,
+      'code': verificationCode,
     });
 
     try {
       final response = await _dio.post(Api.verifyVerificationCode, data: data);
       if (!response.data['status']) return;
 
-      Get.toNamed(Routes.createNewPassword);
+      Get.toNamed(Routes.createNewPassword, arguments: {'email' : email, 'verificationCode' : verificationCode});
 
-      verificationCode = code;
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -66,7 +62,7 @@ class AccountController extends GetxController {
     isLoading(false);
   }
 
-  void createNewPassword({required String password}) async {
+  void createNewPassword({required String email, required String verificationCode, required String password}) async {
     isLoading(true);
     FormData data = FormData.fromMap({
       'email': email,

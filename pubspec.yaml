@@ -81,14 +81,9 @@ flutter:
 
 
   assets:
-    - assets/rive/
-    - assets/svg/
-    - assets/lottie/
     - assets/images/
     - assets/audio/
     - assets/icons/
-    - assets/icons/bottom_navbar/
-    - assets/icons/profile/
   fonts:
     - family: ReadexPro
       fonts:

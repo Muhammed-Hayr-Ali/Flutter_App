@@ -1,4 +1,3 @@
-import 'package:application/app/profile/controller/profile_controller.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import '../component/user_profile.dart';
@@ -6,7 +5,6 @@ import '../component/user_profile.dart';
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
 
-  final ProfileController _ = Get.put<ProfileController>(ProfileController());
 
   final List<Widget> menu = [
     CustomListTile(

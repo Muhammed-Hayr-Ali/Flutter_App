@@ -18,10 +18,10 @@ class CreateNewPassword extends StatelessWidget {
   final String title = 'Create New Password';
   final String subTitle =
       'Your New Password Must Be Different from Previous Password';
-
+  final data = Get.arguments as Map;
   void _recovery() async {
     if (_formKey.currentState!.validate()) {
-      _.createNewPassword(password: _password.text);
+      _.createNewPassword(email: data['email'], verificationCode: data['verificationCode'], password: _password.text);
     }
   }
 
