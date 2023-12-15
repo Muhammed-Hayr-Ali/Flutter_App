@@ -66,11 +66,7 @@ class Authentication extends StatelessWidget {
                               'Continue With Google'.tr,
                             ),
                             const SizedBox(width: 6),
-                            Image.asset(
-                              'assets/images/google.png',
-                              height: 24,
-                              width: 24,
-                            ),
+                            SvgPicture.asset(AppAssets.google),
                           ],
                         ),
                 ),

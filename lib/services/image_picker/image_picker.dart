@@ -13,15 +13,13 @@ class ImageService {
           children: [
             CustomListItem(
               height: 48,
-              child: SvgPicture.asset('assets/icons/camera.svg'),
+              child: SvgPicture.asset(AppAssets.camera),
               onTap: () => Get.back(result: ImageSource.camera),
             ),
             const Divider(),
             CustomListItem(
               height: 48,
-              child: SvgPicture.asset(
-                'assets/icons/gallery.svg',
-              ),
+              child: SvgPicture.asset(AppAssets.gallery),
               onTap: () => Get.back(result: ImageSource.gallery),
             ),
           ],

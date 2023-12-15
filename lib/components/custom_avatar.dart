@@ -1,4 +1,5 @@
 import 'package:application/packages.dart';
+import 'package:application/required_files.dart';
 
 enum SourceImage { networkImage, localImage }
 
@@ -37,7 +38,7 @@ class CustomAvatar extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.all(size * 0.2),
                       child: SvgPicture.asset(
-                        'assets/images/avatar.svg',
+                       AppAssets.user,
                       ),
                     ),
                   )
@@ -57,7 +58,7 @@ class CustomAvatar extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(size * 0.2),
                     child: SvgPicture.asset(
-                      'assets/images/avatar.svg',
+                       AppAssets.user,
                     ),
                   ),
                 ),

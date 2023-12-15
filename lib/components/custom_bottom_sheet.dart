@@ -20,7 +20,11 @@ custombottomSheet({String? title, Widget? child}) {
                 child: title != null
                     ? Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(title.tr),
+                        child: Text(
+                          title.tr,
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w500),
+                        ),
                       )
                     : null,
               ),
