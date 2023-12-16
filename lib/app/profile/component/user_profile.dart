@@ -43,7 +43,7 @@ class UserProfile extends StatelessWidget {
                 ],
               ),
               GetBuilder<ProfileController>(
-                init: ProfileController(),
+                
                 builder: (_) => SizedBox(
                   child: _.currentUser != null
                       ? Column(

@@ -68,8 +68,10 @@ class Pages {
       transitionDuration: duration,
       transition: transition,
       curve: curve,
-        
-         ),
+                binding: BindingsBuilder(() {
+          Get.put<AccountController>(AccountController());
+        })),
+
     GetPage(
       name: Routes.verifyVerificationCode,
       page: () => VerifyVerificationCode(),
@@ -92,7 +94,7 @@ class Pages {
         // transition: transition,
         // curve: curve,
         binding: BindingsBuilder(() {
-          Get.lazyPut(() => ProfileController());
+          Get.put<ProfileController>(ProfileController());
         })),
     GetPage(
       name: Routes.editProfile,
