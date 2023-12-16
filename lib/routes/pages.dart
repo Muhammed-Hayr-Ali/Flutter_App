@@ -26,12 +26,14 @@ class Pages {
 
   static final routes = [
     GetPage(
-      name: Routes.splashScreen,
-      page: () => const SplashScreen(),
-      // transitionDuration: duration,
-      // transition: transition,
-      // curve: curve,
-    ),
+        name: Routes.splashScreen,
+        page: () => const SplashScreen(),
+        // transitionDuration: duration,
+        // transition: transition,
+        // curve: curve,
+        binding: BindingsBuilder(() {
+          Get.put<SplashScreenController>(SplashScreenController());
+        })),
     GetPage(
         name: Routes.authentication,
         page: () => Authentication(),
@@ -63,15 +65,14 @@ class Pages {
       curve: curve,
     ),
     GetPage(
-      name: Routes.forgotPassword,
-      page: () => ForgotPassword(),
-      transitionDuration: duration,
-      transition: transition,
-      curve: curve,
-                binding: BindingsBuilder(() {
+        name: Routes.forgotPassword,
+        page: () => ForgotPassword(),
+        transitionDuration: duration,
+        transition: transition,
+        curve: curve,
+        binding: BindingsBuilder(() {
           Get.put<AccountController>(AccountController());
         })),
-
     GetPage(
       name: Routes.verifyVerificationCode,
       page: () => VerifyVerificationCode(),
@@ -90,8 +91,8 @@ class Pages {
     GetPage(
         name: Routes.home,
         page: () => const NavBar(),
-        // transitionDuration: duration,
-        // transition: transition,
+        transitionDuration: const Duration(milliseconds: 2500),
+        transition: Transition.fade,
         // curve: curve,
         binding: BindingsBuilder(() {
           Get.put<ProfileController>(ProfileController());

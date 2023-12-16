@@ -1,4 +1,3 @@
-export 'bindings.dart';
 
 export 'package:application/components/custom_list_item.dart';
 export 'package:application/utils/models/user.dart';

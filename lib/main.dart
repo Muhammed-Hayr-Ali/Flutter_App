@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
       translations: Translation(),
       locale: Locale(GetStorage().read('language') ?? 'en'),
       fallbackLocale: const Locale('en'),
-      initialBinding: AppBindings(),
       debugShowCheckedModeBanner: false,
       initialRoute: Pages.initial,
       getPages: Pages.routes,
