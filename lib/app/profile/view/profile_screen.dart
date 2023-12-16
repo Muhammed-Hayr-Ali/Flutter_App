@@ -27,6 +27,8 @@ class ProfileScreen extends StatelessWidget {
     ),
   ];
 
+  // final AccountController _ = Get.put(AccountController());
+
   String _shortMail(String value) {
     return value.substring(0, value.indexOf("@"));
   }
@@ -35,35 +37,46 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: null,
+        centerTitle: true,
         backgroundColor: AppColors.primaryColor,
         title: GetBuilder<ProfileController>(
-          builder: (_) => SizedBox(
-            child: _.currentUser != null
-                ? Row(
-                    children: [
-                      SvgPicture.asset(AppAssets.mentionCircle),
-                      SizedBox(width: 2),
-                      Text(
-                        _shortMail(
-                          _.currentUser!.email ?? '',
-                        ),
-                        style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w200),
-                      ),
-                    ],
-                  )
-                : null,
+          init: ProfileController(),
+          builder: (_) => Text(
+            '@${_shortMail(_.currentUser!.email ?? '')}',
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.white,
+              fontWeight: FontWeight.w200,
+            ),
           ),
         ),
-        centerTitle: true,
       ),
+
+      // // appBar: AppBar(
+      //   backgroundColor: AppColors.primaryColor,
+      //   title: GetBuilder<ProfileController>(
+      //     init: ProfileController(),
+      //     builder: (_) => SizedBox(
+      //       child: _.currentUser != null
+      //           ? Text(
+      //               '@${_shortMail(_.currentUser!.email ?? '')}                ',
+      //               style: const TextStyle(
+      //                   fontSize: 14,
+      //                   color: Colors.white,
+      //                   fontWeight: FontWeight.w200),
+      //             )
+      //           : null,
+      //     ),
+      //   ),
+      //   centerTitle: true,
+      //   leading: null,
+      // ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            UserProfile(),
+            const UserProfile(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text('Account Settings'.tr,

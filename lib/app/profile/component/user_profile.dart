@@ -4,56 +4,93 @@ import 'package:application/required_files.dart';
 import '../controller/profile_controller.dart';
 
 class UserProfile extends StatelessWidget {
-  UserProfile({
+  const UserProfile({
     super.key,
   });
-
-
   String shortMail(String value) {
     return value.substring(0, value.indexOf("@"));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
+    return Column(
       children: [
         Container(
-          color: AppColors.primaryColor,
-          height: Get.height * 0.20,
-          child: Column(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [AppColors.primaryColor, Colors.white],
+                  stops: const [0.8, 1.0],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter)),
+          height: Get.height * 0.14,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              SizedBox(
-                height: Get.height * 0.10,
+              Column(
+                children: [
+                  SizedBox(
+                    height: Get.height * 0.14 / 2,
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(16.0))),
+                    ),
+                  )
+                ],
               ),
-              Container(
-                height: Get.height * 0.10,
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(20.0))),
-              )
+              GetBuilder<ProfileController>(
+                init: ProfileController(),
+                builder: (_) => SizedBox(
+                  child: _.currentUser != null
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            CustomAvatar(
+                                borderWidth: 6,
+                                backgroundColor: Colors.white,
+                                size: Get.width * 0.28,
+                                imageUrl: '${_.currentUser!.profile}'),
+                          ],
+                        )
+                      : null,
+                ),
+              ),
             ],
           ),
         ),
-        // ClipOval(
-        //   child: Container(
-        //     height: Get.width * 0.2,
-        //     width: Get.width * 0.2,
-        //     color: Colors.white,
-        //   ),
-        // )
-
         GetBuilder<ProfileController>(
-            builder: (_) => SizedBox(
-                  child: _.currentUser != null
-                      ? CustomAvatar(
-                          borderWidth: 6,
-                          backgroundColor: Colors.white,
-                          size: Get.width * 0.28,
-                          imageUrl: '${_.currentUser!.profile}')
-                      : null,
-                )),
+          builder: (_) => SizedBox(
+            child: _.currentUser != null
+                ? Text(
+                    _.currentUser!.name ?? '',
+                    style: TextStyle(
+                        color: AppColors.blackColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500),
+                  )
+                : null,
+          ),
+        ),
+        GetBuilder<ProfileController>(
+          builder: (_) => SizedBox(
+            child: _.currentUser != null
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      _.currentUser!.status ?? '',
+                      style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  )
+                : null,
+          ),
+        )
       ],
     );
   }
@@ -61,129 +98,3 @@ class UserProfile extends StatelessWidget {
     
     
     
-    
-    
-    
-//     Column(
-//       children: [
-//         Container(height: ,
-//             color: AppColors.primaryColor,
-//             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-//             child: GetBuilder<ProfileController>(
-//               init: ProfileController(),
-//               builder: (_) => _.currentUser == null
-//                   ? Shimmer.fromColors(
-//                       baseColor: Colors.white,
-//                       highlightColor: Colors.grey.shade300,
-//                       child: Row(
-//                         children: [
-//                           Container(
-//                             height: Get.width * 0.14,
-//                             width: Get.width * 0.14,
-//                             decoration: BoxDecoration(
-//                                 color: Colors.white,
-//                                 borderRadius: BorderRadius.circular(
-//                                   Get.width * 0.14,
-//                                 )),
-//                           ),
-//                           const SizedBox(width: 10),
-//                           Flexible(
-//                             child: Column(
-//                               crossAxisAlignment: CrossAxisAlignment.start,
-//                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                               children: [
-//                                 const SizedBox(),
-//                                 Container(
-//                                   height: 26,
-//                                   width: 100,
-//                                   decoration: BoxDecoration(
-//                                       color: Colors.white,
-//                                       borderRadius: BorderRadius.circular(4.0)),
-//                                 ),
-//                                 const SizedBox(height: 4),
-//                                 Container(
-//                                   height: 15,
-//                                   width: 222,
-//                                   decoration: BoxDecoration(
-//                                       color: Colors.white,
-//                                       borderRadius: BorderRadius.circular(4.0)),
-//                                 ),
-//                               ],
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                     )
-//                   : Row(
-//                       children: [
-//                         CustomAvatar(
-//                             size: Get.width * 0.14,
-//                             imageUrl: '${_.currentUser!.profile}'),
-//                         const SizedBox(width: 10),
-//                         Expanded(
-//                           child: Column(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                             children: [
-//                               const SizedBox(),
-//                               Text(
-//                                 _.currentUser!.name ?? '',
-//                                 style: const TextStyle(
-//                                     fontSize: 20,
-//                                     color: Colors.white,
-//                                     fontWeight: FontWeight.bold),
-//                               ),
-//                               Text(
-//                                 '${_.currentUser!.email}',
-//                                 textDirection: TextDirection.ltr,
-//                                 style: const TextStyle(
-//                                   color: Colors.white,
-//                                   fontSize: 12,
-//                                 ),
-//                               ),
-//                               // const SizedBox(height: 18),
-//                               // Text(
-//                               //   _.currentUser!.status ?? '',
-//                               //   textAlign: TextAlign.center,
-//                               //   style: const TextStyle(
-//                               //       fontSize: 12, fontWeight: FontWeight.w300),
-//                               // ),
-//                             ],
-//                           ),
-//                         ),
-//                         IconButton(
-//                           onPressed: () {},
-//                           icon: SvgPicture.asset(AppAssets.editProfile),
-//                         )
-//                       ],
-//                     ),
-//             )),
-//         Stack(
-//           children: [
-//             Container(
-//               height: 20,
-//               width: double.infinity,
-//               decoration: BoxDecoration(
-//                 gradient: LinearGradient(colors: [
-//                   AppColors.primaryColor,
-//                   AppColors.primaryColor.withOpacity(0.0)
-//                 ], stops: const [
-//                   0.0,
-//                   1.0
-//                 ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-//               ),
-//             ),
-//             Container(
-//               height: 20,
-//               width: double.infinity,
-//               decoration: const BoxDecoration(
-//                   color: Colors.white,
-//                   borderRadius:
-//                       BorderRadius.vertical(top: Radius.circular(8.0))),
-//             ),
-//           ],
-//         )
-//       ],
-//     );
-//   }
-// }

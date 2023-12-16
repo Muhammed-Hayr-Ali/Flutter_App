@@ -135,7 +135,7 @@ class CompletetYourProfile extends StatelessWidget {
                     hintText: 'Enter Phone Number',
                     textEditingController: _phoneNumber,
                     keyboardType: TextInputType.phone,
-                    validator: (value) => Validator.mobile(value!),
+                    //     validator: (value) => Validator.mobile(value!),
                     prefix: Obx(
                       () => Row(
                         mainAxisSize: MainAxisSize.min,

@@ -68,9 +68,8 @@ class Pages {
       transitionDuration: duration,
       transition: transition,
       curve: curve,
-           binding: BindingsBuilder(() {
-          Get.put(AccountController());
-        }) ),
+        
+         ),
     GetPage(
       name: Routes.verifyVerificationCode,
       page: () => VerifyVerificationCode(),
