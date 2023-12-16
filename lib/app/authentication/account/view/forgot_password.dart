@@ -59,7 +59,7 @@ class ForgotPassword extends StatelessWidget {
                   delay: 2,
                   child: CustomTextField(
                     labelText: 'E-mail',
-                    textEditingController: _email,
+                    controller: _email,
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) => Validator.email(value!),
                     onChanged: (value) => _.forgotPasswordError.value = '',

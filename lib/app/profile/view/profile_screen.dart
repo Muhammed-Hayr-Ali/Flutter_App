@@ -5,91 +5,8 @@ import '../controller/profile_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
+  final ProfileController _ = Get.put(ProfileController());
 
-  final List<Widget> menu = [
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text('Account Settings'.tr,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-    ),
-    CustomListTile(
-      title: 'Edit my profile',
-      subtitle: 'Edit profile information and personal photo',
-      leading: AppAssets.editProfile,
-      onTap: () => Get.toNamed(Routes.editProfile),
-    ),
-    CustomListTile(
-      title: 'My addresses',
-      subtitle: 'Set shipment delivery addresses',
-      leading: AppAssets.mapPoint,
-      onTap: () => Get.toNamed(Routes.editProfile),
-    ),
-    CustomListTile(
-      title: 'Wish List',
-      subtitle: 'A list of favorite products that you would like to obtain',
-      leading: AppAssets.heart,
-      onTap: () => Get.toNamed(Routes.editProfile),
-    ),
-    CustomListTile(
-      title: 'My Orders',
-      subtitle: 'In-process orders and completed orders',
-      leading: AppAssets.cartCheck,
-      onTap: () => Get.toNamed(Routes.editProfile),
-    ),
-    const SizedBox(height: 14.0),
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text('App Settings'.tr,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-    ),
-    CustomListTile(
-      title: 'Language',
-      subtitle: 'Choose the application language',
-      leading: AppAssets.globus,
-      onTap: () => Get.toNamed(Routes.editProfile),
-    ),
-    CustomListTile(
-      title: 'Theme',
-      subtitle: 'Choose the application Theme',
-      leading: AppAssets.pallete,
-      onTap: () => Get.toNamed(Routes.editProfile),
-    ),
-    CustomListTile(
-      title: 'Notifications',
-      subtitle: 'Choose the notifications you want to receive',
-      leading: AppAssets.bell,
-      onTap: () => Get.toNamed(Routes.editProfile),
-    ),
-    CustomListTile(
-      title: 'FaQ',
-      subtitle: 'Get quick answers about the service provided',
-      leading: AppAssets.question,
-      onTap: () => Get.toNamed(Routes.editProfile),
-    ),
-    CustomListTile(
-      title: 'communication',
-      subtitle: 'Help us improve the service by sending feedback',
-      leading: AppAssets.message,
-      onTap: () => Get.toNamed(Routes.editProfile),
-    ),
-    const SizedBox(height: 38.0),
-    Center(
-      child: CustomElevatedButton(
-        width: Get.width * 0.7,
-        height: 48,
-        borderRadius: BorderRadius.circular(38.0),
-        backgroundColor: AppColors.primaryColor,
-        child: Text(
-          'Logout'.tr,
-          style: const TextStyle(color: Colors.white),
-        ),
-        onPressed: () => print(''),
-      ),
-    ),
-    const SizedBox(height: 80.0),
-  ];
-
-  // final AccountController _ = Get.put(AccountController());
 
   String _shortMail(String value) {
     return value.substring(0, value.indexOf("@"));
@@ -119,8 +36,90 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const UserProfile(),
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.start, children: menu),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('Account Settings'.tr,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w600)),
+            ),
+            CustomListTile(
+              title: 'Edit my profile',
+              subtitle: 'Edit profile information and personal photo',
+              leading: AppAssets.editProfile,
+              onTap: () =>
+                  Get.toNamed(Routes.editProfile, arguments: _.currentUser),
+            ),
+            CustomListTile(
+              title: 'My addresses',
+              subtitle: 'Set shipment delivery addresses',
+              leading: AppAssets.mapPoint,
+              onTap: () => Get.toNamed(Routes.editProfile),
+            ),
+            CustomListTile(
+              title: 'Wish List',
+              subtitle:
+                  'A list of favorite products that you would like to obtain',
+              leading: AppAssets.heart,
+              onTap: () => Get.toNamed(Routes.editProfile),
+            ),
+            CustomListTile(
+              title: 'My Orders',
+              subtitle: 'In-process orders and completed orders',
+              leading: AppAssets.cartCheck,
+              onTap: () => Get.toNamed(Routes.editProfile),
+            ),
+            const SizedBox(height: 14.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('App Settings'.tr,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w600)),
+            ),
+            CustomListTile(
+              title: 'Language',
+              subtitle: 'Choose the application language',
+              leading: AppAssets.globus,
+              onTap: () => Get.toNamed(Routes.editProfile),
+            ),
+            CustomListTile(
+              title: 'Theme',
+              subtitle: 'Choose the application Theme',
+              leading: AppAssets.pallete,
+              onTap: () => Get.toNamed(Routes.editProfile),
+            ),
+            CustomListTile(
+              title: 'Notifications',
+              subtitle: 'Choose the notifications you want to receive',
+              leading: AppAssets.bell,
+              onTap: () => Get.toNamed(Routes.editProfile),
+            ),
+            CustomListTile(
+              title: 'FaQ',
+              subtitle: 'Get quick answers about the service provided',
+              leading: AppAssets.question,
+              onTap: () => Get.toNamed(Routes.editProfile),
+            ),
+            CustomListTile(
+              title: 'communication',
+              subtitle: 'Help us improve the service by sending feedback',
+              leading: AppAssets.message,
+              onTap: () => Get.toNamed(Routes.editProfile),
+            ),
+            const SizedBox(height: 38.0),
+            Center(
+              child: CustomElevatedButton(
+                width: Get.width * 0.7,
+                height: 48,
+                borderRadius: BorderRadius.circular(38.0),
+                backgroundColor: AppColors.primaryColor,
+                child: Text(
+                  'Logout'.tr,
+                  style: const TextStyle(color: Colors.white),
+                ),
+                onPressed: () => print(''),
+              ),
+            ),
+            const SizedBox(height: 80.0),
           ],
         ),
       ),

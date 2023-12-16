@@ -2,24 +2,23 @@ import 'package:application/packages.dart';
 
 class CustomDropdownButton extends StatefulWidget {
   final String? title;
-  final TextEditingController value;
+  final String? initValue;
   final List<String> listItem;
+  final TextEditingController controller;
 
   const CustomDropdownButton(
-      {super.key, required this.value, required this.listItem, this.title});
+      {super.key,
+      required this.controller,
+      required this.listItem,
+      this.title,
+      this.initValue});
 
   @override
   State<CustomDropdownButton> createState() => _CustomState();
 }
 
 class _CustomState extends State<CustomDropdownButton> {
-  String initValue = '';
-
-  @override
-  void initState() {
-    super.initState();
-    initValue = widget.listItem[0];
-  }
+  String? value;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _CustomState extends State<CustomDropdownButton> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          child: widget.title == ''
+          child: widget.title == null
               ? null
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,10 +50,10 @@ class _CustomState extends State<CustomDropdownButton> {
               filled: false,
             ),
             // dropdownColor: Colors.w,
-            value: initValue,
+            value: value ?? widget.initValue ?? widget.listItem[0],
             onChanged: (String? newValue) {
-              widget.value.text = newValue ?? '';
-              initValue = newValue ?? '';
+              widget.controller.text = newValue ?? '';
+              value = newValue ?? '';
             },
             items:
                 widget.listItem.map<DropdownMenuItem<String>>((String value) {

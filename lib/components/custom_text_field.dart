@@ -3,12 +3,28 @@ import 'package:application/required_files.dart';
 import '../packages.dart';
 
 class CustomTextField extends StatefulWidget {
+ 
+ 
+  final bool? enabled;
+  final String? labelText;
+  final Color? underline;
+  final bool isPassword;
+  final bool suffix;
+  final TextEditingController controller;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
+  final Function(String)? onChanged;
+  final String? hintText;
+  final bool autofocus;
+  final Widget? prefix;
+ 
+ 
   const CustomTextField({
     super.key,
     this.labelText,
     this.underline,
     this.isPassword = false,
-    required this.textEditingController,
+    required this.controller,
     this.keyboardType,
     this.validator,
     this.onChanged,
@@ -19,24 +35,27 @@ class CustomTextField extends StatefulWidget {
     this.enabled,
   });
 
-  final bool? enabled;
-  final String? labelText;
-  final Color? underline;
-  final bool isPassword;
-  final bool suffix;
-  final TextEditingController textEditingController;
-  final TextInputType? keyboardType;
-  final String? Function(String?)? validator;
-  final Function(String)? onChanged;
-  final String? hintText;
-  final bool autofocus;
-  final Widget? prefix;
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
   bool obscureText = true;
+
+
+
+ updatevisiblity() {
+    setState(() {
+      obscureText = !obscureText;
+    });
+  }
+
+  clear() {
+    widget.controller.clear();
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +81,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           child: TextFormField(
             enabled: widget.enabled,
             autofocus: widget.autofocus,
-            controller: widget.textEditingController,
+            controller: widget.controller,
             keyboardType: widget.keyboardType,
             obscureText: widget.isPassword ? obscureText : false,
             validator: widget.validator,
@@ -101,13 +120,5 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 
-  updatevisiblity() {
-    setState(() {
-      obscureText = !obscureText;
-    });
-  }
-
-  clear() {
-    widget.textEditingController.clear();
-  }
+ 
 }

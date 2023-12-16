@@ -65,7 +65,7 @@ class CreateNewPassword extends StatelessWidget {
                     labelText: 'Password',
                     hintText: '************',
                     isPassword: true,
-                    textEditingController: _password,
+                    controller: _password,
                     keyboardType: TextInputType.multiline,
                     validator: (value) =>
                         Validator.password(value!, _confirmPassword.text),
@@ -79,7 +79,7 @@ class CreateNewPassword extends StatelessWidget {
                     labelText: 'Confirm password',
                     hintText: '************',
                     isPassword: true,
-                    textEditingController: _confirmPassword,
+                    controller: _confirmPassword,
                     keyboardType: TextInputType.multiline,
                     validator: (value) =>
                         Validator.password(value!, _password.text),

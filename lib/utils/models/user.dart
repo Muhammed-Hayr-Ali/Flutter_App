@@ -5,8 +5,10 @@ class User {
   dynamic emailVerifiedAt;
   String? countryCode;
   String? phoneNumber;
-  String? status;
+  String? gender;
+  String? dateBirth;
   String? profile;
+  String? status;
   String? permissions;
   String? expirationDate;
   String? token;
@@ -18,8 +20,10 @@ class User {
       this.emailVerifiedAt,
       this.countryCode,
       this.phoneNumber,
-      this.status,
+      this.gender,
+      this.dateBirth,
       this.profile,
+      this.status,
       this.permissions,
       this.expirationDate,
       this.token});
@@ -31,8 +35,10 @@ class User {
     emailVerifiedAt = json['email_verified_at'];
     countryCode = json['country_code'];
     phoneNumber = json['phone_number'];
-    status = json['status'];
+    gender = json['gender'];
+    dateBirth = json['date_birth'];
     profile = json['profile'];
+    status = json['status'];
     permissions = json['permissions'];
     expirationDate = json['expiration_date'];
     token = json['token'];
@@ -46,8 +52,10 @@ class User {
     data['email_verified_at'] = emailVerifiedAt;
     data['country_code'] = countryCode;
     data['phone_number'] = phoneNumber;
-    data['status'] = status;
+    data['gender'] = gender;
+    data['date_birth'] = dateBirth;
     data['profile'] = profile;
+    data['status'] = status;
     data['permissions'] = permissions;
     data['expiration_date'] = expirationDate;
     data['token'] = token;

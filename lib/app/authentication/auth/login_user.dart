@@ -55,7 +55,7 @@ class Login extends StatelessWidget {
                   child: CustomTextField(
                     labelText: 'E-mail',
                     hintText: 'example@gmail.com',
-                    textEditingController: _email,
+                    controller: _email,
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) => Validator.email(value!),
                   ),
@@ -67,7 +67,7 @@ class Login extends StatelessWidget {
                     labelText: 'Password',
                     hintText: '************',
                     isPassword: true,
-                    textEditingController: _password,
+                    controller: _password,
                     keyboardType: TextInputType.multiline,
                     validator: (value) => Validator.pass(value!),
                   ),

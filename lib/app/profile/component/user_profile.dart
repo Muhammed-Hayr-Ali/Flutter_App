@@ -82,6 +82,7 @@ class UserProfile extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       _.currentUser!.status ?? '',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           color: AppColors.primaryColor,
                           fontSize: 11,

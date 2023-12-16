@@ -3,10 +3,10 @@ import 'package:application/required_files.dart';
 
 class CustomDatePicker extends StatefulWidget {
   final String? labelText;
-  final TextEditingController textEditingController;
+  final TextEditingController controller;
 
   const CustomDatePicker(
-      {super.key, required this.textEditingController, this.labelText});
+      {super.key, required this.controller, this.labelText});
 
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
@@ -24,7 +24,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       lastDate: DateTime.now(),
     ).then((value) {
       String newDate = value!.format('d/m/Y');
-      widget.textEditingController.text = newDate;
+      widget.controller.text = newDate;
       initialDate = value;
       setState(() {
         dateTime = newDate;
@@ -33,7 +33,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   }
 
   void _remove() {
-    widget.textEditingController.clear();
+    widget.controller.clear();
     initialDate = null;
 
     setState(() {

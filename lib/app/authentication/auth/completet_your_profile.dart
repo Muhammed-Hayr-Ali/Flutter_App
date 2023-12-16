@@ -1,5 +1,6 @@
 import 'package:application/components/custom_date_picker.dart';
 import 'package:application/components/custom_dropdown_utton.dart';
+import 'package:application/components/custom_phone_field.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
@@ -109,7 +110,7 @@ class CompletetYourProfile extends StatelessWidget {
                   child: CustomTextField(
                     labelText: 'Name',
                     hintText: 'Ex. John Doe',
-                    textEditingController: _userName,
+                    controller: _userName,
                     keyboardType: TextInputType.name,
                     validator: (value) => Validator.userName(value!),
                   ),
@@ -128,50 +129,59 @@ class CompletetYourProfile extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: space),
-                FadeAnimationDx(
-                  delay: 3,
-                  child: CustomTextField(
+                // FadeAnimationDx(
+                //   delay: 3,
+                //   child: CustomTextField(
+                //     labelText: 'Phone Number',
+                //     hintText: 'Enter Phone Number',
+                //     controller: _phoneNumber,
+                //     keyboardType: TextInputType.phone,
+                //     //     validator: (value) => Validator.mobile(value!),
+                //     prefix: Obx(
+                //       () => Row(
+                //         mainAxisSize: MainAxisSize.min,
+                //         children: [
+                //           GestureDetector(
+                //             onTap: () async {
+                //               // Show the country code picker when tapped.
+                //               final picked =
+                //                   await countryPickerWithParams.showPicker(
+                //                       context: context,
+                //                       initialSelectedLocale: 'syr');
+                //               // Null check
+                //               if (picked != null) {
+                //                 debugPrint(picked.code);
+                //                 _.countryCode.value = picked.dialCode;
+                //                 _countryCode.text = picked.dialCode;
+                //               }
+                //             },
+                //             child: Text(_.countryCode.value,
+                //                 style: const TextStyle(color: Colors.black)),
+                //           ),
+                //           const SizedBox(width: 8)
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
+
+                CustomPhoneField(
                     labelText: 'Phone Number',
                     hintText: 'Enter Phone Number',
-                    textEditingController: _phoneNumber,
-                    keyboardType: TextInputType.phone,
-                    //     validator: (value) => Validator.mobile(value!),
-                    prefix: Obx(
-                      () => Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              // Show the country code picker when tapped.
-                              final picked =
-                                  await countryPickerWithParams.showPicker(
-                                      context: context,
-                                      initialSelectedLocale: 'syr');
-                              // Null check
-                              if (picked != null) {
-                                debugPrint(picked.code);
-                                _.countryCode.value = picked.dialCode;
-                                _countryCode.text = picked.dialCode;
-                              }
-                            },
-                            child: Text(_.countryCode.value,
-                                style: const TextStyle(color: Colors.black)),
-                          ),
-                          const SizedBox(width: 8)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                    initialSelected: '+963',
+                    phoneNumber: _phoneNumber,
+                    contryCode: _countryCode),
+
+                //
                 SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 4,
                   child: CustomDropdownButton(
-                      title: 'Gender', listItem: genderList, value: _gender),
+                      title: 'Gender', listItem: genderList, controller: _gender),
                 ),
                 SizedBox(height: space),
                 CustomDatePicker(
-                  textEditingController: _dateBirth,
+                  controller: _dateBirth,
                   labelText: 'Date Birth',
                 ),
                 SizedBox(height: space),

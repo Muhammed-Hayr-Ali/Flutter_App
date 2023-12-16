@@ -57,7 +57,7 @@ class CreatNewAccount extends StatelessWidget {
                     hintText: 'example@gmail.com',
                     onChanged: (value) =>
                         _.checkMailAvailabilityError.value = '',
-                    textEditingController: _email,
+                    controller: _email,
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) => Validator.email(value!),
                   ),
@@ -82,7 +82,7 @@ class CreatNewAccount extends StatelessWidget {
                     labelText: 'Password',
                     hintText: '************',
                     isPassword: true,
-                    textEditingController: _password,
+                    controller: _password,
                     keyboardType: TextInputType.multiline,
                     validator: (value) =>
                         Validator.password(value!, _confirmPassword.text),
@@ -95,7 +95,7 @@ class CreatNewAccount extends StatelessWidget {
                     labelText: 'Confirm password',
                     hintText: '************',
                     isPassword: true,
-                    textEditingController: _confirmPassword,
+                    controller: _confirmPassword,
                     keyboardType: TextInputType.multiline,
                     validator: (value) =>
                         Validator.password(value!, _password.text),

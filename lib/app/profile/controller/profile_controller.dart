@@ -25,6 +25,7 @@ class ProfileController extends GetxController {
   String? path;
   final userName = TextEditingController();
   final phoneNumber = TextEditingController();
+  final countryCode = TextEditingController();
   final status = TextEditingController();
 
   void getCurrentUser() async {
@@ -36,6 +37,7 @@ class ProfileController extends GetxController {
     userName.text = currentUser!.name ?? '';
     status.text = currentUser!.status ?? '';
     phoneNumber.text = currentUser!.phoneNumber ?? '';
+    countryCode.text = currentUser!.countryCode ?? '';
   }
 
   void updateProfile() async {
@@ -47,6 +49,7 @@ class ProfileController extends GetxController {
       'name': userName.text,
       'status': status.text,
       'phone_number': phoneNumber.text,
+      'country_code': countryCode.text
     });
 
     if (path != null) {
