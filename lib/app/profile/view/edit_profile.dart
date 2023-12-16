@@ -1,3 +1,4 @@
+import 'package:application/components/custom_date_picker.dart';
 import 'package:application/components/custom_dropdown_utton.dart';
 import 'package:application/components/custom_phone_field.dart';
 import 'package:application/packages.dart';
@@ -14,22 +15,21 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   final _formKey = GlobalKey<FormState>();
-  final _ = Get.find<ProfileController>();
   final data = Get.arguments as User;
-  final List<String> genderList = ['Unspecified', 'Male', 'Female'];
+  final _ = Get.find<ProfileController>();
+  final double space = 32;
 
   String? _profile;
+  String? path;
   TextEditingController _userName = TextEditingController();
   TextEditingController _phoneNumber = TextEditingController();
   TextEditingController _countryCode = TextEditingController();
   TextEditingController _status = TextEditingController();
   TextEditingController _gender = TextEditingController();
-  final double space = 32;
-  String? path;
+  TextEditingController _dateBirth = TextEditingController();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       _profile = data.profile;
@@ -38,7 +38,22 @@ class _EditProfileState extends State<EditProfile> {
       _countryCode = TextEditingController(text: data.countryCode ?? '');
       _phoneNumber = TextEditingController(text: data.phoneNumber ?? '');
       _gender = TextEditingController(text: data.gender ?? '');
+      _dateBirth = TextEditingController(text: data.dateBirth ?? '');
     });
+  }
+
+  upDateProfile() {
+    if (_.isLoading.value) return;
+    Map<String, dynamic> newUser = {
+      'name': _userName.text,
+      'status': _status.text,
+      'countryCode': _countryCode.text,
+      'phoneNumber': _phoneNumber.text,
+      'gender': _gender.text,
+      'dateBirth': _dateBirth.text,
+      'path': path,
+    };
+    _.updateProfile(newUser: newUser);
   }
 
   @override
@@ -47,49 +62,75 @@ class _EditProfileState extends State<EditProfile> {
       appBar: AppBar(
         title: Text('Edite Profile'.tr),
       ),
-      body: Column(
-        children: [
-          SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: Column(
-                  children: [
-                    SizedBox(child: CustomAvatar(imageUrl: _profile ?? '')),
-                    const SizedBox(height: 8),
-                    CustomTextField(
-                      labelText: 'User Name',
-                      controller: _userName,
-                      keyboardType: TextInputType.name,
-                      validator: (value) => Validator.userName(value!),
-                    ),
-                    SizedBox(height: space),
-                    CustomTextField(
-                      labelText: 'Status',
-                      controller: _status,
-                      keyboardType: TextInputType.text,
-                    ),
-                    SizedBox(height: space),
-                    CustomPhoneField(
-                        hintText: 'Edit your Number',
-                        labelText: 'Phone Number',
-                        initialSelected: _countryCode.text,
-                        phoneNumber: _phoneNumber,
-                        contryCode: _countryCode),
-                    SizedBox(height: space),
-                    CustomDropdownButton(
-                      title: 'Gender',
-                      controller: _gender,
-                      listItem: genderList,
-                      initValue: data.gender,
-                    )
-                  ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  child: Column(
+                    children: [
+                      SizedBox(child: CustomAvatar(imageUrl: _profile ?? '')),
+                      const SizedBox(height: 8),
+                      CustomTextField(
+                        labelText: 'User Name',
+                        controller: _userName,
+                        keyboardType: TextInputType.name,
+                        validator: (value) => Validator.userName(value!),
+                      ),
+                      SizedBox(height: space),
+                      CustomTextField(
+                        labelText: 'Status',
+                        controller: _status,
+                        keyboardType: TextInputType.text,
+                      ),
+                      SizedBox(height: space),
+                      CustomPhoneField(
+                          hintText: 'Edit your Number',
+                          labelText: 'Phone Number',
+                          initialSelected: _countryCode.text,
+                          phoneNumber: _phoneNumber,
+                          contryCode: _countryCode),
+                      SizedBox(height: space),
+                      CustomDropdownButton(
+                        title: 'Gender',
+                        controller: _gender,
+                        listItem: AppConstants.genderList,
+                        initValue: data.gender,
+                      ),
+                      SizedBox(height: space),
+                      CustomDatePicker(
+                        controller: _dateBirth,
+                        initialDate: data.dateBirth,
+                      ),
+                      const SizedBox(height: 38.0),
+                      Center(
+                        child: CustomElevatedButton(
+                          width: Get.width * 0.7,
+                          height: 48,
+                          borderRadius: BorderRadius.circular(38.0),
+                          backgroundColor: AppColors.primaryColor,
+                          onPressed: upDateProfile,
+                          child: Obx(
+                            () => _.isLoading.value
+                                ? const CustomProgress(color: Colors.white)
+                                : Text(
+                                    'Save'.tr,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 80.0),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

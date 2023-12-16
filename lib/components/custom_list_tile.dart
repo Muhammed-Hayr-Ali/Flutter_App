@@ -30,15 +30,7 @@ class _CustomListTileState extends State<CustomListTile> {
   void initState() {
     super.initState();
     String local = Get.locale.toString();
-
-    if (local == 'ar') {
-      isRtl = true;
-    }
-    {
-      isRtl = false;
-    }
-
-    print(isRtl);
+    isRtl = local == 'ar' ? true : false;
   }
 
   @override

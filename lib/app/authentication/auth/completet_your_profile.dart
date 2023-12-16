@@ -65,7 +65,9 @@ class CompletetYourProfile extends StatelessWidget {
   final String title = 'Complete Your Profile';
   final String subTitle =
       'Don\'t worry only you can see your personal data No one else will be able to see it';
-  final List<String> genderList = ['Unspecified', 'Male', 'Female'];
+
+
+
   void _createNewAccount() async {
     if (_.isLoading.value) return;
 
@@ -177,7 +179,7 @@ class CompletetYourProfile extends StatelessWidget {
                 FadeAnimationDx(
                   delay: 4,
                   child: CustomDropdownButton(
-                      title: 'Gender', listItem: genderList, controller: _gender),
+                      title: 'Gender', listItem: AppConstants.genderList, controller: _gender),
                 ),
                 SizedBox(height: space),
                 CustomDatePicker(

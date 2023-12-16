@@ -4,9 +4,10 @@ import 'package:application/required_files.dart';
 class CustomDatePicker extends StatefulWidget {
   final String? labelText;
   final TextEditingController controller;
+ final String? initialDate;
 
   const CustomDatePicker(
-      {super.key, required this.controller, this.labelText});
+      {super.key, required this.controller, this.labelText, this.initialDate});
 
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
@@ -14,18 +15,16 @@ class CustomDatePicker extends StatefulWidget {
 
 class _CustomDatePickerState extends State<CustomDatePicker> {
   String? dateTime;
-  DateTime? initialDate;
 
   void _showDatePicker() {
     showDatePicker(
       context: context,
-      initialDate: initialDate ?? DateTime(2000),
+      initialDate: DateTime(2000),
       firstDate: DateTime(1924),
       lastDate: DateTime.now(),
     ).then((value) {
       String newDate = value!.format('d/m/Y');
       widget.controller.text = newDate;
-      initialDate = value;
       setState(() {
         dateTime = newDate;
       });
@@ -34,13 +33,18 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
 
   void _remove() {
     widget.controller.clear();
-    initialDate = null;
-
     setState(() {
       dateTime = null;
     });
   }
 
+
+@override
+  void initState() {
+    super.initState();
+          dateTime = widget.initialDate;
+
+  }
   @override
   Widget build(BuildContext context) {
     return Column(

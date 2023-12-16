@@ -23,10 +23,6 @@ class ProfileController extends GetxController {
   User? currentUser;
 
   String? path;
-  final userName = TextEditingController();
-  final phoneNumber = TextEditingController();
-  final countryCode = TextEditingController();
-  final status = TextEditingController();
 
   void getCurrentUser() async {
     final user = await _localStorage.readData(keys: Keys.profile);
@@ -34,26 +30,25 @@ class ProfileController extends GetxController {
     if (currentUser == null) return;
     debugPrint(currentUser!.profile ?? '');
     update();
-    userName.text = currentUser!.name ?? '';
-    status.text = currentUser!.status ?? '';
-    phoneNumber.text = currentUser!.phoneNumber ?? '';
-    countryCode.text = currentUser!.countryCode ?? '';
   }
 
-  void updateProfile() async {
+  void updateProfile({required Map<String, dynamic> newUser}) async {
     isLoading(true);
+
     final token = await _localStorage.readData(keys: Keys.token);
     final header = {'Authorization': 'Bearer $token'};
 
     FormData data = FormData.fromMap({
-      'name': userName.text,
-      'status': status.text,
-      'phone_number': phoneNumber.text,
-      'country_code': countryCode.text
+      'name': newUser['name'],
+      'status': newUser['status'],
+      'country_code': newUser['countryCode'],
+      'phone_number': newUser['phoneNumber'],
+      'gender': newUser['gender'],
+      'date_birth': newUser['dateBirth'],
     });
 
-    if (path != null) {
-      MultipartFile photo = await MultipartFile.fromFile(path!);
+    if (newUser['path'] != null) {
+      MultipartFile photo = await MultipartFile.fromFile(newUser['path']);
       data.files.add(MapEntry('profile', photo));
     }
 
@@ -64,12 +59,9 @@ class ProfileController extends GetxController {
 
       final profile = response.data['data']['profile'];
       _localStorage.saveData(keys: Keys.profile, data: profile);
-      // final message = response.data['message'];
-      // CustomNotification.showSnackbar(message: message);
       final newProfile = response.data['data']['profile'];
       currentUser = User.fromJson(newProfile);
       update();
-      Get.back();
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -77,8 +69,7 @@ class ProfileController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-    } finally {
-      isLoading(false);
     }
+    isLoading(false);
   }
 }
