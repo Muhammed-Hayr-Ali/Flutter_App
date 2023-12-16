@@ -30,13 +30,8 @@ class AppThemes {
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,
           statusBarBrightness: Brightness.light,
-          systemNavigationBarColor: Colors.white,
+          //     systemNavigationBarColor: Colors.white,
           systemNavigationBarIconBrightness: Brightness.light),
-    ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Colors.transparent,
-      selectedItemColor: Colors.red,
-      elevation: 0,
     ),
     radioTheme: RadioThemeData(
       fillColor: MaterialStateProperty.all(Colors.green),

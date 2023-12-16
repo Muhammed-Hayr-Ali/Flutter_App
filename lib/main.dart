@@ -11,8 +11,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    
-     GetStorage().write('theme', null);
+    GetStorage().write('theme', null);
     return GetMaterialApp(
       title: AppConstants.appName,
       theme: AppThemes.lightTheme,

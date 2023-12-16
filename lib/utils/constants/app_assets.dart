@@ -26,4 +26,13 @@ class AppAssets {
 
   static const String editProfile = 'assets/icons/edit_profile.svg';
   static const String mentionCircle = 'assets/icons/mention-circle.svg';
+
+  static const String mapPoint = 'assets/icons/map-point.svg';
+  static const String heart = 'assets/icons/heart.svg';
+  static const String cartCheck = 'assets/icons/cart-check.svg';
+  static const String globus = 'assets/icons/globus.svg';
+  static const String pallete = 'assets/icons/pallete.svg';
+  static const String bell = 'assets/icons/bell.svg';
+  static const String question = 'assets/icons/question.svg';
+  static const String message = 'assets/icons/message.svg';
 }

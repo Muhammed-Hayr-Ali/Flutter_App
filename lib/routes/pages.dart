@@ -37,8 +37,8 @@ class Pages {
     GetPage(
         name: Routes.authentication,
         page: () => Authentication(),
-        // transitionDuration: duration,
-        // transition: transition,
+        transitionDuration: const Duration(milliseconds: 1500),
+        transition: Transition.fade,
         // curve: curve,
         binding: BindingsBuilder(() {
           Get.put(AuthControlleer());
@@ -91,7 +91,7 @@ class Pages {
     GetPage(
         name: Routes.home,
         page: () => const NavBar(),
-        transitionDuration: const Duration(milliseconds: 2500),
+        transitionDuration: const Duration(milliseconds: 1500),
         transition: Transition.fade,
         // curve: curve,
         binding: BindingsBuilder(() {

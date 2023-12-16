@@ -7,24 +7,86 @@ class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
 
   final List<Widget> menu = [
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('Account Settings'.tr,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+    ),
     CustomListTile(
-      title: 'Edit Profile',
-      icon: PhosphorIcons.note_pencil_bold,
+      title: 'Edit my profile',
+      subtitle: 'Edit profile information and personal photo',
+      leading: AppAssets.editProfile,
       onTap: () => Get.toNamed(Routes.editProfile),
     ),
-    const CustomListTile(
+    CustomListTile(
+      title: 'My addresses',
+      subtitle: 'Set shipment delivery addresses',
+      leading: AppAssets.mapPoint,
+      onTap: () => Get.toNamed(Routes.editProfile),
+    ),
+    CustomListTile(
+      title: 'Wish List',
+      subtitle: 'A list of favorite products that you would like to obtain',
+      leading: AppAssets.heart,
+      onTap: () => Get.toNamed(Routes.editProfile),
+    ),
+    CustomListTile(
+      title: 'My Orders',
+      subtitle: 'In-process orders and completed orders',
+      leading: AppAssets.cartCheck,
+      onTap: () => Get.toNamed(Routes.editProfile),
+    ),
+    const SizedBox(height: 14.0),
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('App Settings'.tr,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+    ),
+    CustomListTile(
       title: 'Language',
-      icon: PhosphorIcons.globe_hemisphere_west_bold,
+      subtitle: 'Choose the application language',
+      leading: AppAssets.globus,
+      onTap: () => Get.toNamed(Routes.editProfile),
     ),
-    const CustomListTile(
+    CustomListTile(
       title: 'Theme',
-      icon: PhosphorIcons.moon_bold,
+      subtitle: 'Choose the application Theme',
+      leading: AppAssets.pallete,
+      onTap: () => Get.toNamed(Routes.editProfile),
     ),
-    const CustomListTile(
-      title: 'Sign Out',
-      icon: PhosphorIcons.power_bold,
-      color: Colors.red,
+    CustomListTile(
+      title: 'Notifications',
+      subtitle: 'Choose the notifications you want to receive',
+      leading: AppAssets.bell,
+      onTap: () => Get.toNamed(Routes.editProfile),
     ),
+    CustomListTile(
+      title: 'FaQ',
+      subtitle: 'Get quick answers about the service provided',
+      leading: AppAssets.question,
+      onTap: () => Get.toNamed(Routes.editProfile),
+    ),
+    CustomListTile(
+      title: 'communication',
+      subtitle: 'Help us improve the service by sending feedback',
+      leading: AppAssets.message,
+      onTap: () => Get.toNamed(Routes.editProfile),
+    ),
+    const SizedBox(height: 38.0),
+    Center(
+      child: CustomElevatedButton(
+        width: Get.width * 0.7,
+        height: 48,
+        borderRadius: BorderRadius.circular(38.0),
+        backgroundColor: AppColors.primaryColor,
+        child: Text(
+          'Logout'.tr,
+          style: const TextStyle(color: Colors.white),
+        ),
+        onPressed: () => print(''),
+      ),
+    ),
+    const SizedBox(height: 80.0),
   ];
 
   // final AccountController _ = Get.put(AccountController());
@@ -47,158 +109,18 @@ class ProfileScreen extends StatelessWidget {
             style: const TextStyle(
               fontSize: 14,
               color: Colors.white,
-              fontWeight: FontWeight.w200,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),
       ),
-
-      // // appBar: AppBar(
-      //   backgroundColor: AppColors.primaryColor,
-      //   title: GetBuilder<ProfileController>(
-      //     init: ProfileController(),
-      //     builder: (_) => SizedBox(
-      //       child: _.currentUser != null
-      //           ? Text(
-      //               '@${_shortMail(_.currentUser!.email ?? '')}                ',
-      //               style: const TextStyle(
-      //                   fontSize: 14,
-      //                   color: Colors.white,
-      //                   fontWeight: FontWeight.w200),
-      //             )
-      //           : null,
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      //   leading: null,
-      // ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const UserProfile(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Account Settings'.tr,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w400)),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: AppColors.primaryColor,
-              ),
-              title: const Text(
-                'My Addresses',
-              ),
-              subtitle: const Text('set shopping delivery address',
-                  style: TextStyle(color: Colors.grey)),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: AppColors.primaryColor,
-              ),
-              title: const Text(
-                'My Addresses',
-              ),
-              subtitle: const Text('set shopping delivery address',
-                  style: TextStyle(color: Colors.grey)),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: AppColors.primaryColor,
-              ),
-              title: const Text(
-                'My Addresses',
-              ),
-              subtitle: const Text('set shopping delivery address',
-                  style: TextStyle(color: Colors.grey)),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: AppColors.primaryColor,
-              ),
-              title: const Text(
-                'My Addresses',
-              ),
-              subtitle: const Text('set shopping delivery address',
-                  style: TextStyle(color: Colors.grey)),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: AppColors.primaryColor,
-              ),
-              title: const Text(
-                'My Addresses',
-              ),
-              subtitle: const Text('set shopping delivery address',
-                  style: TextStyle(color: Colors.grey)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('App Settings'.tr,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w400)),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: AppColors.primaryColor,
-              ),
-              title: const Text(
-                'My Addresses',
-              ),
-              subtitle: const Text('set shopping delivery address',
-                  style: TextStyle(color: Colors.grey)),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: AppColors.primaryColor,
-              ),
-              title: const Text(
-                'My Addresses',
-              ),
-              subtitle: const Text('set shopping delivery address',
-                  style: TextStyle(color: Colors.grey)),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: AppColors.primaryColor,
-              ),
-              title: const Text(
-                'My Addresses',
-              ),
-              subtitle: const Text('set shopping delivery address',
-                  style: TextStyle(color: Colors.grey)),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: AppColors.primaryColor,
-              ),
-              title: const Text(
-                'My Addresses',
-              ),
-              subtitle: const Text('set shopping delivery address',
-                  style: TextStyle(color: Colors.grey)),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_on_rounded,
-                color: AppColors.primaryColor,
-              ),
-              title: const Text(
-                'My Addresses',
-              ),
-              subtitle: const Text('set shopping delivery address',
-                  style: TextStyle(color: Colors.grey)),
-            ),
+            Column(
+                crossAxisAlignment: CrossAxisAlignment.start, children: menu),
           ],
         ),
       ),
