@@ -92,7 +92,12 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
               }
             },
             child: Text(countryCode ?? widget.initialSelected ?? '',
-                style: const TextStyle(color: Colors.black)),
+                style: widget.contryCode.text == ''
+                    ? TextStyle(
+                        color: AppColors.grayColor, fontWeight: FontWeight.w500)
+                    : TextStyle(
+                        color: AppColors.blackColor,
+                        fontWeight: FontWeight.w500)),
           ),
           const SizedBox(width: 8)
         ],

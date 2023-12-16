@@ -53,7 +53,8 @@ class UserProfile extends StatelessWidget {
                                 borderWidth: 6,
                                 backgroundColor: Colors.white,
                                 size: Get.width * 0.28,
-                                imageUrl: '${_.currentUser!.profile}'),
+                                sourceImage: SourceImage.networkImage,
+                                imagePath: '${_.currentUser!.profile}'),
                           ],
                         )
                       : null,

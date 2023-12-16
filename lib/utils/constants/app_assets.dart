@@ -35,4 +35,7 @@ class AppAssets {
   static const String bell = 'assets/icons/bell.svg';
   static const String question = 'assets/icons/question.svg';
   static const String message = 'assets/icons/message.svg';
+
+  static const String pen = 'assets/icons/pen.svg';
+  static const String trash = 'assets/icons/trash.svg';
 }

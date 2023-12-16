@@ -1,4 +1,5 @@
 import 'package:application/packages.dart';
+import 'package:application/required_files.dart';
 
 class CustomDropdownButton extends StatefulWidget {
   final String? title;
@@ -61,6 +62,7 @@ class _CustomState extends State<CustomDropdownButton> {
                 value: value,
                 child: Text(
                   value,
+                  style: value == widget.listItem.first ?  TextStyle(color: AppColors.grayColor):const TextStyle(),
                 ),
               );
             }).toList(),

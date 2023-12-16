@@ -57,16 +57,13 @@ class CompletetYourProfile extends StatelessWidget {
   );
   final TextEditingController _imagePath = TextEditingController();
   final TextEditingController _userName = TextEditingController();
-  final TextEditingController _countryCode =
-      TextEditingController(text: '+963');
+  final TextEditingController _countryCode = TextEditingController();
   final TextEditingController _phoneNumber = TextEditingController();
   final TextEditingController _gender = TextEditingController();
   final TextEditingController _dateBirth = TextEditingController();
   final String title = 'Complete Your Profile';
   final String subTitle =
       'Don\'t worry only you can see your personal data No one else will be able to see it';
-
-
 
   void _createNewAccount() async {
     if (_.isLoading.value) return;
@@ -131,45 +128,9 @@ class CompletetYourProfile extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: space),
-                // FadeAnimationDx(
-                //   delay: 3,
-                //   child: CustomTextField(
-                //     labelText: 'Phone Number',
-                //     hintText: 'Enter Phone Number',
-                //     controller: _phoneNumber,
-                //     keyboardType: TextInputType.phone,
-                //     //     validator: (value) => Validator.mobile(value!),
-                //     prefix: Obx(
-                //       () => Row(
-                //         mainAxisSize: MainAxisSize.min,
-                //         children: [
-                //           GestureDetector(
-                //             onTap: () async {
-                //               // Show the country code picker when tapped.
-                //               final picked =
-                //                   await countryPickerWithParams.showPicker(
-                //                       context: context,
-                //                       initialSelectedLocale: 'syr');
-                //               // Null check
-                //               if (picked != null) {
-                //                 debugPrint(picked.code);
-                //                 _.countryCode.value = picked.dialCode;
-                //                 _countryCode.text = picked.dialCode;
-                //               }
-                //             },
-                //             child: Text(_.countryCode.value,
-                //                 style: const TextStyle(color: Colors.black)),
-                //           ),
-                //           const SizedBox(width: 8)
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
-
                 CustomPhoneField(
                     labelText: 'Phone Number',
-                    hintText: 'Enter Phone Number',
+                    hintText: 'Enter your phone number',
                     initialSelected: '+963',
                     phoneNumber: _phoneNumber,
                     contryCode: _countryCode),
@@ -179,7 +140,9 @@ class CompletetYourProfile extends StatelessWidget {
                 FadeAnimationDx(
                   delay: 4,
                   child: CustomDropdownButton(
-                      title: 'Gender', listItem: AppConstants.genderList, controller: _gender),
+                      title: 'Gender',
+                      listItem: AppConstants.genderList,
+                      controller: _gender),
                 ),
                 SizedBox(height: space),
                 CustomDatePicker(

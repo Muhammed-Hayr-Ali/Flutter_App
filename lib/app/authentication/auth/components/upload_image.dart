@@ -10,7 +10,7 @@ class UploadImage extends StatefulWidget {
 }
 
 class _UploadImageState extends State<UploadImage> {
-  ImageService imageService = ImageService();
+ final ImageService imageService = ImageService();
 
   String? path;
 
@@ -38,7 +38,7 @@ class _UploadImageState extends State<UploadImage> {
           onTap: uploadingImage,
           onLongPress: removeImage,
           child: CustomAvatar(
-            imageUrl: path ?? '',
+            imagePath: path,
             sourceImage: SourceImage.localImage,
           )),
     );

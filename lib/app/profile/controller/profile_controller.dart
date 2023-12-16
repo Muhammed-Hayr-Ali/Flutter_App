@@ -56,9 +56,12 @@ class ProfileController extends GetxController {
       final response = await _dio.post(Api.updateProfile,
           options: Options(headers: header), data: data);
       if (!response.data['status']) return;
+ if (!response.data['status']) return;
 
       final profile = response.data['data']['profile'];
       _localStorage.saveData(keys: Keys.profile, data: profile);
+      final message = response.data['message'];
+      CustomNotification.showSnackbar(message: message);
       final newProfile = response.data['data']['profile'];
       currentUser = User.fromJson(newProfile);
       update();

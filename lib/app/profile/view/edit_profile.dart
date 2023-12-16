@@ -17,10 +17,11 @@ class _EditProfileState extends State<EditProfile> {
   final _formKey = GlobalKey<FormState>();
   final data = Get.arguments as User;
   final _ = Get.find<ProfileController>();
+  final ImageService imageService = ImageService();
   final double space = 32;
 
   String? _profile;
-  String? path;
+  String? _path;
   TextEditingController _userName = TextEditingController();
   TextEditingController _phoneNumber = TextEditingController();
   TextEditingController _countryCode = TextEditingController();
@@ -42,7 +43,7 @@ class _EditProfileState extends State<EditProfile> {
     });
   }
 
-  upDateProfile() {
+  void upDateProfile() {
     if (_.isLoading.value) return;
     Map<String, dynamic> newUser = {
       'name': _userName.text,
@@ -51,9 +52,18 @@ class _EditProfileState extends State<EditProfile> {
       'phoneNumber': _phoneNumber.text,
       'gender': _gender.text,
       'dateBirth': _dateBirth.text,
-      'path': path,
+      'path': _path,
     };
     _.updateProfile(newUser: newUser);
+  }
+
+  void uploadImageProfile() async {
+    final imagePath = await imageService.getImage();
+    if (imagePath != null) {
+      setState(() {
+        _path = imagePath;
+      });
+    }
   }
 
   @override
@@ -72,10 +82,53 @@ class _EditProfileState extends State<EditProfile> {
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
                     children: [
-                      SizedBox(child: CustomAvatar(imageUrl: _profile ?? '')),
+                      SizedBox(
+                        child: Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            GestureDetector(
+                              onTap: uploadImageProfile,
+                              child: _path != null
+                                  ? CustomAvatar(
+                                      sourceImage: SourceImage.localImage,
+                                      imagePath: _path)
+                                  : CustomAvatar(
+                                      sourceImage: SourceImage.networkImage,
+                                      imagePath: _profile),
+                            ),
+                            Container(
+                              height: 34,
+                              width: 34,
+                              padding: const EdgeInsets.all(2.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(34),
+                                  color: Colors.white),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(34),
+                                    color: AppColors.primaryColor),
+                              child: _path!=null ?
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    _path = null;
+                                  });
+                                },
+                                child: SvgPicture.asset(AppAssets.trash),
+                              )
+                              :       GestureDetector(
+                                onTap: uploadImageProfile,
+                                child: SvgPicture.asset(AppAssets.pen),
+                              )
+                              ,),
+                            )
+                          ],
+                        ),
+                      ),
                       const SizedBox(height: 8),
                       CustomTextField(
-                        labelText: 'User Name',
+                        labelText: 'Name',
+                        hintText: 'Ex. John Doe',
                         controller: _userName,
                         keyboardType: TextInputType.name,
                         validator: (value) => Validator.userName(value!),
@@ -83,13 +136,14 @@ class _EditProfileState extends State<EditProfile> {
                       SizedBox(height: space),
                       CustomTextField(
                         labelText: 'Status',
+                        hintText: 'Hello World!',
                         controller: _status,
                         keyboardType: TextInputType.text,
                       ),
                       SizedBox(height: space),
                       CustomPhoneField(
-                          hintText: 'Edit your Number',
                           labelText: 'Phone Number',
+                          hintText: 'Enter your phone number',
                           initialSelected: _countryCode.text,
                           phoneNumber: _phoneNumber,
                           contryCode: _countryCode),

@@ -37,7 +37,7 @@ class User {
     phoneNumber = json['phone_number'];
     gender = json['gender'];
     dateBirth = json['date_birth'];
-    profile = json['profile'];
+    profile = json['profile']??'';
     status = json['status'];
     permissions = json['permissions'];
     expirationDate = json['expiration_date'];
@@ -54,7 +54,7 @@ class User {
     data['phone_number'] = phoneNumber;
     data['gender'] = gender;
     data['date_birth'] = dateBirth;
-    data['profile'] = profile;
+    data['profile'] = profile??'';
     data['status'] = status;
     data['permissions'] = permissions;
     data['expiration_date'] = expirationDate;

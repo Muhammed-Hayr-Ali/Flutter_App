@@ -87,7 +87,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             validator: widget.validator,
             onChanged: widget.onChanged,
             cursorHeight: 26,
-            style: const TextStyle(fontWeight: FontWeight.w500),
+            style:  TextStyle(color: AppColors.blackColor, fontWeight: FontWeight.w500),
             decoration: InputDecoration(
               prefix: widget.prefix,
               hintText: widget.hintText,

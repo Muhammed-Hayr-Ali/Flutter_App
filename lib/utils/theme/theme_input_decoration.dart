@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class InputTheme {
   static InputDecorationTheme lightInputDecorationTheme =
-      const InputDecorationTheme(
-    hintStyle: TextStyle(color: Colors.grey),
+       InputDecorationTheme(
+    hintStyle: TextStyle(color: AppColors.grayColor),
     errorStyle: TextStyle(fontSize: 10),
     contentPadding: EdgeInsets.all(0),
     labelStyle: TextStyle(fontSize: 14, color: Colors.black87),
