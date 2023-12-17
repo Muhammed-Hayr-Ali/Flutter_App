@@ -86,15 +86,18 @@ class _EditProfileState extends State<EditProfile> {
                         child: Stack(
                           alignment: Alignment.bottomRight,
                           children: [
-                            GestureDetector(
-                              onTap: uploadImageProfile,
-                              child: _path != null
-                                  ? CustomAvatar(
-                                      sourceImage: SourceImage.localImage,
-                                      imagePath: _path)
-                                  : CustomAvatar(
-                                      sourceImage: SourceImage.networkImage,
-                                      imagePath: _profile),
+                            Hero(
+                              tag: 'user_avatar',
+                              child: GestureDetector(
+                                onTap: uploadImageProfile,
+                                child: _path != null
+                                    ? CustomAvatar(
+                                        sourceImage: SourceImage.localImage,
+                                        imagePath: _path)
+                                    : CustomAvatar(
+                                        sourceImage: SourceImage.networkImage,
+                                        imagePath: _profile),
+                              ),
                             ),
                             Container(
                               height: 34,
@@ -107,20 +110,28 @@ class _EditProfileState extends State<EditProfile> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(34),
                                     color: AppColors.primaryColor),
-                              child: _path!=null ?
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    _path = null;
-                                  });
-                                },
-                                child: SvgPicture.asset(AppAssets.trash),
-                              )
-                              :       GestureDetector(
-                                onTap: uploadImageProfile,
-                                child: SvgPicture.asset(AppAssets.pen),
-                              )
-                              ,),
+                                child: _path != null
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _path = null;
+                                          });
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child:
+                                              SvgPicture.asset(AppAssets.trash),
+                                        ),
+                                      )
+                                    : Padding(
+                                        padding: const EdgeInsets.all(6.0),
+                                        child: GestureDetector(
+                                          onTap: uploadImageProfile,
+                                          child:
+                                              SvgPicture.asset(AppAssets.pen),
+                                        ),
+                                      ),
+                              ),
                             )
                           ],
                         ),

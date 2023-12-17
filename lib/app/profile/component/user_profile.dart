@@ -22,14 +22,14 @@ class UserProfile extends StatelessWidget {
                   stops: const [0.8, 1.0],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter)),
-          height: Get.height * 0.14,
+          height: Get.height * 0.18,
           child: Stack(
             alignment: Alignment.center,
             children: [
               Column(
                 children: [
                   SizedBox(
-                    height: Get.height * 0.14 / 2,
+                    height: Get.height * 0.18 / 2,
                   ),
                   Expanded(
                     child: Container(
@@ -43,18 +43,20 @@ class UserProfile extends StatelessWidget {
                 ],
               ),
               GetBuilder<ProfileController>(
-                
                 builder: (_) => SizedBox(
                   child: _.currentUser != null
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            CustomAvatar(
-                                borderWidth: 6,
-                                backgroundColor: Colors.white,
-                                size: Get.width * 0.28,
-                                sourceImage: SourceImage.networkImage,
-                                imagePath: '${_.currentUser!.profile}'),
+                            Hero(
+                              tag: 'user_avatar',
+                              child: CustomAvatar(
+                                  borderWidth: 2,
+                                  backgroundColor: Colors.white,
+                                  size: Get.width * 0.32,
+                                  sourceImage: SourceImage.networkImage,
+                                  imagePath: '${_.currentUser!.profile}'),
+                            ),
                           ],
                         )
                       : null,
@@ -97,6 +99,3 @@ class UserProfile extends StatelessWidget {
     );
   }
 }
-    
-    
-    

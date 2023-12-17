@@ -10,97 +10,124 @@ class CustomPhoneField extends StatefulWidget {
   final TextEditingController contryCode;
   final String? Function(String?)? validator;
 
-  const CustomPhoneField(
-      {super.key,
-      required this.phoneNumber,
-      required this.contryCode,
-      this.validator,
-      this.labelText,
-      this.hintText,
-      this.initialSelected});
+  const CustomPhoneField({
+    super.key,
+    required this.phoneNumber,
+    required this.contryCode,
+    this.validator,
+    this.labelText,
+    this.hintText,
+    this.initialSelected,
+  });
 
   @override
   State<CustomPhoneField> createState() => _CustomPhoneFieldState();
 }
 
-const countryPickerWithParams = FlCountryCodePicker(
-  localize: true,
-  showDialCode: true,
-  showSearchBar: true,
-  favorites: [
-    "SY",
-    "BH",
-    "DZ",
-    "SD",
-    "IQ",
-    "KW",
-    "MA",
-    "JO",
-    "AE",
-    "SA",
-    "SO",
-    "SS",
-    "IQ",
-    "KW",
-    "BH",
-    "JO",
-    "DZ",
-    "AE",
-    "MA",
-    "MR",
-    "TN",
-    "DJ",
-    "SO",
-    "PS",
-    "LB",
-    "LY",
-    "EG",
-    "YE",
-    "OM",
-    "QA"
-  ],
-);
-
 class _CustomPhoneFieldState extends State<CustomPhoneField> {
+  final countryPickerWithParams = FlCountryCodePicker(
+      showDialCode: true,
+      showSearchBar: true,
+      favorites: [
+        "SY",
+        "BH",
+        "DZ",
+        "SD",
+        "IQ",
+        "KW",
+        "MA",
+        "JO",
+        "AE",
+        "SA",
+        "SO",
+        "SS",
+        "IQ",
+        "KW",
+        "BH",
+        "JO",
+        "DZ",
+        "AE",
+        "MA",
+        "MR",
+        "TN",
+        "DJ",
+        "SO",
+        "PS",
+        "LB",
+        "LY",
+        "EG",
+        "YE",
+        "OM",
+        "QA"
+      ],
+     searchBarTextStyle: TextStyle(
+                        color: AppColors.blackColor,
+                        fontWeight: FontWeight.w500),
+      searchBarDecoration: InputDecoration(
+        hintText: 'Syria',
+        hintStyle: const TextStyle(color: Colors.grey),
+        filled: true,
+        fillColor: Colors.grey.withOpacity(0.08),
+        contentPadding: const EdgeInsets.all(8.0),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            borderSide: BorderSide.none),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ));
+
   String? countryCode;
+  Future<void> _showContryCodePicker() async {
+    final picked = await countryPickerWithParams.showPicker(
+      context: context,
+    );
+    if (picked != null) {
+      widget.contryCode.text = picked.dialCode;
+      setState(() {
+        countryCode = picked.dialCode;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
+      isLtrOnly: true,
       labelText: widget.labelText,
       hintText: widget.hintText,
       controller: widget.phoneNumber,
       keyboardType: TextInputType.phone,
       validator: widget.validator,
-      prefix: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          GestureDetector(
-            onTap: () async {
-              // Show the country code picker when tapped.
-              final picked = await countryPickerWithParams.showPicker(
-                context: context,
-                // initialSelectedLocale: widget.initialSelectedLocale,
-              );
-              // Null check
-              if (picked != null) {
-                debugPrint(picked.code);
-                widget.contryCode.text = picked.dialCode;
-                setState(() {
-                  countryCode = picked.dialCode;
-                });
-              }
-            },
-            child: Text(countryCode ?? widget.initialSelected ?? '',
-                style: widget.contryCode.text == ''
-                    ? TextStyle(
-                        color: AppColors.grayColor, fontWeight: FontWeight.w500)
-                    : TextStyle(
-                        color: AppColors.blackColor,
-                        fontWeight: FontWeight.w500)),
-          ),
-          const SizedBox(width: 8)
-        ],
+      prefix: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              onTap: _showContryCodePicker,
+              child: Text(countryCode ?? widget.initialSelected ?? '',
+                  textDirection: TextDirection.ltr,
+                  style: widget.contryCode.text == ''
+                      ? TextStyle(
+                          color: AppColors.grayColor,
+                          fontWeight: FontWeight.w500)
+                      : TextStyle(
+                          color: AppColors.blackColor,
+                          fontWeight: FontWeight.w500)),
+            ),
+            const SizedBox(width: 8)
+          ],
+        ),
       ),
     );
   }

@@ -2,6 +2,8 @@ import 'package:application/required_files.dart';
 import 'package:flutter/material.dart';
 
 class InputTheme {
+    InputTheme._();
+
   static InputDecorationTheme lightInputDecorationTheme =
        InputDecorationTheme(
     hintStyle: TextStyle(color: AppColors.grayColor),

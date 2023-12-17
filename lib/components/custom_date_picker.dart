@@ -4,7 +4,7 @@ import 'package:application/required_files.dart';
 class CustomDatePicker extends StatefulWidget {
   final String? labelText;
   final TextEditingController controller;
- final String? initialDate;
+  final String? initialDate;
 
   const CustomDatePicker(
       {super.key, required this.controller, this.labelText, this.initialDate});
@@ -16,19 +16,34 @@ class CustomDatePicker extends StatefulWidget {
 class _CustomDatePickerState extends State<CustomDatePicker> {
   String? dateTime;
 
-  void _showDatePicker() {
-    showDatePicker(
+  Future<void> _selectDate() async {
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime(2000),
       firstDate: DateTime(1924),
       lastDate: DateTime.now(),
-    ).then((value) {
-      String newDate = value!.format('d/m/Y');
+      initialDatePickerMode: DatePickerMode.day,
+      locale: const Locale('en', 'US'),
+      textDirection: TextDirection.ltr,
+      initialEntryMode: DatePickerEntryMode.calendar,
+      helpText: 'Select a date',
+      cancelText: 'Cancel',
+      confirmText: 'Ok',
+      fieldHintText: 'Month/Day/Year',
+      fieldLabelText: 'Date',
+      errorFormatText: 'Invalid date format',
+      errorInvalidText: 'Invalid date',
+      useRootNavigator: true,
+    );
+
+    if (picked != null) {
+      String newDate = picked.format('d/m/Y');
       widget.controller.text = newDate;
+
       setState(() {
         dateTime = newDate;
       });
-    });
+    }
   }
 
   void _remove() {
@@ -38,13 +53,12 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     });
   }
 
-
-@override
+  @override
   void initState() {
     super.initState();
-          dateTime = widget.initialDate;
-
+    dateTime = widget.initialDate;
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,7 +76,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               : null,
         ),
         GestureDetector(
-          onTap: _showDatePicker,
+          onTap:  _selectDate,
           child: Container(
             height: 48,
             width: double.infinity,
