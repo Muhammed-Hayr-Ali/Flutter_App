@@ -173,10 +173,6 @@ class _EditProfileState extends State<EditProfile> {
                       const SizedBox(height: 38.0),
                       Center(
                         child: CustomElevatedButton(
-                          width: Get.width * 0.7,
-                          height: 48,
-                          borderRadius: BorderRadius.circular(38.0),
-                          backgroundColor: AppColors.primaryColor,
                           onPressed: upDateProfile,
                           child: Obx(
                             () => _.isLoading.value

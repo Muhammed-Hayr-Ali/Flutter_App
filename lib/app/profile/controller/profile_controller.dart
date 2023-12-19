@@ -28,7 +28,6 @@ class ProfileController extends GetxController {
     final user = await _localStorage.readData(keys: Keys.profile);
     currentUser = User.fromJson(user);
     if (currentUser == null) return;
-    debugPrint(currentUser!.profile ?? '');
     update();
   }
 
@@ -56,7 +55,6 @@ class ProfileController extends GetxController {
       final response = await _dio.post(Api.updateProfile,
           options: Options(headers: header), data: data);
       if (!response.data['status']) return;
- if (!response.data['status']) return;
 
       final profile = response.data['data']['profile'];
       _localStorage.saveData(keys: Keys.profile, data: profile);

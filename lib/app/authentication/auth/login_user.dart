@@ -1,7 +1,7 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
-import 'components/title_page.dart';
+import '../../../components/title_page.dart';
 import 'controller/auth_controller.dart';
 
 class Login extends StatelessWidget {
@@ -93,9 +93,6 @@ class Login extends StatelessWidget {
                 FadeAnimationDx(
                   delay: 5,
                   child: CustomElevatedButton(
-                    height: 54,
-                    width: double.infinity,
-                    borderRadius: BorderRadius.circular(28),
                     onPressed: _signIn,
                     child: Obx(() => _.isLoading.value
                         ? const CustomProgress(

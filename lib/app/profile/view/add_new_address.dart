@@ -1,16 +1,17 @@
+import 'package:application/app/profile/controller/addresses_controller.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
-import '../../../components/title_page.dart';
-import 'controller/auth_controller.dart';
+import 'package:flutter/material.dart';
 
-class CreatNewAccount extends StatelessWidget {
-  CreatNewAccount({super.key});
+import '../../../components/title_page.dart';
+
+class AddNewAddress extends StatelessWidget {
+   AddNewAddress({super.key});
 
   final double space = 32;
+  final _ = Get.find<AddressesController>();
 
-  final _ = Get.find<AuthControlleer>();
   final _formKey = GlobalKey<FormState>();
-
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
@@ -18,20 +19,20 @@ class CreatNewAccount extends StatelessWidget {
   final String subTitle =
       'Fill in your information below, and proceed to the home page';
 
-  void _createNewAccount() async {
-    if (_.isLoading.value) return;
+  void _createNewAddress() async {
+    // if (_.isLoading.value) return;
 
-    if (_formKey.currentState!.validate()) {
-      _.checkMailAvailabilityError.value = '';
+    // if (_formKey.currentState!.validate()) {
+    //   _.checkMailAvailabilityError.value = '';
 
-      Map data = {
-        'email': _email.text,
-        'password': _password.text,
-      };
-      _.checkMailAvailability(user: data);
-      ();
+    //   Map data = {
+    //     'email': _email.text,
+    //     'password': _password.text,
+    //   };
+    //   _.checkMailAvailability(user: data);
+    //   ();
     }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +56,8 @@ class CreatNewAccount extends StatelessWidget {
                   child: CustomTextField(
                     labelText: 'Email',
                     hintText: 'example@gmail.com',
-                    onChanged: (value) =>
-                        _.checkMailAvailabilityError.value = '',
+                    // onChanged: (value) =>
+                    //     _.checkMailAvailabilityError.value = '',
                     controller: _email,
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) => Validator.email(value!),
@@ -104,7 +105,7 @@ class CreatNewAccount extends StatelessWidget {
                 SizedBox(height: space),
                 Obx(
                   () => Text(
-                    _.checkMailAvailabilityError.value.tr,
+                    _.addAdressError.value.tr,
                     style: const TextStyle(fontSize: 12, color: Colors.red),
                   ),
                 ),
@@ -112,11 +113,10 @@ class CreatNewAccount extends StatelessWidget {
                 FadeAnimationDx(
                   delay: 9,
                   child: CustomElevatedButton(
-                    onPressed: _createNewAccount,
                     child: Obx(() => _.isLoading.value
                         ? const CustomProgress(color: Colors.white)
                         : Text(
-                            'Create New Account'.tr,
+                            'Create New Address'.tr,
                             style: const TextStyle(
                                 fontSize: 16, color: Colors.white),
                           )),

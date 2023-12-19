@@ -1,14 +1,9 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'package:dio/dio.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class AuthControlleer extends GetxController {
-  RxBool isLoading = false.obs;
-  RxString countryCode = '+963'.obs;
-  RxString checkMailAvailabilityError = ''.obs;
-  RxString registerError = ''.obs;
-  RxString genderValue = 'Unspecified'.obs;
-
   final LocalStorage _localStorage = LocalStorage();
   final Dio _dio = Dio(
     BaseOptions(
@@ -16,6 +11,12 @@ class AuthControlleer extends GetxController {
         connectTimeout: Api.connectTimeout,
         headers: Api.defaultHeaders),
   );
+  RxBool isLoading = false.obs;
+  RxString countryCode = '+963'.obs;
+  RxString checkMailAvailabilityError = ''.obs;
+  RxString registerError = ''.obs;
+  RxString genderValue = 'Unspecified'.obs;
+
 
   void checkMailAvailability({required Map user}) async {
     isLoading(true);
@@ -36,9 +37,8 @@ class AuthControlleer extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-    } finally {
-      isLoading(false);
     }
+    isLoading(false);
   }
 
   void register(Map<dynamic, dynamic> user) async {
@@ -65,9 +65,12 @@ class AuthControlleer extends GetxController {
 
       final profile = response.data['data']['profile'];
       final token = response.data['data']['profile']['token'];
+      final uId = response.data['data']['profile']['id'];
 
       _localStorage.saveData(keys: Keys.profile, data: profile);
       _localStorage.saveData(keys: Keys.token, data: token);
+
+      OneSignal.User.addTagWithKey('id', uId);
 
       Get.offAllNamed(Routes.home);
       CustomNotification.showSnackbar(
@@ -79,9 +82,8 @@ class AuthControlleer extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-    } finally {
-      isLoading(false);
     }
+    isLoading(false);
   }
 
   void login(Map<dynamic, dynamic> user) async {
@@ -98,10 +100,15 @@ class AuthControlleer extends GetxController {
 
       final profile = response.data['data']['profile'];
       final token = response.data['data']['profile']['token'];
+      final uId = response.data['data']['profile']['id'];
 
       _localStorage.saveData(keys: Keys.profile, data: profile);
       _localStorage.saveData(keys: Keys.token, data: token);
+
+      OneSignal.User.addTagWithKey('id', uId);
+
       Get.offAllNamed(Routes.home);
+
       CustomNotification.showSnackbar(
           message:
               '${'Welcome Back,'.tr} ${response.data['data']['profile']['name']}');
@@ -112,9 +119,8 @@ class AuthControlleer extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-    } finally {
-      isLoading(false);
     }
+    isLoading(false);
   }
 
   void continueWithGoogle() async {
@@ -138,12 +144,17 @@ class AuthControlleer extends GetxController {
       final response = await _dio.post(Api.continueWithGoogle, data: data);
 
       if (!response.data['status']) return;
+      final isNewUser = response.data['message'];
       final profile = response.data['data']['profile'];
       final token = response.data['data']['profile']['token'];
-      final isNewUser = response.data['message'];
+      final uId = response.data['data']['profile']['id'];
 
       _localStorage.saveData(keys: Keys.profile, data: profile);
       _localStorage.saveData(keys: Keys.token, data: token);
+
+      OneSignal.User.addTagWithKey('id', uId);
+
+      Get.offAllNamed(Routes.home);
       CustomNotification.showSnackbar(
           message: isNewUser
               ? '${'Welcome to the world of '.tr} ${AppConstants.appName}'
@@ -157,9 +168,8 @@ class AuthControlleer extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-    } finally {
-      isLoading(false);
     }
+    isLoading(false);
   }
 
   void logout() async {
@@ -171,6 +181,9 @@ class AuthControlleer extends GetxController {
       if (!response.data['status']) return;
 
       _localStorage.remove(keys: Keys.profile);
+
+      OneSignal.logout();
+
       Get.offAndToNamed(Routes.authentication);
     } on DioException catch (exception) {
       if (exception.response != null) {

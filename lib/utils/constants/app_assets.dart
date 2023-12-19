@@ -38,4 +38,8 @@ class AppAssets {
 
   static const String pen = 'assets/icons/pen.svg';
   static const String trash = 'assets/icons/trash.svg';
+
+
+
+  static const String emptyList = 'assets/images/empty_list.svg';
 }

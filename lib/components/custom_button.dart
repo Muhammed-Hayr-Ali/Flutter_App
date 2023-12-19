@@ -7,13 +7,13 @@ class CustomElevatedButton extends StatelessWidget {
       this.onPressed,
       this.child,
       this.width,
-      this.height = 40,
+      this.height = 58,
       this.backgroundColor,
       this.borderColor = Colors.black,
       this.borderWidth = 0,
       this.border = false,
       this.elevation = 0.0,
-      this.borderRadius = BorderRadius.zero,
+      this.borderRadius = 58,
       this.padding = 8,
       this.overlayColor});
 
@@ -21,7 +21,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Widget? child;
   final double? width;
   final double height;
-  final BorderRadiusGeometry borderRadius;
+  final double? borderRadius;
   final Color? backgroundColor;
   final Color? overlayColor;
   final Color borderColor;
@@ -33,7 +33,7 @@ class CustomElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width,
+      width: width ?? Get.width * 0.85,
       height: height,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -66,7 +66,7 @@ class CustomElevatedButton extends StatelessWidget {
                   side: border
                       ? BorderSide(color: borderColor, width: borderWidth)
                       : BorderSide.none,
-                  borderRadius: borderRadius); // <-- Radius
+                  borderRadius: BorderRadius.circular(height)); // <-- Radius
             },
           ),
         ),

@@ -48,10 +48,6 @@ class Authentication extends StatelessWidget {
             FadeAnimationDy(
               delay: 500,
               child: CustomElevatedButton(
-                height: 54,
-                width: Get.width * 0.8,
-                borderRadius: BorderRadius.circular(8),
-                backgroundColor: AppColors.mainColor,
                 overlayColor: Colors.black12,
                 onPressed: _continueWithGoogle,
                 child: Obx(

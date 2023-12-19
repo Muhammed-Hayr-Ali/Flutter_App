@@ -11,8 +11,6 @@ Future<bool> confirmDialog({required String title, Widget? content}) async {
         children: [
           content ?? const SizedBox(),
           CustomElevatedButton(
-            width: double.infinity,
-            borderRadius: BorderRadius.circular(40.0),
             child: Text(
               'Ok'.tr,
               style: const TextStyle(color: Colors.black87),
@@ -21,8 +19,6 @@ Future<bool> confirmDialog({required String title, Widget? content}) async {
           ),
           const SizedBox(height: 8),
           CustomElevatedButton(
-            width: double.infinity,
-            borderRadius: BorderRadius.circular(40.0),
             backgroundColor: Colors.grey.shade100,
             child: Text(
               'Cancel'.tr,
@@ -79,8 +75,6 @@ Future<String> inputDialog(
                 ),
                 const SizedBox(height: 8),
                 CustomElevatedButton(
-                    width: double.infinity,
-                    borderRadius: BorderRadius.circular(40.0),
                     child: Text(
                       'Ok'.tr,
                       style: const TextStyle(color: Colors.black87),
@@ -102,9 +96,6 @@ Future<String> inputDialog(
                     }),
                 const SizedBox(height: 8),
                 CustomElevatedButton(
-                  width: double.infinity,
-                  borderRadius: BorderRadius.circular(40.0),
-                  backgroundColor: Colors.grey.shade100,
                   child: Text(
                     'Cancel'.tr,
                     style: const TextStyle(color: Colors.black87),

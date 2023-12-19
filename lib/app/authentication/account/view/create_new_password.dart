@@ -1,6 +1,6 @@
 import 'package:application/packages.dart';
 
-import '../../auth/components/title_page.dart';
+import '../../../../components/title_page.dart';
 import '../controller/account_controller.dart';
 import 'package:application/required_files.dart';
 
@@ -97,9 +97,6 @@ class CreateNewPassword extends StatelessWidget {
                 FadeAnimationDx(
                   delay: 3,
                   child: CustomElevatedButton(
-                    height: 54,
-                    width: double.infinity,
-                    borderRadius: BorderRadius.circular(28),
                     onPressed: _recovery,
                     child: Obx(
                       () => _.isLoading.value

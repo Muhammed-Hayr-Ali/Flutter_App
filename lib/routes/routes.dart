@@ -1,8 +1,6 @@
 abstract class Routes {
   static const splashScreen = '/splashScreen';
 
-
-  
   static const authentication = '/Authentication';
 
   static const creatNewAccount = '/creatNewAccount';
@@ -13,5 +11,8 @@ abstract class Routes {
   static const forgotPassword = '/ForgotPassword';
   static const verifyVerificationCode = '/verifyVerificationCode';
   static const createNewPassword = '/createNewPassword';
+
   static const editProfile = '/editProfile';
+  static const adressesScreen = '/AdressesScreen';
+  static const addNewAddress = '/addNewAddress';
 }

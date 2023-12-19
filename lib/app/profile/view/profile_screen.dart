@@ -53,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
               title: 'My addresses',
               subtitle: 'Set shipment delivery addresses',
               leading: AppAssets.mapPoint,
-              onTap: () => Get.toNamed(Routes.editProfile),
+              onTap: () => Get.toNamed(Routes.adressesScreen),
             ),
             CustomListTile(
               title: 'Wish List',
@@ -108,10 +108,6 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 38.0),
             Center(
               child: CustomElevatedButton(
-                width: Get.width * 0.7,
-                height: 48,
-                borderRadius: BorderRadius.circular(38.0),
-                backgroundColor: AppColors.primaryColor,
                 child: Text(
                   'Logout'.tr,
                   style: const TextStyle(color: Colors.white),

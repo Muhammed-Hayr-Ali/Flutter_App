@@ -3,7 +3,7 @@ import 'package:application/required_files.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
-import '../../auth/components/title_page.dart';
+import '../../../../components/title_page.dart';
 import '../controller/account_controller.dart';
 
 class VerifyVerificationCode extends StatelessWidget {
@@ -85,9 +85,6 @@ class VerifyVerificationCode extends StatelessWidget {
                 FadeAnimationDx(
                   delay: 3,
                   child: CustomElevatedButton(
-                    height: 54,
-                    width: double.infinity,
-                    borderRadius: BorderRadius.circular(28),
                     onPressed: _verifyVerificationCode,
                     child: Obx(
                       () => _.isLoading.value

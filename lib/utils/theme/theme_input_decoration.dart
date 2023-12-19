@@ -2,17 +2,16 @@ import 'package:application/required_files.dart';
 import 'package:flutter/material.dart';
 
 class InputTheme {
-    InputTheme._();
+  InputTheme._();
 
-  static InputDecorationTheme lightInputDecorationTheme =
-       InputDecorationTheme(
+  static InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
     hintStyle: TextStyle(color: AppColors.grayColor),
-    errorStyle: TextStyle(fontSize: 10),
-    contentPadding: EdgeInsets.all(0),
-    labelStyle: TextStyle(fontSize: 14, color: Colors.black87),
+    errorStyle: const TextStyle(fontSize: 10),
+    contentPadding: const EdgeInsets.all(0),
+    labelStyle: const TextStyle(fontSize: 14, color: Colors.black87),
     enabledBorder: InputBorder.none,
     focusedBorder: InputBorder.none,
-    border:InputBorder.none,
+    border: InputBorder.none,
     errorBorder: InputBorder.none,
   );
   static InputDecorationTheme darkInputDecorationTheme = InputDecorationTheme(

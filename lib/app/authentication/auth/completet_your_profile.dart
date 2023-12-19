@@ -4,7 +4,7 @@ import 'package:application/components/custom_phone_field.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
-import 'components/title_page.dart';
+import '../../../components/title_page.dart';
 import 'components/upload_image.dart';
 import 'controller/auth_controller.dart';
 
@@ -160,9 +160,6 @@ class CompletetYourProfile extends StatelessWidget {
                 FadeAnimationDx(
                   delay: 9,
                   child: CustomElevatedButton(
-                    height: 54,
-                    width: double.infinity,
-                    borderRadius: BorderRadius.circular(28),
                     onPressed: _createNewAccount,
                     child: Obx(() => _.isLoading.value
                         ? const CustomProgress(color: Colors.white)

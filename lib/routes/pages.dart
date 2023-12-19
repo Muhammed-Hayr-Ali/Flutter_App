@@ -1,6 +1,7 @@
 import 'package:application/app/authentication/account/controller/account_controller.dart';
 import 'package:application/app/authentication/auth/completet_your_profile.dart';
 import 'package:application/app/profile/controller/profile_controller.dart';
+import 'package:application/app/profile/view/add_new_address.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
@@ -15,6 +16,7 @@ import '../app/bottomNavigationBar/view/bottom_navigation_bar.dart';
 
 import '../app/profile/view/edit_profile.dart';
 import '../app/splash_screen/controller/splashscreen_controller.dart';
+import '../app/profile/view/adresses.dart';
 
 /// Pages
 class Pages {
@@ -100,6 +102,20 @@ class Pages {
     GetPage(
       name: Routes.editProfile,
       page: () => const EditProfile(),
+      transitionDuration: duration,
+      transition: transition,
+      curve: curve,
+    ),
+    GetPage(
+      name: Routes.adressesScreen,
+      page: () => const AdressesScreen(),
+      transitionDuration: duration,
+      transition: transition,
+      curve: curve,
+    ),
+    GetPage(
+      name: Routes.addNewAddress,
+      page: () =>  AddNewAddress(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,

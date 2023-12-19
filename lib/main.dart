@@ -1,8 +1,11 @@
+import 'package:application/bindings.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await GetStorage.init();
   runApp(const MyApp());
 }
@@ -12,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: AppConstants.appName,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
@@ -19,7 +23,7 @@ class MyApp extends StatelessWidget {
       translations: Translation(),
       locale: Locale(GetStorage().read('language') ?? 'en'),
       fallbackLocale: const Locale('en'),
-      debugShowCheckedModeBanner: false,
+      initialBinding: AppBindings(),
       initialRoute: Pages.initial,
       getPages: Pages.routes,
     );
