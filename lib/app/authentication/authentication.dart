@@ -46,8 +46,9 @@ class Authentication extends StatelessWidget {
               ),
             ),
             FadeAnimationDy(
-              delay: 500,
+              delay: 2,
               child: CustomElevatedButton(
+                backgroundColor: AppColors.grayColor.withOpacity(0.2),
                 overlayColor: Colors.black12,
                 onPressed: _continueWithGoogle,
                 child: Obx(
@@ -74,7 +75,7 @@ class Authentication extends StatelessWidget {
               style: const TextStyle(fontSize: 12),
             ),
             FadeAnimationDy(
-              delay: 1000,
+              delay: 3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -112,7 +113,7 @@ class Authentication extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             FadeAnimationDy(
-              delay: 1500,
+              delay: 4,
               child: TextButton(
                 onPressed: _dataPolicy,
                 style: ButtonStyle(

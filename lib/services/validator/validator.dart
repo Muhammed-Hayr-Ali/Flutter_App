@@ -66,4 +66,10 @@ class Validator {
     }
     return;
   }
+  static isEmpty(String value) {
+    if (value.isEmpty) {
+      return 'Required field'.tr;
+    }
+    return;
+  }
 }

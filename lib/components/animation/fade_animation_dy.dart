@@ -13,15 +13,15 @@ class FadeAnimationDy extends StatelessWidget {
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<double>(
       tween: Tween<double>(begin: 0.0, end: 1.0),
-      duration: Duration(milliseconds: delay),
+      duration: Duration(milliseconds: delay * 500),
       curve: Curves.easeOut,
       builder: (BuildContext context, double value, Widget? child) {
         return Opacity(
           opacity: value,
           child: Transform.translate(
             offset: getLocal() == true
-                ? Offset(0, -30 * (1 - value))
-                : Offset(0, 30 * (1 - value)),
+                ? Offset(0, -50 * (1 - value))
+                : Offset(0, 50 * (1 - value)),
             child: child,
           ),
         );

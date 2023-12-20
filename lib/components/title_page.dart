@@ -11,24 +11,21 @@ class PageTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FadeAnimationDx(
-          delay: 1,
-          child: Text(
-            '$title'.tr,
-            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w200),
-          ),
+        Text(
+          '$title'.tr,
+          style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w200),
         ),
         SizedBox(height: heightSpace),
-        FadeAnimationDx(
-          delay: 1,
-          child: Text(
-            '$subTitle'.tr,
-            style: TextStyle(
-                color: AppColors.grayColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w300),
-          ),
+        Text(
+          '$subTitle'.tr,
+          style: TextStyle(
+              color: AppColors.grayColor,
+              fontSize: 12,
+              fontWeight: FontWeight.w300),
         ),
       ],
     );

@@ -37,26 +37,30 @@ class ForgotPassword extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                PageTitle(
-                  title: title,
-                  subTitle: subTitle,
+ FadeAnimationDx(
+                  delay: 2,                  child: PageTitle(
+                    title: title,
+                    subTitle: subTitle,
+                  ),
                 ),
                 SizedBox(height: space),
-                Container(
-                  height: size,
-                  width: size,
-                  padding: EdgeInsets.all(size * 0.2),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(size),
-                    color: AppColors.primaryColor.withOpacity(0.1),
-                  ),
-                  child: SvgPicture.asset(
-                    AppAssets.keySquare,
+ FadeAnimationDx(
+                  delay: 3,                  child: Container(
+                    height: size,
+                    width: size,
+                    padding: EdgeInsets.all(size * 0.2),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(size),
+                      color: AppColors.primaryColor.withOpacity(0.1),
+                    ),
+                    child: SvgPicture.asset(
+                      AppAssets.keySquare,
+                    ),
                   ),
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 2,
+                  delay: 4,
                   child: CustomTextField(
                     labelText: 'E-mail',
                     controller: _email,
@@ -74,7 +78,7 @@ class ForgotPassword extends StatelessWidget {
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 3,
+                  delay: 5,
                   child: CustomElevatedButton(
                     onPressed: _recovery,
                     child: Obx(
@@ -90,7 +94,7 @@ class ForgotPassword extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: space * 2.2),
+                SizedBox(height: space),
               ],
             ),
           ),

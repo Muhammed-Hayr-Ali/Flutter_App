@@ -14,11 +14,14 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  final _formKey = GlobalKey<FormState>();
-  final data = Get.arguments as User;
-  final _ = Get.find<ProfileController>();
-  final ImageService imageService = ImageService();
+
   final double space = 32;
+  final _ = Get.find<ProfileController>();
+  final data = Get.arguments as User;
+
+
+  final _formKey = GlobalKey<FormState>();
+  final ImageService imageService = ImageService();
 
   String? _profile;
   String? _path;
@@ -184,7 +187,7 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 80.0),
+                      SizedBox(height: space),
                     ],
                   ),
                 ),

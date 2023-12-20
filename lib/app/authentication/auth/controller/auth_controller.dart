@@ -17,7 +17,6 @@ class AuthControlleer extends GetxController {
   RxString registerError = ''.obs;
   RxString genderValue = 'Unspecified'.obs;
 
-
   void checkMailAvailability({required Map user}) async {
     isLoading(true);
 
@@ -41,18 +40,10 @@ class AuthControlleer extends GetxController {
     isLoading(false);
   }
 
-  void register(Map<dynamic, dynamic> user) async {
+  void register(Map<String, dynamic> user) async {
     isLoading(true);
 
-    FormData data = FormData.fromMap({
-      'name': user['name'],
-      'email': user['email'],
-      'password': user['password'],
-      'country_code': user['country_code'],
-      'phone_number': user['phone_number'],
-      'gender': user['gender'],
-      'date_birth': user['date_birth'],
-    });
+    FormData data = FormData.fromMap(user);
 
     if (user['path'] != '') {
       MultipartFile photo = await MultipartFile.fromFile(user['path']!);
@@ -86,13 +77,10 @@ class AuthControlleer extends GetxController {
     isLoading(false);
   }
 
-  void login(Map<dynamic, dynamic> user) async {
+  void login(Map<String, dynamic> user) async {
     isLoading(true);
 
-    FormData data = FormData.fromMap({
-      'email': user['email'],
-      'password': user['password'],
-    });
+    FormData data = FormData.fromMap(user);
 
     try {
       final response = await _dio.post(Api.login, data: data);
@@ -134,12 +122,12 @@ class AuthControlleer extends GetxController {
         return;
       }
 
-      Map data = {
+      FormData data = FormData.fromMap({
         'name': googleUser.displayName,
         'email': googleUser.email.toString(),
         'password': googleUser.id,
         'profile': googleUser.photoUrl.toString()
-      };
+      });
 
       final response = await _dio.post(Api.continueWithGoogle, data: data);
 

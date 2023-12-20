@@ -95,17 +95,23 @@ class CompletetYourProfile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                PageTitle(
-                  title: title,
-                  subTitle: subTitle,
-                ),
-                SizedBox(height: space),
-                UploadImage(
-                  pathImage: _imagePath,
+                FadeAnimationDx(
+                  delay: 2,
+                  child: PageTitle(
+                    title: title,
+                    subTitle: subTitle,
+                  ),
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 2,
+                  delay: 3,
+                  child: UploadImage(
+                    pathImage: _imagePath,
+                  ),
+                ),
+                SizedBox(height: space),
+                FadeAnimationDx(
+                  delay: 4,
                   child: CustomTextField(
                     labelText: 'Name',
                     hintText: 'Ex. John Doe',
@@ -128,26 +134,32 @@ class CompletetYourProfile extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: space),
-                CustomPhoneField(
-                    labelText: 'Phone Number',
-                    hintText: 'Enter your phone number',
-                    initialSelected: '+963',
-                    phoneNumber: _phoneNumber,
-                    contryCode: _countryCode),
+                FadeAnimationDx(
+                  delay: 5,
+                  child: CustomPhoneField(
+                      labelText: 'Phone Number',
+                      hintText: 'Enter your phone number',
+                      initialSelected: '+963',
+                      phoneNumber: _phoneNumber,
+                      contryCode: _countryCode),
+                ),
 
                 //
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 4,
+                  delay: 6,
                   child: CustomDropdownButton(
                       title: 'Gender',
                       listItem: AppConstants.genderList,
                       controller: _gender),
                 ),
                 SizedBox(height: space),
-                CustomDatePicker(
-                  controller: _dateBirth,
-                  labelText: 'Date Birth',
+                FadeAnimationDx(
+                  delay: 7,
+                  child: CustomDatePicker(
+                    controller: _dateBirth,
+                    labelText: 'Date Birth',
+                  ),
                 ),
                 SizedBox(height: space),
                 Obx(
@@ -158,7 +170,7 @@ class CompletetYourProfile extends StatelessWidget {
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 9,
+                  delay: 8,
                   child: CustomElevatedButton(
                     onPressed: _createNewAccount,
                     child: Obx(() => _.isLoading.value
@@ -170,7 +182,7 @@ class CompletetYourProfile extends StatelessWidget {
                           )),
                   ),
                 ),
-                SizedBox(height: space * 2.2),
+                SizedBox(height: space),
               ],
             ),
           ),

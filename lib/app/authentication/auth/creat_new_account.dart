@@ -45,13 +45,16 @@ class CreatNewAccount extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                PageTitle(
-                  title: title,
-                  subTitle: subTitle,
+                FadeAnimationDx(
+                  delay: 2,
+                  child: PageTitle(
+                    title: title,
+                    subTitle: subTitle,
+                  ),
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 4,
+                  delay: 3,
                   child: CustomTextField(
                     labelText: 'Email',
                     hintText: 'example@gmail.com',
@@ -66,7 +69,7 @@ class CreatNewAccount extends StatelessWidget {
                 Row(
                   children: [
                     FadeAnimationDx(
-                      delay: 5,
+                      delay: 4,
                       child: Text(
                         'You cannot edit the email at a later time'.tr,
                         style:
@@ -77,7 +80,7 @@ class CreatNewAccount extends StatelessWidget {
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 6,
+                  delay: 5,
                   child: CustomTextField(
                     labelText: 'Password',
                     hintText: '************',
@@ -90,7 +93,7 @@ class CreatNewAccount extends StatelessWidget {
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 7,
+                  delay: 6,
                   child: CustomTextField(
                     labelText: 'Confirm password',
                     hintText: '************',
@@ -110,7 +113,7 @@ class CreatNewAccount extends StatelessWidget {
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 9,
+                  delay: 7,
                   child: CustomElevatedButton(
                     onPressed: _createNewAccount,
                     child: Obx(() => _.isLoading.value
@@ -122,7 +125,7 @@ class CreatNewAccount extends StatelessWidget {
                           )),
                   ),
                 ),
-                SizedBox(height: space * 2.2),
+                SizedBox(height: space),
               ],
             ),
           ),

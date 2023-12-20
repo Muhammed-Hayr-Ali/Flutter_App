@@ -13,6 +13,6 @@ abstract class Routes {
   static const createNewPassword = '/createNewPassword';
 
   static const editProfile = '/editProfile';
-  static const adressesScreen = '/AdressesScreen';
+  static const myAddresses = '/myAddresses';
   static const addNewAddress = '/addNewAddress';
 }

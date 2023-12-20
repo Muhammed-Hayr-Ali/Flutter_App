@@ -44,6 +44,11 @@ dependencies:
   # firebase_core: ^2.24.2 
   onesignal_flutter: ^5.0.4
   uuid: ^4.2.2
+  location: ^5.0.0
+  google_maps_flutter: ^2.5.0
+
+
+
   # fluttertoast: ^8.2.4      Preparing "Install Android SDK Platform 31 (revision: 1)".
   # easy_image_viewer: ^1.2.1
   # open_settings: ^2.0.2

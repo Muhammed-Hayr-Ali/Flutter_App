@@ -15,8 +15,9 @@ import '../app/authentication/authentication.dart';
 import '../app/bottomNavigationBar/view/bottom_navigation_bar.dart';
 
 import '../app/profile/view/edit_profile.dart';
+import '../app/profile/view/my_addresses.dart';
 import '../app/splash_screen/controller/splashscreen_controller.dart';
-import '../app/profile/view/adresses.dart';
+
 
 /// Pages
 class Pages {
@@ -107,8 +108,8 @@ class Pages {
       curve: curve,
     ),
     GetPage(
-      name: Routes.adressesScreen,
-      page: () => const AdressesScreen(),
+      name: Routes.myAddresses,
+      page: () =>  MyAddresses(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,

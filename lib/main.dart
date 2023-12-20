@@ -1,7 +1,6 @@
 import 'package:application/bindings.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();

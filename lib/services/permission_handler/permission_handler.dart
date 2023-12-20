@@ -31,7 +31,6 @@ class PerHandler {
     return false;
   }
 
-
   static Future<bool> notification() async {
     var status = await Permission.notification.request();
     if (status.isGranted) {
@@ -46,5 +45,17 @@ class PerHandler {
     return false;
   }
 
+  static Future<bool> location() async {
+    var status = await Permission.location.request();
+    if (status.isGranted) {
+      return true;
+    } else if (status.isPermanentlyDenied) {
+      CustomNotification.showSnackbar(
+          message:
+              'Permission to access notification has been permanently denied. You can grant permission through settings');
+      return false;
+    }
 
+    return false;
+  }
 }

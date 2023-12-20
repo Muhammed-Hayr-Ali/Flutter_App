@@ -45,13 +45,16 @@ class Login extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                PageTitle(
-                  title: title,
-                  subTitle: subTitle,
+                FadeAnimationDx(
+                  delay: 2,
+                  child: PageTitle(
+                    title: title,
+                    subTitle: subTitle,
+                  ),
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 2,
+                  delay: 3,
                   child: CustomTextField(
                     labelText: 'E-mail',
                     hintText: 'example@gmail.com',
@@ -62,7 +65,7 @@ class Login extends StatelessWidget {
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
-                  delay: 3,
+                  delay: 4,
                   child: CustomTextField(
                     labelText: 'Password',
                     hintText: '************',
@@ -74,7 +77,7 @@ class Login extends StatelessWidget {
                 ),
                 SizedBox(height: space / 2),
                 FadeAnimationDx(
-                  delay: 4,
+                  delay: 5,
                   child: TextButton(
                     onPressed: _recovery,
                     child: Row(
@@ -91,7 +94,7 @@ class Login extends StatelessWidget {
                 ),
                 SizedBox(height: space * 2.2),
                 FadeAnimationDx(
-                  delay: 5,
+                  delay: 6,
                   child: CustomElevatedButton(
                     onPressed: _signIn,
                     child: Obx(() => _.isLoading.value
@@ -105,7 +108,7 @@ class Login extends StatelessWidget {
                           )),
                   ),
                 ),
-                SizedBox(height: space * 2.2),
+                SizedBox(height: space),
               ],
             ),
           ),

@@ -1,7 +1,7 @@
 class Api {
   Api._();
 
-  static const String baseUrl = 'http://192.168.0.105:8000';
+  static const String baseUrl = 'http://192.168.55.248:8000';
   //
   static const Duration connectTimeout = Duration(seconds: 5);
   static const Map<String, dynamic> defaultHeaders = {
@@ -32,6 +32,7 @@ class Api {
 
 
   static const String getAllAddresses = '/api/addresses/getAllAddresses';
+  static const String createAddress = '/api/addresses/createAddress';
 
 
 }

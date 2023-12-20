@@ -1,10 +1,10 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'package:application/utils/models/address.dart';
+import 'package:dio/dio.dart';
 
 class AddressesController extends GetxController {
   final LocalStorage _localStorage = LocalStorage();
-
   final Dio _dio = Dio(
     BaseOptions(
         baseUrl: Api.baseUrl,
@@ -23,7 +23,7 @@ class AddressesController extends GetxController {
     getAllAddresses();
   }
 
-  void getAllAddresses() async {
+  Future<void> getAllAddresses() async {
     isLoading(true);
 
     final token = await _localStorage.readData(keys: Keys.token);
@@ -35,11 +35,11 @@ class AddressesController extends GetxController {
 
       if (!response.data['status']) return;
       final data = response.data['data'];
-      print(data.runtimeType);
+      List<AddressModel> list = [];
       data.forEach((element) {
-        listAddresses.add(AddressModel.fromJson(element));
+        list.add(AddressModel.fromJson(element));
       });
-
+      listAddresses = list;
       update();
     } on DioException catch (exception) {
       if (exception.response != null) {
@@ -48,9 +48,33 @@ class AddressesController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+    } finally {
+      isLoading(false);
     }
-    isLoading(false);
   }
 
-  void addNewAddresse({required AddressModel addressModel}) {}
+  Future<void> addNewAddresse(
+      {required Map<String, dynamic> newAddress}) async {
+    isLoading(true);
+    FormData data = FormData.fromMap(newAddress);
+    final token = await _localStorage.readData(keys: Keys.token);
+    final header = {'Authorization': 'Bearer $token'};
+
+    try {
+      final response = await _dio.post(Api.createAddress,
+          options: Options(headers: header), data: data);
+
+      if (!response.data['status']) return;
+      CustomNotification.showSnackbar(message: '${response.data['message']}');
+    } on DioException catch (exception) {
+      if (exception.response != null) {
+        final responseData = exception.response?.data;
+        CustomNotification.showSnackbar(message: responseData['message']);
+      } else {
+        CustomDioException.exception(exception.type);
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
 }

@@ -21,12 +21,16 @@ class AppThemes {
     ),
   ).copyWith(
     scaffoldBackgroundColor: Colors.white,
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
       scrolledUnderElevation: 0,
       elevation: 0,
       centerTitle: true,
-      systemOverlayStyle: SystemUiOverlayStyle(
+      titleTextStyle: TextStyle(
+          color: AppColors.blackColor,
+          fontSize: 30,
+          fontWeight: FontWeight.w200),
+      systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,
           statusBarBrightness: Brightness.light,
@@ -60,6 +64,8 @@ class AppThemes {
       scrolledUnderElevation: 0,
       elevation: 0,
       centerTitle: true,
+      titleTextStyle: TextStyle(
+          color: Colors.white, fontSize: 30, fontWeight: FontWeight.w200),
       systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.light,

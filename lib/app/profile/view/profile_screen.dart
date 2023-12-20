@@ -53,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
               title: 'My addresses',
               subtitle: 'Set shipment delivery addresses',
               leading: AppAssets.mapPoint,
-              onTap: () => Get.toNamed(Routes.adressesScreen),
+              onTap: () => Get.toNamed(Routes.myAddresses),
             ),
             CustomListTile(
               title: 'Wish List',
