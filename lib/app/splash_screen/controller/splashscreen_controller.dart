@@ -1,6 +1,4 @@
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:uuid/uuid.dart';
-
 import '../../../../packages.dart';
 import '../../../../required_files.dart';
 

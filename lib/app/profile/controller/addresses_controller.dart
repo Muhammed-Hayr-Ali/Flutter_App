@@ -53,7 +53,7 @@ class AddressesController extends GetxController {
     }
   }
 
-  Future<void> addNewAddresse(
+  Future<bool> addNewAddresse(
       {required Map<String, dynamic> newAddress}) async {
     isLoading(true);
     FormData data = FormData.fromMap(newAddress);
@@ -64,8 +64,10 @@ class AddressesController extends GetxController {
       final response = await _dio.post(Api.createAddress,
           options: Options(headers: header), data: data);
 
-      if (!response.data['status']) return;
+      if (!response.data['status']) return false;
       CustomNotification.showSnackbar(message: '${response.data['message']}');
+      getAllAddresses();
+      return true;
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -73,6 +75,7 @@ class AddressesController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+      return false;
     } finally {
       isLoading(false);
     }

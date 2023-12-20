@@ -114,7 +114,7 @@ Widget address(AddressModel address) {
         borderRadius: BorderRadius.circular(12),
         onTap: () => print('${address.latitude} + ${address.longitude}'),
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(14),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,19 +142,30 @@ Widget address(AddressModel address) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${address.country ?? ''} ${address.state ?? ''} ${address.city ?? ''}',
+                          address.countryName ?? '',
                           style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w300),
+                              fontSize: 14, fontWeight: FontWeight.w400),
+                        ),
+                        Text(
+                          '${address.state ?? ''} / ${address.city ?? ''}',
+                          style: const TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w600),
                         ),
                         Text(
                           address.addressLine1 ?? '',
                           style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w200),
+                              fontSize: 10, fontWeight: FontWeight.w400),
                         ),
                         Text(
                           address.addressLine2 ?? '',
                           style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w200),
+                              fontSize: 10, fontWeight: FontWeight.w400),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          address.phoneNumber ?? '',
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -170,11 +181,6 @@ Widget address(AddressModel address) {
                         : null,
                   )
                 ],
-              ),
-              Text(
-                '${address.countryCode ?? ''} ${address.phoneNumber ?? ''}',
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
               ),
             ],
           ),

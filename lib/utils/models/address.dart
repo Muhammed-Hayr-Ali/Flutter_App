@@ -5,7 +5,7 @@ class AddressModel {
   String? city;
   String? addressLine1;
   String? addressLine2;
-  String? countryCode;
+  String? countryName;
   String? phoneNumber;
   String? latitude;
   String? longitude;
@@ -21,7 +21,7 @@ class AddressModel {
       this.city,
       this.addressLine1,
       this.addressLine2,
-      this.countryCode,
+      this.countryName,
       this.phoneNumber,
       this.latitude,
       this.longitude,
@@ -37,7 +37,7 @@ class AddressModel {
     city = json['city'];
     addressLine1 = json['address_line_1'];
     addressLine2 = json['address_line_2'];
-    countryCode = json['country_code'];
+    countryName = json['country_name'];
     phoneNumber = json['phone_number'];
     latitude = json['latitude'];
     longitude = json['longitude'];
@@ -55,7 +55,7 @@ class AddressModel {
     data['city'] = city;
     data['address_line_1'] = addressLine1;
     data['address_line_2'] = addressLine2;
-    data['country_code'] = countryCode;
+    data['country_name'] = countryName;
     data['phone_number'] = phoneNumber;
     data['latitude'] = latitude;
     data['longitude'] = longitude;
