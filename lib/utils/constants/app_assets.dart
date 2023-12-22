@@ -40,6 +40,7 @@ class AppAssets {
   static const String trash = 'assets/icons/trash.svg';
 
   static const String map = 'assets/icons/map.svg';
+  static const String marker = 'assets/icons/marker.svg';
 
 
   static const String emptyList = 'assets/images/empty_list.svg';

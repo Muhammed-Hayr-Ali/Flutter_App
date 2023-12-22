@@ -21,7 +21,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Widget? child;
   final double? width;
   final double height;
-  final double? borderRadius;
+  final double borderRadius;
   final Color? backgroundColor;
   final Color? overlayColor;
   final Color borderColor;
@@ -66,7 +66,8 @@ class CustomElevatedButton extends StatelessWidget {
                   side: border
                       ? BorderSide(color: borderColor, width: borderWidth)
                       : BorderSide.none,
-                  borderRadius: BorderRadius.circular(height)); // <-- Radius
+                  borderRadius:
+                      BorderRadius.circular(borderRadius)); // <-- Radius
             },
           ),
         ),

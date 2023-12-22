@@ -1,7 +1,8 @@
 import '../packages.dart';
 
-custombottomSheet({String? title, Widget? child}) {
+custombottomSheet({String? title, Widget? child, bool? isDismissible}) {
   return Get.bottomSheet(
+    isDismissible: isDismissible ?? true,
     elevation: 0,
     SizedBox(
       width: double.infinity,

@@ -27,7 +27,7 @@ class CustomListItem extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(radius),
           onTap: onTap,
-          child: child,
+          child: Center(child: child),
         ),
       ),
     );

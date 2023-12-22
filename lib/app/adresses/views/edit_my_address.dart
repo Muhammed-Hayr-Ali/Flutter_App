@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'package:application/app/profile/controller/addresses_controller.dart';
+import 'package:application/app/adresses/controlers/addresses_controller.dart';
+import 'package:application/app/adresses/models/address.dart';
 import 'package:application/components/custom_phone_field.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
@@ -9,21 +10,19 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import '../../../components/title_page.dart';
 
-class AddNewAddress extends StatefulWidget {
-  const AddNewAddress({super.key});
+class EditMyAddress extends StatefulWidget {
+  const EditMyAddress({super.key});
 
   @override
-  State<AddNewAddress> createState() => _AddNewAddressState();
+  State<EditMyAddress> createState() => _EditAddressState();
 }
 
-class _AddNewAddressState extends State<AddNewAddress> {
+class _EditAddressState extends State<EditMyAddress> {
   final double space = 32;
 
   final _ = Get.find<AddressesController>();
 
-  final String title = 'Add address';
-
-  final String subTitle = 'Fill in the fields to add a new address';
+  final String title = 'Edit title';
 
   final _formKey = GlobalKey<FormState>();
   final Completer<GoogleMapController> _controller = Completer();
@@ -37,40 +36,48 @@ class _AddNewAddressState extends State<AddNewAddress> {
   final TextEditingController _city = TextEditingController();
   final TextEditingController _addressLine1 = TextEditingController();
   final TextEditingController _addressLine2 = TextEditingController();
+  int? id;
+
   double? lati;
   double? long;
 
   Set<Marker> markers = <Marker>{};
   Marker? marker;
+  final address = Get.arguments as UserAddress;
 
   @override
   void initState() {
     super.initState();
-    getMyLocation();
+    setDefaultValue();
   }
 
-  Future<void> getMyLocation() async {
-    bool serviceEnabled;
-    bool permissionGranted;
-
-    serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-      if (!serviceEnabled) {
-        return;
-      }
-    }
-
-    permissionGranted = await PerHandler.location();
-    if (!permissionGranted) {
+  setDefaultValue() {
+    id = address.id;
+    _firstName.text = address.firstName ?? '';
+    _lastName.text = address.lastName ?? '';
+    _phoneNumber.text = address.phoneNumber ?? '';
+    _country.text = address.country ?? '';
+    _state.text = address.state ?? '';
+    _city.text = address.city ?? '';
+    _addressLine1.text = address.addressLine1 ?? '';
+    _addressLine2.text = address.addressLine2 ?? '';
+    if (!hasLocation(
+        latitude: address.latitude, longitude: address.longitude)) {
       return;
     }
+    _goToPosition(
+        latLng: LatLng(
+            double.parse(address.latitude!), double.parse(address.longitude!)));
+  }
 
-    await location.getLocation().then((value) {
-      lati = value.latitude ?? 0.0;
-      long = value.longitude ?? 0.0;
-      _goToPosition(latLng: LatLng(lati ?? 0.0, long ?? 0.0));
-    });
+  bool hasLocation({required latitude, required longitude}) {
+    if (latitude != '0.00000000' &&
+        longitude != '0.00000000' &&
+        latitude != null &&
+        longitude != null) {
+      return true;
+    }
+    return false;
   }
 
   Future<void> _goToPosition({required LatLng latLng}) async {
@@ -97,11 +104,13 @@ class _AddNewAddressState extends State<AddNewAddress> {
     });
   }
 
-  Future<void> _addNewAddress() async {
+  void _addNewAddress() 
+   {
     if (_.isLoading.value) return;
 
     if (_formKey.currentState!.validate()) {
       var newAddress = {
+        'id': id,
         'first_name': _firstName.text,
         'last_name': _lastName.text,
         'country': _country.text,
@@ -113,18 +122,25 @@ class _AddNewAddressState extends State<AddNewAddress> {
         'latitude': lati,
         'longitude': long,
       };
-      final response = await _.addNewAddresse(newAddress: newAddress);
-      if (response) {
-        _firstName.clear();
-        _lastName.clear();
-        _country.clear();
-        _state.clear();
-        _city.clear();
-        _addressLine1.clear();
-        _addressLine2.clear();
-        _phoneNumber.clear();
-      }
+      _.updateAddress(newAddress: newAddress);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    clear();
+  }
+
+  clear() {
+    _firstName.clear();
+    _lastName.clear();
+    _country.clear();
+    _state.clear();
+    _city.clear();
+    _addressLine1.clear();
+    _addressLine2.clear();
+    _phoneNumber.clear();
   }
 
   @override
@@ -143,7 +159,6 @@ class _AddNewAddressState extends State<AddNewAddress> {
                   children: [
                     PageTitle(
                       title: title,
-                      subTitle: subTitle,
                     ),
                   ],
                 ),
@@ -224,7 +239,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
                               //settings for scrolling
                               scrollGesturesEnabled: true,
                               zoomGesturesEnabled: true,
-                              myLocationButtonEnabled: true,
+                              myLocationButtonEnabled: false,
                               zoomControlsEnabled: false,
                               gestureRecognizers: <Factory<
                                   OneSequenceGestureRecognizer>>{
@@ -254,7 +269,8 @@ class _AddNewAddressState extends State<AddNewAddress> {
                         padding: const EdgeInsets.all(10),
                         child: CustomPhoneField(
                             mode: Mode.contry,
-                            initialSelected: 'Select country',
+                            initialvalue: _country.text,
+                            initialSelected: 'Select country*',
                             contryName: _country),
                       ),
                       Padding(
@@ -264,9 +280,9 @@ class _AddNewAddressState extends State<AddNewAddress> {
                             Expanded(
                               flex: 1,
                               child: CustomTextField(
-                                hintText: 'State',
+                                hintText: 'State*',
                                 controller: _state,
-                                keyboardType: TextInputType.name,
+                                keyboardType: TextInputType.text,
                                 validator: (value) => Validator.isEmpty(value!),
                               ),
                             ),
@@ -274,9 +290,9 @@ class _AddNewAddressState extends State<AddNewAddress> {
                             Expanded(
                               flex: 1,
                               child: CustomTextField(
-                                hintText: 'City',
+                                hintText: 'City*',
                                 controller: _city,
-                                keyboardType: TextInputType.name,
+                                keyboardType: TextInputType.text,
                                 validator: (value) => Validator.isEmpty(value!),
                               ),
                             ),
@@ -286,9 +302,10 @@ class _AddNewAddressState extends State<AddNewAddress> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: CustomTextField(
-                          hintText: 'Address line 1',
+                          hintText: 'Address line 1*',
                           controller: _addressLine1,
-                          keyboardType: TextInputType.name,
+                          keyboardType: TextInputType.streetAddress,
+                          validator: (value) => Validator.isEmpty(value!),
                         ),
                       ),
                       Padding(
@@ -302,7 +319,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
                     ],
                   ),
                 ),
-                SizedBox(height: space * 2),
+                SizedBox(height: space),
                 Center(
                   child: Obx(
                     () => CustomElevatedButton(

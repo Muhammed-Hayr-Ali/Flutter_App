@@ -1,23 +1,23 @@
-import 'package:application/app/authentication/account/controller/account_controller.dart';
-import 'package:application/app/authentication/auth/completet_your_profile.dart';
-import 'package:application/app/profile/controller/profile_controller.dart';
-import 'package:application/app/profile/view/add_new_address.dart';
-import 'package:application/packages.dart';
-import 'package:application/required_files.dart';
-
+import '../app/adresses/views/add_new_address.dart';
+import '../app/adresses/views/edit_my_address.dart';
+import '../app/adresses/views/location_screen.dart';
+import '../app/adresses/views/my_addresses.dart';
+import '../app/authentication/account/controller/account_controller.dart';
 import '../app/authentication/account/view/create_new_password.dart';
 import '../app/authentication/account/view/forgot_password.dart';
 import '../app/authentication/account/view/verify_verification_code.dart';
+import '../app/authentication/auth/completet_your_profile.dart';
 import '../app/authentication/auth/controller/auth_controller.dart';
 import '../app/authentication/auth/creat_new_account.dart';
 import '../app/authentication/auth/login_user.dart';
 import '../app/authentication/authentication.dart';
 import '../app/bottomNavigationBar/view/bottom_navigation_bar.dart';
 
+import '../app/profile/controller/profile_controller.dart';
 import '../app/profile/view/edit_profile.dart';
-import '../app/profile/view/my_addresses.dart';
 import '../app/splash_screen/controller/splashscreen_controller.dart';
-
+import '../packages.dart';
+import '../required_files.dart';
 
 /// Pages
 class Pages {
@@ -109,14 +109,28 @@ class Pages {
     ),
     GetPage(
       name: Routes.myAddresses,
-      page: () =>  MyAddresses(),
+      page: () => const MyAddresses(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,
     ),
     GetPage(
       name: Routes.addNewAddress,
-      page: () =>  AddNewAddress(),
+      page: () => const AddNewAddress(),
+      transitionDuration: duration,
+      transition: transition,
+      curve: curve,
+    ),
+    GetPage(
+      name: Routes.editAddress,
+      page: () => const EditMyAddress(),
+      transitionDuration: duration,
+      transition: transition,
+      curve: curve,
+    ),
+    GetPage(
+      name: Routes.locationScreen,
+      page: () => const LocationScreen(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,

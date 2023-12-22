@@ -8,6 +8,7 @@ class CustomPhoneField extends StatefulWidget {
   final String? labelText;
   final String? hintText;
   final String? initialSelected;
+  final String? initialvalue;
   final bool showDialCode;
   final bool showSearchBar;
   final Mode mode;
@@ -28,6 +29,7 @@ class CustomPhoneField extends StatefulWidget {
     this.showSearchBar = true,
     this.mode = Mode.phone,
     this.contryName,
+    this.initialvalue,
   });
 
   @override
@@ -149,13 +151,20 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
                               style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             )
-                          : Text(
-                              widget.initialSelected??'',
-                              style: TextStyle(
-                                  color: AppColors.grayColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500),
-                            ),
+                          : widget.initialvalue != null
+                              ? Text(
+                                  widget.initialvalue!,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              : Text(
+                                  widget.initialSelected ?? '',
+                                  style: TextStyle(
+                                      color: AppColors.grayColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
                     ],
                   )),
                 )

@@ -36,8 +36,9 @@ class AuthControlleer extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+    } finally {
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   void register(Map<String, dynamic> user) async {
@@ -73,8 +74,9 @@ class AuthControlleer extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+    } finally {
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   void login(Map<String, dynamic> user) async {
@@ -107,8 +109,9 @@ class AuthControlleer extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+    } finally {
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   void continueWithGoogle() async {
@@ -156,16 +159,15 @@ class AuthControlleer extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+    } finally {
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   void logout() async {
-    final token = await _localStorage.readData(keys: Keys.token);
-    final header = {'Authorization': 'Bearer $token'};
     try {
       final response =
-          await _dio.post(Api.logout, options: Options(headers: header));
+          await _dio.post(Api.logout, options: Options(headers: Authorization().bearer()));
       if (!response.data['status']) return;
 
       _localStorage.remove(keys: Keys.profile);

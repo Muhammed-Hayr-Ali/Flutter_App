@@ -28,8 +28,8 @@ class AppThemes {
       centerTitle: true,
       titleTextStyle: TextStyle(
           color: AppColors.blackColor,
-          fontSize: 30,
-          fontWeight: FontWeight.w200),
+          fontSize: 20,
+          fontWeight: FontWeight.w400),
       systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,

@@ -34,9 +34,6 @@ class ProfileController extends GetxController {
   void updateProfile({required Map<String, dynamic> newUser}) async {
     isLoading(true);
 
-    final token = await _localStorage.readData(keys: Keys.token);
-    final header = {'Authorization': 'Bearer $token'};
-
     FormData data = FormData.fromMap({
       'name': newUser['name'],
       'status': newUser['status'],
@@ -53,7 +50,7 @@ class ProfileController extends GetxController {
 
     try {
       final response = await _dio.post(Api.updateProfile,
-          options: Options(headers: header), data: data);
+          options: Options(headers: Authorization().bearer()), data: data);
       if (!response.data['status']) return;
 
       final profile = response.data['data']['profile'];

@@ -1,7 +1,15 @@
+import 'package:application/required_files.dart';
 import 'package:flutter/material.dart';
 
 class AppColors {
   AppColors._();
+
+  LocalStorage localStorage = LocalStorage();
+
+   Color primaryColors() {
+    return LocalStorage().readData(keys: Keys.primaryColor) ??
+        const Color(0xFFF9622E);
+  }
 
   static Color primaryColor = const Color(0xFFF9622E);
   static Color blackColor = const Color(0xFF242424);

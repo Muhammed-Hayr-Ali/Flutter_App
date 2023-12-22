@@ -8,6 +8,7 @@ class CustomTextField extends StatefulWidget {
   final Color? underline;
   final bool isPassword;
   final bool suffix;
+  final bool enabledSuffix;
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
@@ -31,7 +32,8 @@ class CustomTextField extends StatefulWidget {
       this.autofocus = false,
       this.prefix,
       this.enabled,
-      this.isLtrOnly = false});
+      this.isLtrOnly = false,
+      this.enabledSuffix = true});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -90,7 +92,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       prefix: widget.prefix,
                       hintText: widget.hintText,
                       //  labelText: '${widget.labelText}'.tr,
-                      suffix: widget.suffix
+                      suffix: 
+                      
+                      
+                      widget.suffix
                           ? GestureDetector(
                               onTap:
                                   widget.isPassword ? updatevisiblity : clear,
@@ -102,11 +107,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
                                       size: 16,
                                       color: AppColors.grayColor,
                                     )
-                                  : Icon(
-                                      Icons.cancel,
-                                      size: 16,
-                                      color: AppColors.grayColor,
-                                    ),
+                                  : widget.enabledSuffix
+                                      ? Icon(
+                                          Icons.cancel,
+                                          size: 16,
+                                          color: AppColors.grayColor,
+                                        )
+                                      : null,
                             )
                           : null,
                       // errorBorder: const UnderlineInputBorder(

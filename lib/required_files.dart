@@ -4,6 +4,7 @@ export 'package:application/utils/models/user.dart';
 export 'package:application/components/custom_list_tile.dart';
 
 export 'package:shimmer/shimmer.dart';
+export 'package:application/services/dio/authorization.dart';
 
 export 'app/splash_screen/view/splash_screen.dart';
 

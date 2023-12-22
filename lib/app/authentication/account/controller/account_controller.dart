@@ -34,8 +34,9 @@ class AccountController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+    } finally {
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   void verifyVerificationCode({required String email, required String verificationCode}) async {
@@ -58,8 +59,9 @@ class AccountController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+    } finally {
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   void createNewPassword({required String email, required String verificationCode, required String password}) async {
@@ -85,8 +87,8 @@ class AccountController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+    } finally {
+      isLoading(false);
     }
-
-    isLoading(false);
   }
 }
