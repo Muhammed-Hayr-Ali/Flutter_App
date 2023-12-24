@@ -10,9 +10,6 @@ class MyAddresses extends StatelessWidget {
 
   final double space = 32;
 
-  final String title = 'My addresses';
-
-  final String subTitle = 'Control my shipping addresses';
 
   @override
   Widget build(BuildContext context) {

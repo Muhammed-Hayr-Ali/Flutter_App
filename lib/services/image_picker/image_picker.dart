@@ -12,14 +12,18 @@ class ImageService {
         child: Column(
           children: [
             CustomListItem(
-              height: 48,
-              child: SvgPicture.asset(AppAssets.camera),
+              child: SizedBox(
+                  height: 48,
+                  width: 48,
+                  child: SvgPicture.asset(AppAssets.camera)),
               onTap: () => Get.back(result: ImageSource.camera),
             ),
             const Divider(),
             CustomListItem(
-              height: 48,
-              child: SvgPicture.asset(AppAssets.gallery),
+              child: SizedBox(
+                  height: 48,
+                  width: 48,
+                  child: SvgPicture.asset(AppAssets.gallery)),
               onTap: () => Get.back(result: ImageSource.gallery),
             ),
           ],

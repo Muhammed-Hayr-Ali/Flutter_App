@@ -69,17 +69,18 @@ class AddressesController extends GetxController {
     }
   }
 
-  void createAddress({required Map<String, dynamic> newAddress}) async {
+  Future<bool> createNewAddress(
+      {required Map<String, dynamic> newAddress}) async {
     isLoading(true);
     FormData data = FormData.fromMap(newAddress);
 
     try {
-      final response = await _dio.post(Api.createAddress,
+      final response = await _dio.post(Api.createNewAddress,
           options: Options(headers: Authorization().bearer()), data: data);
-
-      if (!response.data['status']) return;
+      if (!response.data['status']) return false;
+      await getUserAddresses();
       CustomNotification.showSnackbar(message: '${response.data['message']}');
-      getUserAddresses();
+      return true;
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -87,13 +88,13 @@ class AddressesController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-      return;
+      return false;
     } finally {
       isLoading(false);
     }
   }
 
-  void updateAddress({required Map<String, dynamic> newAddress}) async {
+  Future<bool> updateAddress({required Map<String, dynamic> newAddress}) async {
     isLoading(true);
     FormData data = FormData.fromMap(newAddress);
 
@@ -101,9 +102,10 @@ class AddressesController extends GetxController {
       final response = await _dio.post(Api.updateAddress,
           options: Options(headers: Authorization().bearer()), data: data);
 
-      if (!response.data['status']) return;
+      if (!response.data['status']) return false;
+      await getUserAddresses();
       CustomNotification.showSnackbar(message: '${response.data['message']}');
-      getUserAddresses();
+      return true;
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -111,7 +113,7 @@ class AddressesController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
-      return;
+      return false;
     } finally {
       isLoading(false);
     }
@@ -126,8 +128,7 @@ class AddressesController extends GetxController {
 
       listAddresses = listAddresses
           .where((element) =>
-              element.firstName!.toLowerCase().contains(lowercaseQuery) ||
-              element.lastName!.toLowerCase().contains(lowercaseQuery) ||
+              element.recipientName!.toLowerCase().contains(lowercaseQuery) ||
               element.country!.toLowerCase().contains(lowercaseQuery) ||
               element.state!.toLowerCase().contains(lowercaseQuery) ||
               element.addressLine1!.toLowerCase().contains(lowercaseQuery) ||
@@ -139,7 +140,7 @@ class AddressesController extends GetxController {
     }
   }
 
-  void setDefaultAddress(int id) async {
+  Future<bool> setDefaultAddress(int id) async {
     isLoading(true);
     FormData data = FormData.fromMap({'id': id});
 
@@ -147,9 +148,10 @@ class AddressesController extends GetxController {
       final response = await _dio.post(Api.setDefaultAddress,
           options: Options(headers: Authorization().bearer()), data: data);
 
-      if (!response.data['status']) return;
+      if (!response.data['status']) return false;
+      await getUserAddresses();
       CustomNotification.showSnackbar(message: '${response.data['message']}');
-      getUserAddresses();
+      return true;
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -157,12 +159,13 @@ class AddressesController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+      return false;
     } finally {
       isLoading(false);
     }
   }
 
-  void deleteAddress(int id) async {
+  Future<bool> deleteAddress(int id) async {
     isLoading(true);
     FormData data = FormData.fromMap({'id': id});
 
@@ -170,9 +173,10 @@ class AddressesController extends GetxController {
       final response = await _dio.post(Api.deleteAddress,
           options: Options(headers: Authorization().bearer()), data: data);
 
-      if (!response.data['status']) return;
+      if (!response.data['status']) return false;
+      await getUserAddresses();
       CustomNotification.showSnackbar(message: '${response.data['message']}');
-      getUserAddresses();
+      return true;
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -180,6 +184,7 @@ class AddressesController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+      return false;
     } finally {
       isLoading(false);
     }

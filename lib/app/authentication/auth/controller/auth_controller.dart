@@ -57,12 +57,9 @@ class AuthControlleer extends GetxController {
 
       final profile = response.data['data']['profile'];
       final token = response.data['data']['profile']['token'];
-      final uId = response.data['data']['profile']['id'];
-
       _localStorage.saveData(keys: Keys.profile, data: profile);
       _localStorage.saveData(keys: Keys.token, data: token);
-
-      OneSignal.User.addTagWithKey('id', uId);
+      saveUserData(User.fromJson(profile));
 
       Get.offAllNamed(Routes.home);
       CustomNotification.showSnackbar(
@@ -88,14 +85,11 @@ class AuthControlleer extends GetxController {
       final response = await _dio.post(Api.login, data: data);
       if (!response.data['status']) return;
 
-      final profile = response.data['data']['profile'];
       final token = response.data['data']['profile']['token'];
-      final uId = response.data['data']['profile']['id'];
-
-      _localStorage.saveData(keys: Keys.profile, data: profile);
+      final profile = response.data['data']['profile'];
       _localStorage.saveData(keys: Keys.token, data: token);
-
-      OneSignal.User.addTagWithKey('id', uId);
+      _localStorage.saveData(keys: Keys.profile, data: profile);
+      saveUserData(User.fromJson(profile));
 
       Get.offAllNamed(Routes.home);
 
@@ -138,12 +132,10 @@ class AuthControlleer extends GetxController {
       final isNewUser = response.data['message'];
       final profile = response.data['data']['profile'];
       final token = response.data['data']['profile']['token'];
-      final uId = response.data['data']['profile']['id'];
-
       _localStorage.saveData(keys: Keys.profile, data: profile);
       _localStorage.saveData(keys: Keys.token, data: token);
 
-      OneSignal.User.addTagWithKey('id', uId);
+      saveUserData(User.fromJson(profile));
 
       Get.offAllNamed(Routes.home);
       CustomNotification.showSnackbar(
@@ -166,8 +158,8 @@ class AuthControlleer extends GetxController {
 
   void logout() async {
     try {
-      final response =
-          await _dio.post(Api.logout, options: Options(headers: Authorization().bearer()));
+      final response = await _dio.post(Api.logout,
+          options: Options(headers: Authorization().bearer()));
       if (!response.data['status']) return;
 
       _localStorage.remove(keys: Keys.profile);
@@ -193,5 +185,11 @@ class AuthControlleer extends GetxController {
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $url');
     }
+  }
+
+  void saveUserData(User user) {
+    OneSignal.User.addEmail('${user.email}');
+    OneSignal.User.addSms('${user.countryCode}${user.phoneNumber}');
+    OneSignal.User.addTags({'id': user.id, 'permissions': user.permissions});
   }
 }

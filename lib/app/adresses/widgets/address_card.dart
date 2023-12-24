@@ -85,29 +85,29 @@ class AddressCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${address.firstName!} ${address.lastName!} ',
+                          address.recipientName ?? '',
                           style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          address.phoneNumber!,
+                          address.phoneNumber ?? '',
                           style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          address.country!,
+                          address.country ?? '',
                           style: const TextStyle(fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          '${address.state!} / ${address.city!}',
+                          '${address.state ?? ''} / ${address.city ?? ''}',
                           style: const TextStyle(
                               fontWeight: FontWeight.w400, fontSize: 13),
                         ),
                         Text(
-                          '${address.addressLine1}',
+                          address.addressLine1 ?? '',
                           style: const TextStyle(
                               fontWeight: FontWeight.w200, fontSize: 13),
                         ),
                         Text(
-                          '${address.addressLine2}',
+                          address.addressLine2 ?? '',
                           style: const TextStyle(
                               fontWeight: FontWeight.w200, fontSize: 13),
                         ),

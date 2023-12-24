@@ -15,17 +15,26 @@ class PageTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '$title'.tr,
-          style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w200),
+        SizedBox(
+          child: title != null
+              ? Text(
+                  '$title'.tr,
+                  style: const TextStyle(
+                      fontSize: 30, fontWeight: FontWeight.w200),
+                )
+              : null,
         ),
-        SizedBox(height: heightSpace),
-        Text(
-          '$subTitle'.tr,
-          style: TextStyle(
-              color: AppColors.grayColor,
-              fontSize: 12,
-              fontWeight: FontWeight.w300),
+        SizedBox(height: subTitle != null ? heightSpace : 0),
+        SizedBox(
+          child: subTitle != null
+              ? Text(
+                  '$subTitle'.tr,
+                  style: TextStyle(
+                      color: AppColors.grayColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300),
+                )
+              : null,
         ),
       ],
     );

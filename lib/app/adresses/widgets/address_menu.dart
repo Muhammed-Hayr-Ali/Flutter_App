@@ -5,7 +5,7 @@ import '../models/address.dart';
 
 class AddressCardMenu {
   AddressCardMenu._();
-  static menu(UserAddress address) {
+  static menu(UserAddress address) async {
     AddressesController _ = Get.find<AddressesController>();
 
     custombottomSheet(
@@ -17,7 +17,10 @@ class AddressCardMenu {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             onTap: () => {
-              Get.back(),
+              if (Get.isBottomSheetOpen ?? false)
+                {
+                  Get.back(),
+                },
               Get.toNamed(Routes.editAddress, arguments: address)
             },
           ),
@@ -29,7 +32,13 @@ class AddressCardMenu {
               'Set as default address',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
-            onTap: () => {Get.back(), _.setDefaultAddress(address.id!)},
+            onTap: () => {
+              if (Get.isBottomSheetOpen ?? false)
+                {
+                  Get.back(),
+                },
+              _.setDefaultAddress(address.id!)
+            },
           ),
           Divider(
             color: Colors.grey.withOpacity(0.1),
@@ -40,7 +49,13 @@ class AddressCardMenu {
               style: TextStyle(
                   fontSize: 16, fontWeight: FontWeight.w500, color: Colors.red),
             ),
-            onTap: () => {Get.back(), _.deleteAddress(address.id!)},
+            onTap: () => {
+              if (Get.isBottomSheetOpen ?? false)
+                {
+                  Get.back(),
+                },
+              _.deleteAddress(address.id!)
+            },
           )
         ],
       ),

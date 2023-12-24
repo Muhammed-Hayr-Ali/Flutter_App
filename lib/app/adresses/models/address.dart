@@ -1,7 +1,7 @@
 class UserAddress {
   int? id;
   int? userId;
-  String? firstName;
+  String? recipientName;
   String? lastName;
   String? country;
   String? state;
@@ -17,7 +17,7 @@ class UserAddress {
   UserAddress(
       {this.id,
       this.userId,
-      this.firstName,
+      this.recipientName,
       this.lastName,
       this.country,
       this.state,
@@ -33,8 +33,7 @@ class UserAddress {
   UserAddress.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id']??'';
-    firstName = json['first_name']??'';
-    lastName = json['last_name']??'';
+    recipientName = json['recipient_name']??'';
     country = json['country']??'';
     state = json['state']??'';
     city = json['city']??'';
@@ -51,8 +50,7 @@ class UserAddress {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['user_id'] = userId;
-    data['first_name'] = firstName;
-    data['last_name'] = lastName;
+    data['recipient_name'] = recipientName;
     data['country'] = country;
     data['state'] = state;
     data['city'] = city;

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:application/app/adresses/controlers/addresses_controller.dart';
+import 'package:application/app/adresses/models/address.dart';
 import 'package:application/components/custom_phone_field.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
@@ -7,19 +8,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import '../../../components/title_page.dart';
 
-class AddNewAddress extends StatefulWidget {
-  const AddNewAddress({super.key});
+class UpdateAddress extends StatefulWidget {
+  const UpdateAddress({super.key});
 
   @override
-  State<AddNewAddress> createState() => _AddNewAddressState();
+  State<UpdateAddress> createState() => _EditAddressState();
 }
 
-class _AddNewAddressState extends State<AddNewAddress> {
+class _EditAddressState extends State<UpdateAddress> {
   final double space = 32;
 
   final _ = Get.find<AddressesController>();
+
+  final String title = 'Edit Address';
 
   final _formKey = GlobalKey<FormState>();
   final Completer<GoogleMapController> _controller = Completer();
@@ -32,40 +34,47 @@ class _AddNewAddressState extends State<AddNewAddress> {
   final TextEditingController _city = TextEditingController();
   final TextEditingController _addressLine1 = TextEditingController();
   final TextEditingController _addressLine2 = TextEditingController();
+  int? id;
+
   double? lati;
   double? long;
 
   Set<Marker> markers = <Marker>{};
   Marker? marker;
+  final address = Get.arguments as UserAddress;
 
   @override
   void initState() {
     super.initState();
-    getMyLocation();
+    setDefaultValue();
   }
 
-  Future<void> getMyLocation() async {
-    bool serviceEnabled;
-    bool permissionGranted;
-
-    serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-      if (!serviceEnabled) {
-        return;
-      }
-    }
-
-    permissionGranted = await PerHandler.location();
-    if (!permissionGranted) {
+  setDefaultValue() {
+    id = address.id;
+    _recipientName.text = address.recipientName ?? '';
+    _phoneNumber.text = address.phoneNumber ?? '';
+    _country.text = address.country ?? '';
+    _state.text = address.state ?? '';
+    _city.text = address.city ?? '';
+    _addressLine1.text = address.addressLine1 ?? '';
+    _addressLine2.text = address.addressLine2 ?? '';
+    if (!hasLocation(
+        latitude: address.latitude, longitude: address.longitude)) {
       return;
     }
+    _goToPosition(
+        latLng: LatLng(
+            double.parse(address.latitude!), double.parse(address.longitude!)));
+  }
 
-    await location.getLocation().then((value) {
-      lati = value.latitude ?? 0.0;
-      long = value.longitude ?? 0.0;
-      _goToPosition(latLng: LatLng(lati ?? 0.0, long ?? 0.0));
-    });
+  bool hasLocation({required latitude, required longitude}) {
+    if (latitude != '0.00000000' &&
+        longitude != '0.00000000' &&
+        latitude != null &&
+        longitude != null) {
+      return true;
+    }
+    return false;
   }
 
   Future<void> _goToPosition({required LatLng latLng}) async {
@@ -92,11 +101,12 @@ class _AddNewAddressState extends State<AddNewAddress> {
     });
   }
 
-  void _createNewAddress() async {
+  void _addNewAddress() {
     if (_.isLoading.value) return;
 
     if (_formKey.currentState!.validate()) {
       var newAddress = {
+        'id': id,
         'recipient_name': _recipientName.text,
         'country': _country.text,
         'state': _state.text,
@@ -107,11 +117,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
         'latitude': lati,
         'longitude': long,
       };
-      final response = await _.createNewAddress(newAddress: newAddress);
-      
-      if (response) {
-        clear();
-      }
+      _.updateAddress(newAddress: newAddress);
     }
   }
 
@@ -135,7 +141,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create New Address'.tr),
+        title: Text('Edit Address'.tr),
       ),
       body: Form(
         key: _formKey,
@@ -162,6 +168,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
                         validator: (value) => Validator.isEmpty(value!),
                       ),
                     ),
+              
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: CustomTextField(
@@ -240,6 +247,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
                       padding: const EdgeInsets.all(10),
                       child: CustomPhoneField(
                           mode: Mode.contry,
+                          initialvalue: _country.text,
                           initialSelected: 'Select country*',
                           contryName: _country),
                     ),
@@ -294,11 +302,11 @@ class _AddNewAddressState extends State<AddNewAddress> {
                 () => CustomElevatedButton(
                   width: double.infinity,
                   borderRadius: 0,
-                  onPressed: _createNewAddress,
+                  onPressed: _addNewAddress,
                   child: _.isLoading.value
                       ? const CustomProgress(color: Colors.white)
                       : const Text(
-                          'Create',
+                          'Save',
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                 ),

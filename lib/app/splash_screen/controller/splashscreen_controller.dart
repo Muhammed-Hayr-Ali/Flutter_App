@@ -25,9 +25,8 @@ class SplashScreenController extends GetxController {
       if (!response.data['status']) Get.offAndToNamed(Routes.authentication);
 
       final profile = response.data['data']['profile'];
-      final uId = response.data['data']['profile']['id'];
       _localStorage.saveData(keys: Keys.profile, data: profile);
-      OneSignal.User.addTagWithKey('id', uId);
+      saveUserData(User.fromJson(profile));
 
       Get.offAndToNamed(Routes.home);
     } on DioException catch (exception) {
@@ -44,4 +43,14 @@ class SplashScreenController extends GetxController {
       Get.offAndToNamed(Routes.authentication);
     }
   }
+
+
+  void saveUserData(User user) {
+    OneSignal.User.addEmail('${user.email}');
+    OneSignal.User.addSms('${user.countryCode}${user.phoneNumber}');
+    OneSignal.User.addTags({'id': user.id, 'permissions': user.permissions});
+  }
+
+
+
 }

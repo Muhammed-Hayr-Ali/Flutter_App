@@ -58,4 +58,17 @@ class PerHandler {
 
     return false;
   }
+  static Future<bool> phone() async {
+    var status = await Permission.phone.request();
+    if (status.isGranted) {
+      return true;
+    } else if (status.isPermanentlyDenied) {
+      CustomNotification.showSnackbar(
+          message:
+              'Permission to access phone number has been permanently denied. You can grant permission through settings');
+      return false;
+    }
+
+    return false;
+  }
 }

@@ -5,7 +5,7 @@ import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import '../../../components/title_page.dart';
-import 'components/upload_image.dart';
+import 'widgets/upload_image.dart';
 import 'controller/auth_controller.dart';
 
 class CompletetYourProfile extends StatelessWidget {

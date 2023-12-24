@@ -1,5 +1,5 @@
 import '../app/adresses/views/add_new_address.dart';
-import '../app/adresses/views/edit_my_address.dart';
+import '../app/adresses/views/update_address.dart';
 import '../app/adresses/views/location_screen.dart';
 import '../app/adresses/views/my_addresses.dart';
 import '../app/authentication/account/controller/account_controller.dart';
@@ -123,7 +123,7 @@ class Pages {
     ),
     GetPage(
       name: Routes.editAddress,
-      page: () => const EditMyAddress(),
+      page: () => const UpdateAddress(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,
