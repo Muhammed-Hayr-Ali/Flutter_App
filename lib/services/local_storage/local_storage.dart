@@ -1,6 +1,6 @@
 import 'package:application/packages.dart';
 
-enum Keys { language, theme, currentUser, token, profile ,primaryColor}
+enum Keys { language, theme, currentUser, token, profile ,primaryColor, uuid}
 
 class LocalStorage {
   final storage = GetStorage();
@@ -19,6 +19,8 @@ class LocalStorage {
         return 'profile';
       case Keys.primaryColor:
         return 'primaryColor';
+      case Keys.uuid:
+        return 'uuid';
     }
   }
 

@@ -49,12 +49,10 @@ class Validator {
     return null;
   }
 
-  static mobile(String value) {
-    String patttern = r'(^(?:[0]9)?[0-9]{10,12}$)';
-    RegExp regExp = RegExp(patttern);
-    if (value.isEmpty) {
-      return null;
-    } else if (!regExp.hasMatch(value)) {
+  static phoneNumber(String value) {
+    // String pattern = r'^(?:\+)?(^(?:[0]9)?[0-9]{10,15})$';
+String pattern = r'^(\+)?[0-9]+$';    RegExp regExp = RegExp(pattern);
+    if (value.isEmpty || !regExp.hasMatch(value)) {
       return 'Please enter valid phone number'.tr;
     }
     return null;
@@ -66,6 +64,7 @@ class Validator {
     }
     return;
   }
+
   static isEmpty(String value) {
     if (value.isEmpty) {
       return 'Required field'.tr;

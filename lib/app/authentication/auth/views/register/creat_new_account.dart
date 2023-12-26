@@ -1,19 +1,20 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
-import '../../../components/title_page.dart';
-import 'controller/auth_controller.dart';
+import '../../../../../components/title_page.dart';
+import '../../controller/creat_new_account.dart';
 
 class CreatNewAccount extends StatelessWidget {
   CreatNewAccount({super.key});
 
   final double space = 32;
 
-  final _ = Get.find<AuthControlleer>();
+  final _ = Get.put<CreatNewAccountController>(CreatNewAccountController());
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
+
   final String title = 'Create Account';
   final String subTitle =
       'Fill in your information below, and proceed to the home page';
@@ -22,16 +23,16 @@ class CreatNewAccount extends StatelessWidget {
     if (_.isLoading.value) return;
 
     if (_formKey.currentState!.validate()) {
-      _.checkMailAvailabilityError.value = '';
-
-      Map data = {
+      Map<String, dynamic> data = {
         'email': _email.text,
         'password': _password.text,
       };
-      _.checkMailAvailability(user: data);
-      ();
+      final response = await _.checkMailAvailability(data: data);
+      if (response) Get.toNamed(Routes.completetYourProfile, arguments: data);
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +59,6 @@ class CreatNewAccount extends StatelessWidget {
                   child: CustomTextField(
                     labelText: 'Email',
                     hintText: 'example@gmail.com',
-                    onChanged: (value) =>
-                        _.checkMailAvailabilityError.value = '',
                     controller: _email,
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) => Validator.email(value!),
@@ -78,7 +77,7 @@ class CreatNewAccount extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: space),
+                SizedBox(height: space / 2),
                 FadeAnimationDx(
                   delay: 5,
                   child: CustomTextField(
@@ -105,13 +104,6 @@ class CreatNewAccount extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: space),
-                Obx(
-                  () => Text(
-                    _.checkMailAvailabilityError.value.tr,
-                    style: const TextStyle(fontSize: 12, color: Colors.red),
-                  ),
-                ),
-                SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 7,
                   child: CustomElevatedButton(
@@ -119,7 +111,7 @@ class CreatNewAccount extends StatelessWidget {
                     child: Obx(() => _.isLoading.value
                         ? const CustomProgress(color: Colors.white)
                         : Text(
-                            'Create New Account'.tr,
+                            'Next'.tr,
                             style: const TextStyle(
                                 fontSize: 16, color: Colors.white),
                           )),

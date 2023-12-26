@@ -1,7 +1,7 @@
 class Api {
   Api._();
 
-  static const String baseUrl = 'http://192.168.55.253:8000';
+  static const String baseUrl = 'http://192.168.0.108:8000';
   //
   static const Duration connectTimeout = Duration(seconds: 5);
   static const Map<String, dynamic> defaultHeaders = {
@@ -12,6 +12,9 @@ class Api {
   //Auth
   static const String register = '/api/auth/register';
   static const String checkMailAvailability = '/api/auth/checkMailAvailability';
+  static const String sendVerificationCode = '/api/auth/sendVerificationCode';
+  static const String completeRegistration = '/api/auth/completeRegistration';
+
   static const String login = '/api/auth/login';
   static const String continueWithGoogle = '/api/auth/continueWithGoogle';
   static const String logout = '/api/auth/logout';

@@ -1,8 +1,8 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
-import '../../../components/title_page.dart';
-import 'controller/auth_controller.dart';
+import '../../../../components/title_page.dart';
+import '../controller/login_controller.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -10,7 +10,7 @@ class Login extends StatelessWidget {
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.find<AuthControlleer>();
+  final _ = Get.put<LoginController>(LoginController());
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _email = TextEditingController();
@@ -26,10 +26,13 @@ class Login extends StatelessWidget {
     if (_.isLoading.value) return;
 
     if (_formKey.currentState!.validate()) {
-      _.login({
+      Map<String, dynamic> data = {
         'email': _email.text,
         'password': _password.text,
-      });
+      };
+
+      final response = await _.login(data: data);
+      if (response) Get.offAllNamed(Routes.home);
     }
   }
 

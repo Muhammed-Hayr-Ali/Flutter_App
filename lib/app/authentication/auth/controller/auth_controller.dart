@@ -13,7 +13,6 @@ class AuthControlleer extends GetxController {
   );
   RxBool isLoading = false.obs;
   RxString countryCode = '+963'.obs;
-  RxString checkMailAvailabilityError = ''.obs;
   RxString registerError = ''.obs;
   RxString genderValue = 'Unspecified'.obs;
 
@@ -24,6 +23,11 @@ class AuthControlleer extends GetxController {
       'email': user['email'],
     });
 
+
+
+
+
+
     try {
       final response = await _dio.post(Api.checkMailAvailability, data: data);
       if (!response.data['status']) return;
@@ -32,7 +36,8 @@ class AuthControlleer extends GetxController {
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
-        checkMailAvailabilityError.value = responseData['message'];
+        CustomNotification.showSnackbar(message: '${responseData['message']}');
+
       } else {
         CustomDioException.exception(exception.type);
       }

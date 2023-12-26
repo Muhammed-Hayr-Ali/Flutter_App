@@ -26,6 +26,7 @@ class AppAssets {
 
   static const String editProfile = 'assets/icons/edit_profile.svg';
   static const String mentionCircle = 'assets/icons/mention-circle.svg';
+  static const String simCard = 'assets/icons/sim-card.svg';
 
   static const String mapPoint = 'assets/icons/map-point.svg';
   static const String heart = 'assets/icons/heart.svg';

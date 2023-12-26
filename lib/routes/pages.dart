@@ -6,10 +6,11 @@ import '../app/authentication/account/controller/account_controller.dart';
 import '../app/authentication/account/view/create_new_password.dart';
 import '../app/authentication/account/view/forgot_password.dart';
 import '../app/authentication/account/view/verify_verification_code.dart';
-import '../app/authentication/auth/completet_your_profile.dart';
 import '../app/authentication/auth/controller/auth_controller.dart';
-import '../app/authentication/auth/creat_new_account.dart';
-import '../app/authentication/auth/login_user.dart';
+import '../app/authentication/auth/views/login_user.dart';
+import '../app/authentication/auth/views/register/complete_registration.dart';
+import '../app/authentication/auth/views/register/completet_your_profile.dart';
+import '../app/authentication/auth/views/register/creat_new_account.dart';
 import '../app/authentication/authentication.dart';
 import '../app/bottomNavigationBar/view/bottom_navigation_bar.dart';
 
@@ -56,6 +57,20 @@ class Pages {
     GetPage(
       name: Routes.completetYourProfile,
       page: () => CompletetYourProfile(),
+      transitionDuration: duration,
+      transition: transition,
+      curve: curve,
+    ),
+    GetPage(
+      name: Routes.completetYourProfile,
+      page: () => CompletetYourProfile(),
+      transitionDuration: duration,
+      transition: transition,
+      curve: curve,
+    ),
+    GetPage(
+      name: Routes.completeRegistration,
+      page: () => CompleteRegistration(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,
