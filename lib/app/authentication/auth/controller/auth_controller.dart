@@ -1,7 +1,6 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 import 'package:dio/dio.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class AuthControlleer extends GetxController {
   final LocalStorage _localStorage = LocalStorage();
@@ -16,102 +15,6 @@ class AuthControlleer extends GetxController {
   RxString registerError = ''.obs;
   RxString genderValue = 'Unspecified'.obs;
 
-  void checkMailAvailability({required Map user}) async {
-    isLoading(true);
-
-    FormData data = FormData.fromMap({
-      'email': user['email'],
-    });
-
-
-
-
-
-
-    try {
-      final response = await _dio.post(Api.checkMailAvailability, data: data);
-      if (!response.data['status']) return;
-
-      Get.toNamed(Routes.completetYourProfile, arguments: user);
-    } on DioException catch (exception) {
-      if (exception.response != null) {
-        final responseData = exception.response?.data;
-        CustomNotification.showSnackbar(message: '${responseData['message']}');
-
-      } else {
-        CustomDioException.exception(exception.type);
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
-
-  void register(Map<String, dynamic> user) async {
-    isLoading(true);
-
-    FormData data = FormData.fromMap(user);
-
-    if (user['path'] != '') {
-      MultipartFile photo = await MultipartFile.fromFile(user['path']!);
-      data.files.add(MapEntry('profile', photo));
-    }
-
-    try {
-      final response = await _dio.post(Api.register, data: data);
-      if (!response.data['status']) return;
-
-      final profile = response.data['data']['profile'];
-      final token = response.data['data']['profile']['token'];
-      _localStorage.saveData(keys: Keys.profile, data: profile);
-      _localStorage.saveData(keys: Keys.token, data: token);
-      saveUserData(User.fromJson(profile));
-
-      Get.offAllNamed(Routes.home);
-      CustomNotification.showSnackbar(
-          message: '${'Welcome to the world of '.tr} ${AppConstants.appName}');
-    } on DioException catch (exception) {
-      if (exception.response != null) {
-        final responseData = exception.response?.data;
-        CustomNotification.showSnackbar(message: responseData['message']);
-      } else {
-        CustomDioException.exception(exception.type);
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
-
-  void login(Map<String, dynamic> user) async {
-    isLoading(true);
-
-    FormData data = FormData.fromMap(user);
-
-    try {
-      final response = await _dio.post(Api.login, data: data);
-      if (!response.data['status']) return;
-
-      final token = response.data['data']['profile']['token'];
-      final profile = response.data['data']['profile'];
-      _localStorage.saveData(keys: Keys.token, data: token);
-      _localStorage.saveData(keys: Keys.profile, data: profile);
-      saveUserData(User.fromJson(profile));
-
-      Get.offAllNamed(Routes.home);
-
-      CustomNotification.showSnackbar(
-          message:
-              '${'Welcome Back,'.tr} ${response.data['data']['profile']['name']}');
-    } on DioException catch (exception) {
-      if (exception.response != null) {
-        final responseData = exception.response?.data;
-        CustomNotification.showSnackbar(message: responseData['message']);
-      } else {
-        CustomDioException.exception(exception.type);
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
 
   void continueWithGoogle() async {
     isLoading(true);
@@ -140,7 +43,6 @@ class AuthControlleer extends GetxController {
       _localStorage.saveData(keys: Keys.profile, data: profile);
       _localStorage.saveData(keys: Keys.token, data: token);
 
-      saveUserData(User.fromJson(profile));
 
       Get.offAllNamed(Routes.home);
       CustomNotification.showSnackbar(
@@ -161,30 +63,7 @@ class AuthControlleer extends GetxController {
     }
   }
 
-  void logout() async {
-    try {
-      final response = await _dio.post(Api.logout,
-          options: Options(headers: Authorization().bearer()));
-      if (!response.data['status']) return;
-
-      _localStorage.remove(keys: Keys.profile);
-
-      OneSignal.logout();
-
-      Get.offAndToNamed(Routes.authentication);
-    } on DioException catch (exception) {
-      if (exception.response != null) {
-        final responseData = exception.response?.data;
-        final errorMessage = responseData['message'];
-        CustomNotification.showSnackbar(message: errorMessage);
-      } else {
-        CustomDioException.exception(exception.type);
-      }
-
-      Get.offAndToNamed(Routes.authentication);
-    }
-  }
-
+  
   Future<void> dataPolicy() async {
     final Uri url = Uri.parse(AppConstants.getPrivacyPolicyUrl);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
@@ -192,9 +71,5 @@ class AuthControlleer extends GetxController {
     }
   }
 
-  void saveUserData(User user) {
-    OneSignal.User.addEmail('${user.email}');
-    OneSignal.User.addSms('${user.countryCode}${user.phoneNumber}');
-    OneSignal.User.addTags({'id': user.id, 'permissions': user.permissions});
-  }
+
 }

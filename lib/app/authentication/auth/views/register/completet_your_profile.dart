@@ -37,7 +37,7 @@ class CompletetYourProfile extends StatelessWidget {
       arguments['phone_number'] = _phoneNumber.text;
 
 
-      final response = await _.sendVerificationCode(data: arguments);
+      final response = await _.sendVerificationCode(map: arguments);
       if (response) {
         Get.toNamed(Routes.completeRegistration, arguments: arguments);
       }

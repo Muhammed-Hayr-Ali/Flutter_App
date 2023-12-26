@@ -1,26 +1,30 @@
 import 'package:application/packages.dart';
 
 import '../../../../components/title_page.dart';
-import '../controller/account_controller.dart';
+import '../controller/forgot_pass.dart';
 import 'package:application/required_files.dart';
 
-class ForgotPassword extends StatelessWidget {
-  ForgotPassword({super.key});
+class CreateNewPassword extends StatelessWidget {
+  CreateNewPassword({super.key});
 
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.find<AccountController>();
+  final _ = Get.find<ForgotPasswordController>();
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _email = TextEditingController();
-  final String title = 'Forgot Password';
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _confirmPassword = TextEditingController();
+  final String title = 'Create New Password';
   final String subTitle =
-      'Please Enter your email Address To Recieve a Verification Code';
-
-  void _recovery() async {
+      'Your New Password Must Be Different from Previous Password';
+  final data = Get.arguments as Map<String, dynamic>;
+  void _createNewPassword() async {
     if (_formKey.currentState!.validate()) {
-      _.forgotPassword(mail: _email.text);
+      data['password'] = _password.text;
+
+      final response = await _.createNewPassword(map: data);
+      if (response) Get.offAllNamed(Routes.loginUser);
     }
   }
 
@@ -37,15 +41,17 @@ class ForgotPassword extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
- FadeAnimationDx(
-                  delay: 2,                  child: PageTitle(
+                FadeAnimationDx(
+                  delay: 2,
+                  child: PageTitle(
                     title: title,
                     subTitle: subTitle,
                   ),
                 ),
                 SizedBox(height: space),
- FadeAnimationDx(
-                  delay: 3,                  child: Container(
+                FadeAnimationDx(
+                  delay: 3,
+                  child: Container(
                     height: size,
                     width: size,
                     padding: EdgeInsets.all(size * 0.2),
@@ -54,7 +60,7 @@ class ForgotPassword extends StatelessWidget {
                       color: AppColors.primaryColor.withOpacity(0.1),
                     ),
                     child: SvgPicture.asset(
-                      AppAssets.keySquare,
+                      AppAssets.password,
                     ),
                   ),
                 ),
@@ -62,32 +68,40 @@ class ForgotPassword extends StatelessWidget {
                 FadeAnimationDx(
                   delay: 4,
                   child: CustomTextField(
-                    labelText: 'E-mail',
-                    controller: _email,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) => Validator.email(value!),
-                    onChanged: (value) => _.forgotPasswordError.value = '',
-                  ),
-                ),
-                SizedBox(height: space),
-                Obx(
-                  () => Text(
-                    _.forgotPasswordError.value.tr,
-                    style: const TextStyle(fontSize: 12, color: Colors.red),
+                    labelText: 'Password',
+                    hintText: '************',
+                    isPassword: true,
+                    controller: _password,
+                    keyboardType: TextInputType.multiline,
+                    validator: (value) =>
+                        Validator.password(value!, _confirmPassword.text),
                   ),
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 5,
+                  child: CustomTextField(
+                    labelText: 'Confirm password',
+                    hintText: '************',
+                    isPassword: true,
+                    controller: _confirmPassword,
+                    keyboardType: TextInputType.multiline,
+                    validator: (value) =>
+                        Validator.password(value!, _password.text),
+                  ),
+                ),
+                SizedBox(height: space),
+                FadeAnimationDx(
+                  delay: 6,
                   child: CustomElevatedButton(
-                    onPressed: _recovery,
+                    onPressed: _createNewPassword,
                     child: Obx(
                       () => _.isLoading.value
                           ? const CustomProgress(
                               color: Colors.white,
                             )
                           : Text(
-                              'Send'.tr,
+                              'save'.tr,
                               style: const TextStyle(
                                   fontSize: 16, color: Colors.white),
                             ),

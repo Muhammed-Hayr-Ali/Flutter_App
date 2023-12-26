@@ -27,7 +27,7 @@ class CreatNewAccount extends StatelessWidget {
         'email': _email.text,
         'password': _password.text,
       };
-      final response = await _.checkMailAvailability(data: data);
+      final response = await _.checkMailAvailability(map: data);
       if (response) Get.toNamed(Routes.completetYourProfile, arguments: data);
     }
   }

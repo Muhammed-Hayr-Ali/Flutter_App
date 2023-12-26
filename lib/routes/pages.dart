@@ -2,10 +2,10 @@ import '../app/adresses/views/add_new_address.dart';
 import '../app/adresses/views/update_address.dart';
 import '../app/adresses/views/location_screen.dart';
 import '../app/adresses/views/my_addresses.dart';
-import '../app/authentication/account/controller/account_controller.dart';
-import '../app/authentication/account/view/create_new_password.dart';
-import '../app/authentication/account/view/forgot_password.dart';
-import '../app/authentication/account/view/verify_verification_code.dart';
+import '../app/authentication/forgot_pass/controller/forgot_pass.dart';
+import '../app/authentication/forgot_pass/view/create_new_password.dart';
+import '../app/authentication/forgot_pass/view/forgot_password.dart';
+import '../app/authentication/forgot_pass/view/verify_phone_number.dart';
 import '../app/authentication/auth/controller/auth_controller.dart';
 import '../app/authentication/auth/views/login_user.dart';
 import '../app/authentication/auth/views/register/complete_registration.dart';
@@ -83,17 +83,15 @@ class Pages {
       curve: curve,
     ),
     GetPage(
-        name: Routes.forgotPassword,
-        page: () => ForgotPassword(),
-        transitionDuration: duration,
-        transition: transition,
-        curve: curve,
-        binding: BindingsBuilder(() {
-          Get.put<AccountController>(AccountController());
-        })),
+      name: Routes.forgotPassword,
+      page: () => ForgotPassword(),
+      transitionDuration: duration,
+      transition: transition,
+      curve: curve,
+    ),
     GetPage(
-      name: Routes.verifyVerificationCode,
-      page: () => VerifyVerificationCode(),
+      name: Routes.verifyPhoneNumber,
+      page: () => VerifyPhoneNumber(),
       transitionDuration: duration,
       transition: transition,
       curve: curve,

@@ -10,7 +10,7 @@ abstract class Routes {
   static const navBar = '/navBar';
   static const home = '/home';
   static const forgotPassword = '/ForgotPassword';
-  static const verifyVerificationCode = '/verifyVerificationCode';
+  static const verifyPhoneNumber = '/verifyPhoneNumber';
   static const createNewPassword = '/createNewPassword';
 
   static const editProfile = '/editProfile';

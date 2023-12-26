@@ -26,7 +26,7 @@ class CompleteRegistration extends StatelessWidget {
     if (_.isLoading.value) return;
 
     arguments['verificationCode'] = _verificationCode.text;
-    final response = await _.completeRegistration(data: arguments);
+    final response = await _.completeRegistration(map: arguments);
     if (response) Get.offAllNamed(Routes.home);
   }
 

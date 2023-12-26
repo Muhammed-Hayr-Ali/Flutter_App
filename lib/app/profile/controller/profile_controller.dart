@@ -24,24 +24,17 @@ class ProfileController extends GetxController {
 
   String? path;
 
-  void getCurrentUser() async {
+  getCurrentUser() async {
     final user = await _localStorage.readData(keys: Keys.profile);
     currentUser = User.fromJson(user);
     if (currentUser == null) return;
     update();
   }
 
-  void updateProfile({required Map<String, dynamic> newUser}) async {
+  Future<bool> updateProfile({required Map<String, dynamic> newUser}) async {
     isLoading(true);
 
-    FormData data = FormData.fromMap({
-      'name': newUser['name'],
-      'status': newUser['status'],
-      'country_code': newUser['countryCode'],
-      'phone_number': newUser['phoneNumber'],
-      'gender': newUser['gender'],
-      'date_birth': newUser['dateBirth'],
-    });
+    FormData data = FormData.fromMap(newUser);
 
     if (newUser['path'] != null) {
       MultipartFile photo = await MultipartFile.fromFile(newUser['path']);
@@ -51,15 +44,16 @@ class ProfileController extends GetxController {
     try {
       final response = await _dio.post(Api.updateProfile,
           options: Options(headers: Authorization().bearer()), data: data);
-      if (!response.data['status']) return;
+      if (!response.data['status']) return false;
 
       final profile = response.data['data']['profile'];
       _localStorage.saveData(keys: Keys.profile, data: profile);
-      final message = response.data['message'];
-      CustomNotification.showSnackbar(message: message);
-      final newProfile = response.data['data']['profile'];
-      currentUser = User.fromJson(newProfile);
+
+      CustomNotification.showSnackbar(message: response.data['message']);
+
+      await getCurrentUser();
       update();
+      return true;
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -67,7 +61,39 @@ class ProfileController extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+      return false;
+    } finally {
+      isLoading(false);
     }
-    isLoading(false);
   }
+
+
+  Future<bool> logout() async {
+    isLoading(true);
+
+
+    try {
+      final response = await _dio.post(Api.logout,
+          options: Options(headers: Authorization().bearer()));
+      if (!response.data['status']) return false;
+      _localStorage.remove(keys: Keys.profile);
+      _localStorage.remove(keys: Keys.token);
+
+      return true;
+    } on DioException catch (exception) {
+      if (exception.response != null) {
+        final responseData = exception.response?.data;
+        CustomNotification.showSnackbar(message: responseData['message']);
+      } else {
+        CustomDioException.exception(exception.type);
+      }
+      return false;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+
+
+
 }

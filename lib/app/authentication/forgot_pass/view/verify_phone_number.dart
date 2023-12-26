@@ -4,26 +4,30 @@ import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
 import '../../../../components/title_page.dart';
-import '../controller/account_controller.dart';
+import '../controller/forgot_pass.dart';
 
-class VerifyVerificationCode extends StatelessWidget {
-  VerifyVerificationCode({super.key});
+class VerifyPhoneNumber extends StatelessWidget {
+  VerifyPhoneNumber({super.key});
 
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.find<AccountController>();
+  final _ = Get.find<ForgotPasswordController>();
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _verificationCode = TextEditingController();
-  final String title = 'Verify Your Email';
+  final String title = 'Verify Your Number';
   final String subTitle =
-      'Please Enter your verification code that we sent you through your email ';
+      'Please enter your verification code that we sent to you via app notifications ';
 
-  final data = Get.arguments as Map;
-  void _verifyVerificationCode() async {
-    _.verifyVerificationCode(
-        email: data['email'], verificationCode: _verificationCode.text);
+  final data = Get.arguments as Map<String, dynamic>;
+
+  void _verifyPhoneNumber() async {
+    if (_verificationCode.text != '') {
+      data['verificationCode'] = _verificationCode.text;
+      final response = await _.verifyPhoneNumber(map: data);
+      if (response) Get.toNamed(Routes.createNewPassword, arguments: data);
+    }
   }
 
   @override
@@ -39,15 +43,17 @@ class VerifyVerificationCode extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
- FadeAnimationDx(
-                  delay: 2,                  child: PageTitle(
+                FadeAnimationDx(
+                  delay: 2,
+                  child: PageTitle(
                     title: title,
                     subTitle: subTitle,
                   ),
                 ),
                 SizedBox(height: space),
- FadeAnimationDx(
-                  delay: 3,                  child: Container(
+                FadeAnimationDx(
+                  delay: 3,
+                  child: Container(
                     height: size,
                     width: size,
                     padding: EdgeInsets.all(size * 0.2),
@@ -56,7 +62,7 @@ class VerifyVerificationCode extends StatelessWidget {
                       color: AppColors.primaryColor.withOpacity(0.1),
                     ),
                     child: SvgPicture.asset(
-                      AppAssets.mention,
+                      AppAssets.key,
                     ),
                   ),
                 ),
@@ -74,22 +80,14 @@ class VerifyVerificationCode extends StatelessWidget {
                     fieldStyle: FieldStyle.underline,
                     outlineBorderRadius: 2,
                     onCompleted: (code) => _verificationCode.text = code,
-                    onChanged: (value) =>
-                        _.verifyVerificationCodeError.value = '',
-                  ),
-                ),
-                SizedBox(height: space),
-                Obx(
-                  () => Text(
-                    _.verifyVerificationCodeError.value.tr,
-                    style: const TextStyle(fontSize: 12, color: Colors.red),
+                    onChanged: (value) {},
                   ),
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 5,
                   child: CustomElevatedButton(
-                    onPressed: _verifyVerificationCode,
+                    onPressed: _verifyPhoneNumber,
                     child: Obx(
                       () => _.isLoading.value
                           ? const CustomProgress(

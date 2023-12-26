@@ -7,9 +7,13 @@ class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
   final ProfileController _ = Get.put(ProfileController());
 
-
   String _shortMail(String value) {
     return value.substring(0, value.indexOf("@"));
+  }
+
+  void logout() async {
+    final response = await _.logout();
+    if (response) Get.offAllNamed(Routes.authentication);
   }
 
   @override
@@ -108,11 +112,11 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 38.0),
             Center(
               child: CustomElevatedButton(
+                onPressed: logout,
                 child: Text(
                   'Logout'.tr,
                   style: const TextStyle(color: Colors.white),
                 ),
-                onPressed: () => debugPrint(''),
               ),
             ),
             const SizedBox(height: 80.0),

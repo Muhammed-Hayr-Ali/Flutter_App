@@ -3,6 +3,8 @@ import 'package:application/required_files.dart';
 import 'package:dio/dio.dart';
 
 class LoginController extends GetxController {
+
+
   RxBool isLoading = false.obs;
 
   final LocalStorage _localStorage = LocalStorage();
@@ -13,7 +15,6 @@ class LoginController extends GetxController {
         headers: Api.defaultHeaders),
   );
 
-  ///
   Future<bool> login({required Map<String, dynamic> data}) async {
     isLoading(true);
 

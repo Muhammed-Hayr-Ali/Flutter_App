@@ -48,12 +48,16 @@ class Login extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                FadeAnimationDx(
-                  delay: 2,
-                  child: PageTitle(
-                    title: title,
-                    subTitle: subTitle,
-                  ),
+                Row(
+                  children: [
+                    FadeAnimationDx(
+                      delay: 2,
+                      child: PageTitle(
+                        title: title,
+                        subTitle: subTitle,
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(

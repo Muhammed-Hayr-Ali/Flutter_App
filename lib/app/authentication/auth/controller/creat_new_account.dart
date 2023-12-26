@@ -15,14 +15,14 @@ class CreatNewAccountController extends GetxController {
 
   ///
   Future<bool> checkMailAvailability(
-      {required Map<String, dynamic> data}) async {
+      {required Map<String, dynamic> map}) async {
     isLoading(true);
 
-    FormData formData = FormData.fromMap(data);
+    FormData data = FormData.fromMap(map);
 
     try {
       final response =
-          await _dio.post(Api.checkMailAvailability, data: formData);
+          await _dio.post(Api.checkMailAvailability, data: data);
       return response.data['status'];
     } on DioException catch (exception) {
       if (exception.response != null) {
@@ -38,14 +38,14 @@ class CreatNewAccountController extends GetxController {
   }
 
   Future<bool> sendVerificationCode(
-      {required Map<String, dynamic> data}) async {
+      {required Map<String, dynamic> map}) async {
     isLoading(true);
 
-    FormData formData = FormData.fromMap(data);
+    FormData data = FormData.fromMap(map);
 
     try {
       final response =
-          await _dio.post(Api.sendVerificationCode, data: formData);
+          await _dio.post(Api.sendVerificationCode, data: data);
       return response.data['status'];
       
     } on DioException catch (exception) {
@@ -62,14 +62,14 @@ class CreatNewAccountController extends GetxController {
   }
 
   Future<bool> completeRegistration(
-      {required Map<String, dynamic> data}) async {
+      {required Map<String, dynamic> map}) async {
     isLoading(true);
 
-    FormData formData = FormData.fromMap(data);
+    FormData data = FormData.fromMap(map);
 
     try {
       final response =
-          await _dio.post(Api.completeRegistration, data: formData);
+          await _dio.post(Api.completeRegistration, data: data);
       if (!response.data['status']) return false;
 
       final profile = response.data['data']['profile'];

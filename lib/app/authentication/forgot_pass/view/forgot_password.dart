@@ -1,30 +1,28 @@
 import 'package:application/packages.dart';
 
 import '../../../../components/title_page.dart';
-import '../controller/account_controller.dart';
+import '../controller/forgot_pass.dart';
 import 'package:application/required_files.dart';
 
-class CreateNewPassword extends StatelessWidget {
-  CreateNewPassword({super.key});
+class ForgotPassword extends StatelessWidget {
+  ForgotPassword({super.key});
 
   final double space = 32;
   final double fontSize = 10;
 
-  final _ = Get.find<AccountController>();
+  final _ = Get.put<ForgotPasswordController>(ForgotPasswordController());
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _password = TextEditingController();
-  final TextEditingController _confirmPassword = TextEditingController();
-  final String title = 'Create New Password';
+  final TextEditingController _phoneNumber = TextEditingController();
+  final String title = 'Forgot Password';
   final String subTitle =
-      'Your New Password Must Be Different from Previous Password';
-  final data = Get.arguments as Map;
-  void _recovery() async {
+      'Please Enter your Phone Number To Receive a Verification Code';
+
+  void _sendVerificationCode() async {
     if (_formKey.currentState!.validate()) {
-      _.createNewPassword(
-          email: data['email'],
-          verificationCode: data['verificationCode'],
-          password: _password.text);
+      Map<String, dynamic> map = {'phone_number': _phoneNumber.text};
+      final response = await _.sendVerificationCode(map: map);
+      if (response) Get.toNamed(Routes.verifyPhoneNumber, arguments: map);
     }
   }
 
@@ -41,15 +39,17 @@ class CreateNewPassword extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
- FadeAnimationDx(
-                  delay: 2,                  child: PageTitle(
+                FadeAnimationDx(
+                  delay: 2,
+                  child: PageTitle(
                     title: title,
                     subTitle: subTitle,
                   ),
                 ),
                 SizedBox(height: space),
- FadeAnimationDx(
-                  delay: 3,                  child: Container(
+                FadeAnimationDx(
+                  delay: 3,
+                  child: Container(
                     height: size,
                     width: size,
                     padding: EdgeInsets.all(size * 0.2),
@@ -58,7 +58,7 @@ class CreateNewPassword extends StatelessWidget {
                       color: AppColors.primaryColor.withOpacity(0.1),
                     ),
                     child: SvgPicture.asset(
-                      AppAssets.password,
+                      AppAssets.simCard,
                     ),
                   ),
                 ),
@@ -66,49 +66,25 @@ class CreateNewPassword extends StatelessWidget {
                 FadeAnimationDx(
                   delay: 4,
                   child: CustomTextField(
-                    labelText: 'Password',
-                    hintText: '************',
-                    isPassword: true,
-                    controller: _password,
-                    keyboardType: TextInputType.multiline,
-                    validator: (value) =>
-                        Validator.password(value!, _confirmPassword.text),
-                    onChanged: (value) => _.createNewPasswordError.value = '',
+                    labelText: 'Phone Number',
+                    hintText: 'E.g 0933123456',
+                    controller: _phoneNumber,
+                    keyboardType: TextInputType.phone,
+                    validator: (value) => Validator.phoneNumber(value!),
                   ),
                 ),
                 SizedBox(height: space),
                 FadeAnimationDx(
                   delay: 5,
-                  child: CustomTextField(
-                    labelText: 'Confirm password',
-                    hintText: '************',
-                    isPassword: true,
-                    controller: _confirmPassword,
-                    keyboardType: TextInputType.multiline,
-                    validator: (value) =>
-                        Validator.password(value!, _password.text),
-                    onChanged: (value) => _.createNewPasswordError.value = '',
-                  ),
-                ),
-                SizedBox(height: space),
-                Obx(
-                  () => Text(
-                    _.createNewPasswordError.value.tr,
-                    style: const TextStyle(fontSize: 12, color: Colors.red),
-                  ),
-                ),
-                SizedBox(height: space),
-                FadeAnimationDx(
-                  delay: 6,
                   child: CustomElevatedButton(
-                    onPressed: _recovery,
+                    onPressed: _sendVerificationCode,
                     child: Obx(
                       () => _.isLoading.value
                           ? const CustomProgress(
                               color: Colors.white,
                             )
                           : Text(
-                              'save'.tr,
+                              'Send'.tr,
                               style: const TextStyle(
                                   fontSize: 16, color: Colors.white),
                             ),
