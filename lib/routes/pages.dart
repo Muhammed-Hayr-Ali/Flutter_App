@@ -2,7 +2,6 @@ import '../app/adresses/views/add_new_address.dart';
 import '../app/adresses/views/update_address.dart';
 import '../app/adresses/views/location_screen.dart';
 import '../app/adresses/views/my_addresses.dart';
-import '../app/authentication/forgot_pass/controller/forgot_pass.dart';
 import '../app/authentication/forgot_pass/view/create_new_password.dart';
 import '../app/authentication/forgot_pass/view/forgot_password.dart';
 import '../app/authentication/forgot_pass/view/verify_phone_number.dart';
