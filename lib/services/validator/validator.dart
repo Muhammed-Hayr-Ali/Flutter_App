@@ -4,6 +4,9 @@ class Validator {
   Validator._();
 
   static userName(String value) {
+
+  // regex:/^[^0-9!@#$%^&*()_+|~=`{}\[\]:";\'<>?,.\/]*$/'],
+
     if (value.isEmpty) {
       return 'Enter your full name'.tr;
     } else if (value.length <= 3) {

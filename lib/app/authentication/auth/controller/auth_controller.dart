@@ -10,13 +10,10 @@ class AuthControlleer extends GetxController {
         connectTimeout: Api.connectTimeout,
         headers: Api.defaultHeaders),
   );
+
   RxBool isLoading = false.obs;
-  RxString countryCode = '+963'.obs;
-  RxString registerError = ''.obs;
-  RxString genderValue = 'Unspecified'.obs;
 
-
-  void continueWithGoogle() async {
+  Future<bool> continueWithGoogle() async {
     isLoading(true);
     final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
     try {
@@ -24,33 +21,25 @@ class AuthControlleer extends GetxController {
       if (googleUser == null) {
         CustomNotification.showSnackbar(
             message: 'We were unable to obtain your account information');
-        return;
+        return false;
       }
-
-      FormData data = FormData.fromMap({
+      Map<String, dynamic> map = {
         'name': googleUser.displayName,
         'email': googleUser.email.toString(),
         'password': googleUser.id,
         'profile': googleUser.photoUrl.toString()
-      });
+      };
 
+      FormData data = FormData.fromMap(map);
       final response = await _dio.post(Api.continueWithGoogle, data: data);
 
-      if (!response.data['status']) return;
-      final isNewUser = response.data['message'];
+      if (!response.data['status']) return false;
       final profile = response.data['data']['profile'];
       final token = response.data['data']['profile']['token'];
       _localStorage.saveData(keys: Keys.profile, data: profile);
       _localStorage.saveData(keys: Keys.token, data: token);
 
-
-      Get.offAllNamed(Routes.home);
-      CustomNotification.showSnackbar(
-          message: isNewUser
-              ? '${'Welcome to the world of '.tr} ${AppConstants.appName}'
-              : '${'Welcome Back,'.tr} ${response.data['data']['profile']['name']}');
-
-      Get.offAllNamed(Routes.home);
+      return true;
     } on DioException catch (exception) {
       if (exception.response != null) {
         final responseData = exception.response?.data;
@@ -58,18 +47,16 @@ class AuthControlleer extends GetxController {
       } else {
         CustomDioException.exception(exception.type);
       }
+      return false;
     } finally {
       isLoading(false);
     }
   }
 
-  
   Future<void> dataPolicy() async {
     final Uri url = Uri.parse(AppConstants.getPrivacyPolicyUrl);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $url');
     }
   }
-
-
 }

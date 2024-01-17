@@ -7,11 +7,12 @@ class Authentication extends StatelessWidget {
   Authentication({super.key});
 
   final double fontSize = 9;
-  final _ = Get.find<AuthControlleer>();
+  final _ = Get.put<AuthControlleer>(AuthControlleer());
 
   void _continueWithGoogle() async {
     if (_.isLoading.value) return;
-    _.continueWithGoogle();
+    final response = await _.continueWithGoogle();
+    if (response) Get.offAllNamed(Routes.home);
   }
 
   void _signIn() {

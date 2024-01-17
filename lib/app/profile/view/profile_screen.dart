@@ -1,6 +1,6 @@
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
-import '../component/user_profile.dart';
+import '../widgets/user_profile.dart';
 import '../controller/profile_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -23,15 +23,11 @@ class ProfileScreen extends StatelessWidget {
         leading: null,
         centerTitle: true,
         backgroundColor: AppColors.primaryColor,
-        title: GetBuilder<ProfileController>(
-          init: ProfileController(),
-          builder: (_) => Text(
-            '@${_shortMail(_.currentUser!.email ?? '')}',
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-            ),
+        title: const Text(
+          'Profile',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),

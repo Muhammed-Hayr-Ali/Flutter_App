@@ -31,13 +31,13 @@ class ProfileController extends GetxController {
     update();
   }
 
-  Future<bool> updateProfile({required Map<String, dynamic> newUser}) async {
+  Future<bool> updateProfile({required Map<String, dynamic> map}) async {
     isLoading(true);
 
-    FormData data = FormData.fromMap(newUser);
+    FormData data = FormData.fromMap(map);
 
-    if (newUser['path'] != null) {
-      MultipartFile photo = await MultipartFile.fromFile(newUser['path']);
+    if (map['newPath'] != null) {
+      MultipartFile photo = await MultipartFile.fromFile(map['newPath']);
       data.files.add(MapEntry('profile', photo));
     }
 
@@ -50,7 +50,6 @@ class ProfileController extends GetxController {
       _localStorage.saveData(keys: Keys.profile, data: profile);
 
       CustomNotification.showSnackbar(message: response.data['message']);
-
       await getCurrentUser();
       update();
       return true;

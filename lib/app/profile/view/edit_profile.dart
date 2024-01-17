@@ -1,6 +1,5 @@
 import 'package:application/components/custom_date_picker.dart';
 import 'package:application/components/custom_dropdown_utton.dart';
-import 'package:application/components/custom_phone_field.dart';
 import 'package:application/packages.dart';
 import 'package:application/required_files.dart';
 
@@ -14,58 +13,60 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-
   final double space = 32;
-  final _ = Get.find<ProfileController>();
   final data = Get.arguments as User;
 
-
   final _formKey = GlobalKey<FormState>();
+  final _ = Get.find<ProfileController>();
   final ImageService imageService = ImageService();
 
-  String? _profile;
-  String? _path;
+  String? _profileUrl;
+  String? _newPath;
   TextEditingController _userName = TextEditingController();
-  TextEditingController _phoneNumber = TextEditingController();
-  TextEditingController _countryCode = TextEditingController();
   TextEditingController _status = TextEditingController();
   TextEditingController _gender = TextEditingController();
   TextEditingController _dateBirth = TextEditingController();
+  TextEditingController _phoneNumber = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     setState(() {
-      _profile = data.profile;
+      _profileUrl = data.profile;
       _userName = TextEditingController(text: data.name ?? '');
       _status = TextEditingController(text: data.status ?? '');
-      _countryCode = TextEditingController(text: data.countryCode ?? '');
-      _phoneNumber = TextEditingController(text: data.phoneNumber ?? '');
       _gender = TextEditingController(text: data.gender ?? '');
       _dateBirth = TextEditingController(text: data.dateBirth ?? '');
+      _phoneNumber = TextEditingController(text: data.phoneNumber ?? '');
     });
-  }
-
-  void upDateProfile() {
-    if (_.isLoading.value) return;
-    Map<String, dynamic> newUser = {
-      'name': _userName.text,
-      'status': _status.text,
-      'countryCode': _countryCode.text,
-      'phoneNumber': _phoneNumber.text,
-      'gender': _gender.text,
-      'dateBirth': _dateBirth.text,
-      'path': _path,
-    };
-    _.updateProfile(newUser: newUser);
   }
 
   void uploadImageProfile() async {
     final imagePath = await imageService.getImage();
     if (imagePath != null) {
       setState(() {
-        _path = imagePath;
+        _newPath = imagePath;
       });
+    }
+  }
+
+  void _removeNewPath() {
+    setState(() {
+      _newPath = null;
+    });
+  }
+
+  void _updateProfile() {
+    if (_formKey.currentState!.validate()) {
+      Map<String, dynamic> data = {
+        'newPath': _newPath,
+        'name': _userName.text,
+        'status': _status.text,
+        'gender': _gender.text,
+        'date_birth': _dateBirth.text,
+        'phone_number': _phoneNumber.text,
+      };
+      _.updateProfile(map: data);
     }
   }
 
@@ -93,13 +94,13 @@ class _EditProfileState extends State<EditProfile> {
                               tag: 'user_avatar',
                               child: GestureDetector(
                                 onTap: uploadImageProfile,
-                                child: _path != null
+                                child: _newPath != null
                                     ? CustomAvatar(
                                         sourceImage: SourceImage.localImage,
-                                        imagePath: _path)
+                                        imagePath: _newPath)
                                     : CustomAvatar(
                                         sourceImage: SourceImage.networkImage,
-                                        imagePath: _profile),
+                                        imagePath: _profileUrl!),
                               ),
                             ),
                             Container(
@@ -113,27 +114,19 @@ class _EditProfileState extends State<EditProfile> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(34),
                                     color: AppColors.primaryColor),
-                                child: _path != null
-                                    ? GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            _path = null;
-                                          });
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(6.0),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: _newPath != null
+                                      ? GestureDetector(
+                                          onTap: _removeNewPath,
                                           child:
                                               SvgPicture.asset(AppAssets.trash),
-                                        ),
-                                      )
-                                    : Padding(
-                                        padding: const EdgeInsets.all(6.0),
-                                        child: GestureDetector(
-                                          onTap: uploadImageProfile,
+                                        )
+                                      : GestureDetector(
                                           child:
                                               SvgPicture.asset(AppAssets.pen),
                                         ),
-                                      ),
+                                ),
                               ),
                             )
                           ],
@@ -155,28 +148,29 @@ class _EditProfileState extends State<EditProfile> {
                         keyboardType: TextInputType.text,
                       ),
                       SizedBox(height: space),
-                      CustomPhoneField(
-                          labelText: 'Phone Number',
-                          hintText: 'Enter your phone number',
-                          initialSelected: _countryCode.text,
-                          phoneNumber: _phoneNumber,
-                          contryCode: _countryCode),
-                      SizedBox(height: space),
                       CustomDropdownButton(
                         title: 'Gender',
                         controller: _gender,
                         listItem: AppConstants.genderList,
-                        initValue: data.gender,
+                        initValue: _gender.text,
                       ),
                       SizedBox(height: space),
                       CustomDatePicker(
                         controller: _dateBirth,
-                        initialDate: data.dateBirth,
+                        initialDate: _dateBirth.text,
                       ),
-                      const SizedBox(height: 38.0),
+                      SizedBox(height: space),
+                      CustomTextField(
+                        labelText: 'Phone Number',
+                        hintText: 'E.g 0933123456',
+                        controller: _phoneNumber,
+                        keyboardType: TextInputType.phone,
+                        validator: (value) => Validator.phoneNumber(value!),
+                      ),
+                      SizedBox(height: space),
                       Center(
                         child: CustomElevatedButton(
-                          onPressed: upDateProfile,
+                          onPressed: _updateProfile,
                           child: Obx(
                             () => _.isLoading.value
                                 ? const CustomProgress(color: Colors.white)
